@@ -68,7 +68,7 @@ class FamilyImage {
         // println(this.image.pixels[y+x]);
         pixelCount++;
         int loc = x + y * this.image.width;
-        int greyscale = gray(loc);
+        int greyscale = gray(this.image.pixels[loc]);
         sumOfGreyscale += greyscale;
         //println(color(this.image.pixels[loc]));
       }
@@ -83,11 +83,12 @@ class FamilyImage {
 }
 
 // https://processing.org/discourse/beta/num_1159135995.html
+
 static final int gray(color value) { 
   int r=(value&0x00FF0000)>>16; // red part
   int g=(value&0x0000FF00)>>8; // green part
   int b=(value&0x000000FF); // blue part
-  return (r + g + b) / 3;  
+  return (r + g + b) / 3;   
 }
 
 // TODO create function that will loop through familyImages to find closest matching greyscale

@@ -5,7 +5,7 @@ String[] KJ_IMAGE_PATHS = new String[] {
   "images/kj.jpg",
   "images/kj2.png"
 };
-String SELECTED_IMAGE = KJ_IMAGE_PATHS[0];
+String SELECTED_IMAGE = KJ_IMAGE_PATHS[1];
 PImage KJ_IMAGE;
 
 FamilyImage[] familyImages;

@@ -1,10 +1,16 @@
 
 // first define a bunch of images ( 1 kj, 10 eve, 10 gabe) all in grey scale
 // Map through each eve and gabe image
-PImage kjImage;
+String[] KJ_IMAGE_PATHS = new String[] {
+  "images/kj.jpg",
+  "images/kj2.png"
+};
+String SELECTED_IMAGE = KJ_IMAGE_PATHS[0];
+PImage KJ_IMAGE;
 
 FamilyImage[] familyImages;
 String imagesPath = "images/family/";
+
 static final int SIZE_OF_BOXES_TO_REPLACE = 4;
 static final int KJ_STARTING_POSITION_X = 0;
 static final int KJ_STARTING_POSITION_Y = 0;
@@ -12,7 +18,7 @@ static final int KJ_STARTING_POSITION_Y = 0;
 
 void setup() {
   size(800, 800);
-  kjImage = loadImage("images/kj.jpg");
+  KJ_IMAGE = loadImage(SELECTED_IMAGE);
   familyImages = createImages();
   background(familyImages[0].greyscale);
   noLoop();
@@ -64,7 +70,7 @@ void performSelfPortrait() {
 }
 
 void paintImagesInPlaceOfPortrait(FamilyImage[][] mostSimilarImages) {
-  int portraitWidth = kjImage.width;
+  int portraitWidth = KJ_IMAGE.width;
   int numberOfColumns = portraitWidth / SIZE_OF_BOXES_TO_REPLACE;
   int currentRow = -1;
   
@@ -121,18 +127,18 @@ int[][] calculateAverageGreyscalePerBox (int[][][] boxes) {
 }
 
 int [][][] createBoxes(int SIZE_OF_BOXES_TO_REPLACE) {
-  println("kjImage has size of " + kjImage.width + " X " + kjImage.height);
-  println("initializing boxes with " + (kjImage.width) + " X " + kjImage.height + " Dimensions");
-  int[][][] boxes = new int [kjImage.width / SIZE_OF_BOXES_TO_REPLACE][kjImage.height / SIZE_OF_BOXES_TO_REPLACE][SIZE_OF_BOXES_TO_REPLACE * SIZE_OF_BOXES_TO_REPLACE];
+  println("KJ_IMAGE has size of " + KJ_IMAGE.width + " X " + KJ_IMAGE.height);
+  println("initializing boxes with " + (KJ_IMAGE.width) + " X " + KJ_IMAGE.height + " Dimensions");
+  int[][][] boxes = new int [KJ_IMAGE.width / SIZE_OF_BOXES_TO_REPLACE][KJ_IMAGE.height / SIZE_OF_BOXES_TO_REPLACE][SIZE_OF_BOXES_TO_REPLACE * SIZE_OF_BOXES_TO_REPLACE];
   
-  if ((kjImage.width % SIZE_OF_BOXES_TO_REPLACE == 0) && (kjImage.height % SIZE_OF_BOXES_TO_REPLACE == 0)) {
-    int numberOfBoxes = (kjImage.width / SIZE_OF_BOXES_TO_REPLACE) * (kjImage.height * SIZE_OF_BOXES_TO_REPLACE );
-    println("creating " + numberOfBoxes + " boxes, each having " + SIZE_OF_BOXES_TO_REPLACE + "X" + SIZE_OF_BOXES_TO_REPLACE + " dimensions - which works for kjImage size");
+  if ((KJ_IMAGE.width % SIZE_OF_BOXES_TO_REPLACE == 0) && (KJ_IMAGE.height % SIZE_OF_BOXES_TO_REPLACE == 0)) {
+    int numberOfBoxes = (KJ_IMAGE.width / SIZE_OF_BOXES_TO_REPLACE) * (KJ_IMAGE.height * SIZE_OF_BOXES_TO_REPLACE );
+    println("creating " + numberOfBoxes + " boxes, each having " + SIZE_OF_BOXES_TO_REPLACE + "X" + SIZE_OF_BOXES_TO_REPLACE + " dimensions - which works for KJ_IMAGE size");
   }
   
-  // take kjImage iterate over every 10X10 block and replace with the closest matching family image
-  for (int y = 0; y < kjImage.height; y++) {
-    for (int x = 0; x < kjImage.width; x++) {
+  // take KJ_IMAGE iterate over every 10X10 block and replace with the closest matching family image
+  for (int y = 0; y < KJ_IMAGE.height; y++) {
+    for (int x = 0; x < KJ_IMAGE.width; x++) {
       int trueX = x;
       int trueY = y;
       
@@ -140,14 +146,14 @@ int [][][] createBoxes(int SIZE_OF_BOXES_TO_REPLACE) {
       int boxIndexY = (int) Math.ceil(trueY / SIZE_OF_BOXES_TO_REPLACE);
       int boxIndexZ = trueX - (boxIndexX * SIZE_OF_BOXES_TO_REPLACE) + (y - (boxIndexY * SIZE_OF_BOXES_TO_REPLACE)) * SIZE_OF_BOXES_TO_REPLACE;
       
-      int loc = x + y * kjImage.width;
-      int greyscale = gray(kjImage.pixels[loc]);
+      int loc = x + y * KJ_IMAGE.width;
+      int greyscale = gray(KJ_IMAGE.pixels[loc]);
       
       boxes[boxIndexY][boxIndexX][boxIndexZ] = greyscale;
     }
   }
 
-  println("initializing boxes with " + (kjImage.width / SIZE_OF_BOXES_TO_REPLACE) + " X " + kjImage.height / SIZE_OF_BOXES_TO_REPLACE + " Dimensions");
+  println("initializing boxes with " + (KJ_IMAGE.width / SIZE_OF_BOXES_TO_REPLACE) + " X " + KJ_IMAGE.height / SIZE_OF_BOXES_TO_REPLACE + " Dimensions");
 
   return boxes;
 }
@@ -157,7 +163,6 @@ int [][][] createBoxes(int SIZE_OF_BOXES_TO_REPLACE) {
 class FamilyImage {
   public PImage image;
   public int greyscale;
-  private int imageSize;
   FamilyImage (String filePath) {
     // then get the grayscale of each image - apply
     this.image = loadImage(filePath);
@@ -179,8 +184,6 @@ class FamilyImage {
     
     int averageGreyscale = sumOfGreyscale / pixelCount;
     this.greyscale = averageGreyscale;
-    
-    this.imageSize = pixelCount;
   }
 }
 
@@ -192,5 +195,3 @@ static final int gray(color value) {
   int b=(value&0x000000FF); // blue part
   return (r + g + b) / 3;   
 }
-
-// TODO create function that will loop through familyImages to find closest matching greyscale

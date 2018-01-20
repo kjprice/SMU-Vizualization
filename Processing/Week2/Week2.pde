@@ -11,7 +11,7 @@ static final int KJ_STARTING_POSITION_Y = 0;
 
 
 void setup() {
-  size(400, 400);
+  size(800, 800);
   kjImage = loadImage("images/kj.jpg");
   familyImages = createImages();
   background(familyImages[0].greyscale);

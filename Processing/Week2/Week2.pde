@@ -53,6 +53,11 @@ void draw() {
 
 void performSelfPortrait() {
   int sizeToReplace = 10;
+  
+  int[][] boxesOfPixels = createBoxes(sizeToReplace);
+}
+
+int [][] createBoxes(int sizeToReplace) {
   println("kjImage has size of " + kjImage.width + " X " + kjImage.height);
   println("initializing boxes with " + (kjImage.width / sizeToReplace) + " X " + kjImage.height / sizeToReplace + " Dimensions");
   int[][] boxes = new int [kjImage.width / sizeToReplace][kjImage.height / sizeToReplace];
@@ -78,7 +83,11 @@ void performSelfPortrait() {
       boxes[boxIndexX][boxIndexY] = greyscale;
     }
   }
+
+  return boxes;
 }
+
+
 
 class FamilyImage {
   public PImage image;

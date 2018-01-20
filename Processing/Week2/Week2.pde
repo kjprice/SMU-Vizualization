@@ -1,42 +1,48 @@
 
-// first define a bunch of images ( 1 kj, 10 eve, 10 gabe) all in grey scale
-// Map through each eve and gabe image
-String[] KJ_IMAGE_PATHS = new String[] {
+// KJ global variables
+static final String[] KJ_IMAGE_PATHS = new String[] {
   "images/kj.jpg",
   "images/kj2.png"
 };
-String SELECTED_IMAGE = KJ_IMAGE_PATHS[1];
-PImage KJ_IMAGE;
-
-FamilyImage[] familyImages;
-String imagesPath = "images/family/";
+static final String SELECTED_IMAGE = KJ_IMAGE_PATHS[1];
+static final Boolean DEBUG_KJ = false;
+static final String IMAGES_PATH = "images/family/";
 
 static final int SIZE_OF_BOXES_TO_REPLACE = 4;
-static final int KJ_STARTING_POSITION_X = 0;
-static final int KJ_STARTING_POSITION_Y = 0;
+static final int KJ_STARTING_POSITION_X = 20;
+static final int KJ_STARTING_POSITION_Y = 20;
+
+PImage KJ_IMAGE;
+FamilyImage[] familyImages;
 
 
 void setup() {
-  size(800, 800);
-  KJ_IMAGE = loadImage(SELECTED_IMAGE);
-  familyImages = createImages();
-  background(familyImages[0].greyscale);
+  size(880, 440);
+  background(200);
   noLoop();
+  KJ_IMAGE = loadImage(SELECTED_IMAGE);
+  familyImages = createFamilyIMages();
 }
 
-FamilyImage[] createImages() {
+void draw() {
+  performKjSelfPortrait();
+}
+
+FamilyImage[] createFamilyIMages() {
   String[] imageFileNames = getFileNamesOfImages();
   ArrayList<FamilyImage> images = new ArrayList<FamilyImage>();
   for (int i = 0; i < imageFileNames.length; i++) {
     String fileName = imageFileNames[i];
     if (fileName.endsWith("jpg")) {
-      FamilyImage familyImage = new FamilyImage(imagesPath + fileName);
+      FamilyImage familyImage = new FamilyImage(IMAGES_PATH + fileName);
       // println(familyImage.greyscale + " - " + fileName);
       images.add(familyImage);
     }
   }
   
-  println("found " + images.size() + " images");
+  if (DEBUG_KJ) {
+    println("found " + images.size() + " images");
+  }
   return images.toArray(new FamilyImage[images.size()]);
 }
 
@@ -45,8 +51,9 @@ String[] getFileNamesOfImages() {
   // https://processing.org/discourse/beta/num_1253083238.html
   // and: https://processing.org/discourse/beta/num_1229443269.html
 
-  File dir = new File(sketchPath() + "/" + imagesPath);
+  File dir = new File(sketchPath() + "/" + IMAGES_PATH);
   String[] children = dir.list();
+
   if (children == null) {
     println("image folder does not exist");
   }
@@ -54,11 +61,7 @@ String[] getFileNamesOfImages() {
   return children;
 }
 
-void draw() {
-  performSelfPortrait();
-}
-
-void performSelfPortrait() {
+void performKjSelfPortrait() {
   int[][][] boxesOfPixels = createBoxes(SIZE_OF_BOXES_TO_REPLACE);
   
   
@@ -69,11 +72,7 @@ void performSelfPortrait() {
   paintImagesInPlaceOfPortrait(mostSimilarImages);
 }
 
-void paintImagesInPlaceOfPortrait(FamilyImage[][] mostSimilarImages) {
-  int portraitWidth = KJ_IMAGE.width;
-  int numberOfColumns = portraitWidth / SIZE_OF_BOXES_TO_REPLACE;
-  int currentRow = -1;
-  
+void paintImagesInPlaceOfPortrait(FamilyImage[][] mostSimilarImages) { 
   for (int y = 0; y < mostSimilarImages.length; y++) {
     for (int x = 0; x < mostSimilarImages[y].length; x++) {
       int x_location = x * SIZE_OF_BOXES_TO_REPLACE + KJ_STARTING_POSITION_X;
@@ -127,11 +126,13 @@ int[][] calculateAverageGreyscalePerBox (int[][][] boxes) {
 }
 
 int [][][] createBoxes(int SIZE_OF_BOXES_TO_REPLACE) {
-  println("KJ_IMAGE has size of " + KJ_IMAGE.width + " X " + KJ_IMAGE.height);
-  println("initializing boxes with " + (KJ_IMAGE.width) + " X " + KJ_IMAGE.height + " Dimensions");
+  if (DEBUG_KJ) {
+    println("KJ_IMAGE has size of " + KJ_IMAGE.width + " X " + KJ_IMAGE.height);
+    println("initializing boxes with " + (KJ_IMAGE.width) + " X " + KJ_IMAGE.height + " Dimensions");
+  }
   int[][][] boxes = new int [KJ_IMAGE.width / SIZE_OF_BOXES_TO_REPLACE][KJ_IMAGE.height / SIZE_OF_BOXES_TO_REPLACE][SIZE_OF_BOXES_TO_REPLACE * SIZE_OF_BOXES_TO_REPLACE];
   
-  if ((KJ_IMAGE.width % SIZE_OF_BOXES_TO_REPLACE == 0) && (KJ_IMAGE.height % SIZE_OF_BOXES_TO_REPLACE == 0)) {
+  if (DEBUG_KJ && (KJ_IMAGE.width % SIZE_OF_BOXES_TO_REPLACE == 0) && (KJ_IMAGE.height % SIZE_OF_BOXES_TO_REPLACE == 0)) {
     int numberOfBoxes = (KJ_IMAGE.width / SIZE_OF_BOXES_TO_REPLACE) * (KJ_IMAGE.height * SIZE_OF_BOXES_TO_REPLACE );
     println("creating " + numberOfBoxes + " boxes, each having " + SIZE_OF_BOXES_TO_REPLACE + "X" + SIZE_OF_BOXES_TO_REPLACE + " dimensions - which works for KJ_IMAGE size");
   }
@@ -153,7 +154,9 @@ int [][][] createBoxes(int SIZE_OF_BOXES_TO_REPLACE) {
     }
   }
 
-  println("initializing boxes with " + (KJ_IMAGE.width / SIZE_OF_BOXES_TO_REPLACE) + " X " + KJ_IMAGE.height / SIZE_OF_BOXES_TO_REPLACE + " Dimensions");
+  if (DEBUG_KJ) {
+    println("initializing boxes with " + (KJ_IMAGE.width / SIZE_OF_BOXES_TO_REPLACE) + " X " + KJ_IMAGE.height / SIZE_OF_BOXES_TO_REPLACE + " Dimensions");
+  }
 
   return boxes;
 }

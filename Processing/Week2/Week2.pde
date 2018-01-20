@@ -5,10 +5,13 @@ PImage kjImage;
 
 FamilyImage[] familyImages;
 String imagesPath = "images/family/";
+static final int SIZE_OF_BOXES_TO_REPLACE = 10;
+static final int KJ_STARTING_POSITION_X = 0;
+static final int KJ_STARTING_POSITION_Y = 0;
 
 
 void setup() {
-  size(100, 100);
+  size(300, 300);
   kjImage = loadImage("images/kj.jpg");
   familyImages = createImages();
   background(familyImages[0].greyscale);
@@ -45,28 +48,58 @@ String[] getFileNamesOfImages() {
 }
 
 void draw() {
-  // image(kjImage, 10, 0);
-  println(kjImage.width + ", " + kjImage.height);
   performSelfPortrait();
+  // image(kjImage, 10, 0);
   // must include a default start top-left position - to work with partner
 }
 
 void performSelfPortrait() {
-  int sizeToReplace = 10;
+  // first create boxes of all the pixels
   
-  int[][] boxesOfPixels = createBoxes(sizeToReplace);
+  // then create boxes of the averages
+  int[][][] boxesOfPixels = createBoxes(SIZE_OF_BOXES_TO_REPLACE);
   
-  int[] averageGreyscalePerBox = calculateAverageGreyscalePerBox(boxesOfPixels);
   
-  FamilyImage[] mostSimilarImages = findMostSimilarImagesToPixelColors(averageGreyscalePerBox);
+  int[][] averageGreyscalePerBox = calculateAverageGreyscalePerBox(boxesOfPixels);
+  
+  FamilyImage[][] mostSimilarImages = findMostSimilarImagesToPixelColors(averageGreyscalePerBox);
+  
+  paintImagesInPlaceOfPortrait(mostSimilarImages);
 }
 
-FamilyImage[] findMostSimilarImagesToPixelColors(int[] averageGreyscalePerBox) {
-  FamilyImage[] mostSimilarImages = new FamilyImage[averageGreyscalePerBox.length];
+void paintImagesInPlaceOfPortrait(FamilyImage[][] mostSimilarImages) {
+  int portraitWidth = kjImage.width;
+  int numberOfColumns = portraitWidth / SIZE_OF_BOXES_TO_REPLACE;
+  int currentRow = -1;
   
-  for (int i = 0; i < averageGreyscalePerBox.length; i++) {
-    FamilyImage mostSimilarImage = findMostSimilarImageToPixelColor(averageGreyscalePerBox[i]);
-    mostSimilarImages[i] = mostSimilarImage;
+  for (int y = 0; y < mostSimilarImages.length; y++) {
+    for (int x = 0; x < mostSimilarImages[y].length; x++) {
+      int x_location = x * SIZE_OF_BOXES_TO_REPLACE + KJ_STARTING_POSITION_X;
+      int y_location = y * SIZE_OF_BOXES_TO_REPLACE + KJ_STARTING_POSITION_Y;
+      image(mostSimilarImages[y][x].image, x_location, y_location, SIZE_OF_BOXES_TO_REPLACE, SIZE_OF_BOXES_TO_REPLACE);
+    }
+
+    //if (y % SIZE_OF_BOXES_TO_REPLACE == 0) {
+      //currentRow++;
+    //}
+
+    //int x = i * SIZE_OF_BOXES_TO_REPLACE + KJ_STARTING_POSITION_X;
+    //int y = currentRow * SIZE_OF_BOXES_TO_REPLACE + KJ_STARTING_POSITION_Y;
+    // print(currentRow * SIZE_OF_BOXES_TO_REPLACE + KJ_STARTING_POSITION_Y + ", ");
+    // print(y + ", ");
+    
+    //image(mostSimilarImages[i].image, x, y, SIZE_OF_BOXES_TO_REPLACE, SIZE_OF_BOXES_TO_REPLACE);
+  }
+}
+
+FamilyImage[][] findMostSimilarImagesToPixelColors(int[][] averageGreyscalePerBox) {
+  FamilyImage[][] mostSimilarImages = new FamilyImage[averageGreyscalePerBox.length][averageGreyscalePerBox[0].length];
+  
+  for (int y = 0; y < averageGreyscalePerBox.length; y++) {
+    for (int x = 0; x < averageGreyscalePerBox[y].length; x++) {
+      FamilyImage mostSimilarImage = findMostSimilarImageToPixelColor(averageGreyscalePerBox[y][x]);
+      mostSimilarImages[y][x] = mostSimilarImage; 
+    }
   }
   
   return mostSimilarImages;
@@ -82,50 +115,54 @@ FamilyImage findMostSimilarImageToPixelColor(int greyscale) {
       imageWithShortestDistance = familyImages[i];
     }
   }
-  
+    
   return familyImages[0];
 }
 
-int[] calculateAverageGreyscalePerBox (int[][] boxes) {
-  int[] averageGreyscalePerBox = new int[boxes.length];
+int[][] calculateAverageGreyscalePerBox (int[][][] boxes) {
+  int[][] averageGreyscalePerBox = new int[boxes.length][boxes[0].length];
 
   for (int y = 0; y < boxes.length; y++) {
     int sumOfGreyscale = 0;
     for (int x = 0; x < boxes[y].length; x++) {
-      sumOfGreyscale += boxes[y][x];
+      for (int z = 0; z < boxes[y][x].length; z++) {
+        sumOfGreyscale += boxes[y][x][z];
+      }
+      averageGreyscalePerBox[y][x] = sumOfGreyscale / boxes[y][x].length;
     }
-    averageGreyscalePerBox[y] = sumOfGreyscale / boxes[y].length;
   }
   
   return averageGreyscalePerBox;
 }
 
-int [][] createBoxes(int sizeToReplace) {
+int [][][] createBoxes(int SIZE_OF_BOXES_TO_REPLACE) {
   println("kjImage has size of " + kjImage.width + " X " + kjImage.height);
-  println("initializing boxes with " + (kjImage.width / sizeToReplace) + " X " + kjImage.height / sizeToReplace + " Dimensions");
-  int[][] boxes = new int [kjImage.width / sizeToReplace][kjImage.height / sizeToReplace];
+  println("initializing boxes with " + (kjImage.width) + " X " + kjImage.height + " Dimensions");
+  int[][][] boxes = new int [kjImage.width / SIZE_OF_BOXES_TO_REPLACE][kjImage.height / SIZE_OF_BOXES_TO_REPLACE][SIZE_OF_BOXES_TO_REPLACE * SIZE_OF_BOXES_TO_REPLACE];
   
-  if ((kjImage.width % sizeToReplace == 0) && (kjImage.height % sizeToReplace == 0)) {
-    int numberOfBoxes = (kjImage.width / sizeToReplace) * (kjImage.height * sizeToReplace );
-    println("creating " + numberOfBoxes + " boxes, each having " + sizeToReplace + "X" + sizeToReplace + " dimensions - which works for kjImage size");
+  if ((kjImage.width % SIZE_OF_BOXES_TO_REPLACE == 0) && (kjImage.height % SIZE_OF_BOXES_TO_REPLACE == 0)) {
+    int numberOfBoxes = (kjImage.width / SIZE_OF_BOXES_TO_REPLACE) * (kjImage.height * SIZE_OF_BOXES_TO_REPLACE );
+    println("creating " + numberOfBoxes + " boxes, each having " + SIZE_OF_BOXES_TO_REPLACE + "X" + SIZE_OF_BOXES_TO_REPLACE + " dimensions - which works for kjImage size");
   }
   
   // take kjImage iterate over every 10X10 block and replace with the closest matching family image
   for (int y = 0; y < kjImage.height; y++) {
-    //println(y);
     for (int x = 0; x < kjImage.width; x++) {
       int trueX = x;
       int trueY = y;
       
-      int boxIndexX = (int) Math.ceil(trueX / sizeToReplace);
-      int boxIndexY = (int) Math.ceil(trueY / sizeToReplace);
+      int boxIndexX = (int) Math.ceil(trueX / SIZE_OF_BOXES_TO_REPLACE);
+      int boxIndexY = (int) Math.ceil(trueY / SIZE_OF_BOXES_TO_REPLACE);
+      int boxIndexZ = trueX - (boxIndexX * SIZE_OF_BOXES_TO_REPLACE) + (y - (boxIndexY * SIZE_OF_BOXES_TO_REPLACE)) * SIZE_OF_BOXES_TO_REPLACE;
       
       int loc = x + y * kjImage.width;
       int greyscale = gray(kjImage.pixels[loc]);
       
-      boxes[boxIndexX][boxIndexY] = greyscale;
+      boxes[boxIndexX][boxIndexY][boxIndexZ] = greyscale;
     }
   }
+
+  println("initializing boxes with " + (kjImage.width / SIZE_OF_BOXES_TO_REPLACE) + " X " + kjImage.height / SIZE_OF_BOXES_TO_REPLACE + " Dimensions");
 
   return boxes;
 }
@@ -157,7 +194,6 @@ class FamilyImage {
     
     int averageGreyscale = sumOfGreyscale / pixelCount;
     this.greyscale = averageGreyscale;
-    // println(this.greyscale);
     
     this.imageSize = pixelCount;
   }

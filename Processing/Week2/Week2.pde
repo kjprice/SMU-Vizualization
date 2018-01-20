@@ -55,6 +55,23 @@ void performSelfPortrait() {
   int sizeToReplace = 10;
   
   int[][] boxesOfPixels = createBoxes(sizeToReplace);
+  
+  int[] averageGreyscalePerBox = calculateAverageGreyscalePerBox(boxesOfPixels);
+  println(averageGreyscalePerBox);
+}
+
+int[] calculateAverageGreyscalePerBox (int[][] boxes) {
+  int[] averageGreyscalePerBox = new int[boxes.length];
+
+  for (int y = 0; y < boxes.length; y++) {
+    int sumOfGreyscale = 0;
+    for (int x = 0; x < boxes[y].length; x++) {
+      sumOfGreyscale += boxes[y][x];
+    }
+    averageGreyscalePerBox[y] = sumOfGreyscale / boxes[y].length;
+  }
+  
+  return averageGreyscalePerBox;
 }
 
 int [][] createBoxes(int sizeToReplace) {

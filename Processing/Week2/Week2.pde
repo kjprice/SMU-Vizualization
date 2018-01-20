@@ -25,6 +25,7 @@ FamilyImage[] createImages() {
     String fileName = imageFileNames[i];
     if (fileName.endsWith("jpg")) {
       FamilyImage familyImage = new FamilyImage(imagesPath + fileName);
+      // println(familyImage.greyscale + " - " + fileName);
       images.add(familyImage);
     }
   }

@@ -57,7 +57,33 @@ void performSelfPortrait() {
   int[][] boxesOfPixels = createBoxes(sizeToReplace);
   
   int[] averageGreyscalePerBox = calculateAverageGreyscalePerBox(boxesOfPixels);
-  println(averageGreyscalePerBox);
+  
+  FamilyImage[] mostSimilarImages = findMostSimilarImagesToPixelColors(averageGreyscalePerBox);
+}
+
+FamilyImage[] findMostSimilarImagesToPixelColors(int[] averageGreyscalePerBox) {
+  FamilyImage[] mostSimilarImages = new FamilyImage[averageGreyscalePerBox.length];
+  
+  for (int i = 0; i < averageGreyscalePerBox.length; i++) {
+    FamilyImage mostSimilarImage = findMostSimilarImageToPixelColor(averageGreyscalePerBox[i]);
+    mostSimilarImages[i] = mostSimilarImage;
+  }
+  
+  return mostSimilarImages;
+}
+
+FamilyImage findMostSimilarImageToPixelColor(int greyscale) {
+  FamilyImage imageWithShortestDistance = null;
+  int shortestDistance = 255;
+  for (int i = 0; i < familyImages.length; i++) {
+    int colorDifference = Math.abs(familyImages[i].greyscale - greyscale);
+    if (colorDifference < shortestDistance) {
+      shortestDistance = colorDifference;
+      imageWithShortestDistance = familyImages[i];
+    }
+  }
+  
+  return familyImages[0];
 }
 
 int[] calculateAverageGreyscalePerBox (int[][] boxes) {
@@ -108,7 +134,7 @@ int [][] createBoxes(int sizeToReplace) {
 
 class FamilyImage {
   public PImage image;
-  private int greyscale;
+  public int greyscale;
   private int imageSize;
   FamilyImage (String filePath) {
     // then get the grayscale of each image - apply

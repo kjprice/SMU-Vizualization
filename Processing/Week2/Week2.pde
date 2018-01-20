@@ -11,7 +11,7 @@ static final int KJ_STARTING_POSITION_Y = 0;
 
 
 void setup() {
-  size(300, 300);
+  size(400, 400);
   kjImage = loadImage("images/kj.jpg");
   familyImages = createImages();
   background(familyImages[0].greyscale);
@@ -110,21 +110,26 @@ FamilyImage findMostSimilarImageToPixelColor(int greyscale) {
   int shortestDistance = 255;
   for (int i = 0; i < familyImages.length; i++) {
     int colorDifference = Math.abs(familyImages[i].greyscale - greyscale);
+    println(colorDifference);
     if (colorDifference < shortestDistance) {
       shortestDistance = colorDifference;
       imageWithShortestDistance = familyImages[i];
     }
   }
+  
+  if (imageWithShortestDistance == null) {
+    // print("null");
+  }
     
-  return familyImages[0];
+  return imageWithShortestDistance;
 }
 
 int[][] calculateAverageGreyscalePerBox (int[][][] boxes) {
   int[][] averageGreyscalePerBox = new int[boxes.length][boxes[0].length];
 
   for (int y = 0; y < boxes.length; y++) {
-    int sumOfGreyscale = 0;
     for (int x = 0; x < boxes[y].length; x++) {
+      int sumOfGreyscale = 0;
       for (int z = 0; z < boxes[y][x].length; z++) {
         sumOfGreyscale += boxes[y][x][z];
       }

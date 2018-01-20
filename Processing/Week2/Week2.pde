@@ -5,7 +5,7 @@ PImage kjImage;
 
 FamilyImage[] familyImages;
 String imagesPath = "images/family/";
-static final int SIZE_OF_BOXES_TO_REPLACE = 25;
+static final int SIZE_OF_BOXES_TO_REPLACE = 4;
 static final int KJ_STARTING_POSITION_X = 0;
 static final int KJ_STARTING_POSITION_Y = 0;
 
@@ -49,14 +49,9 @@ String[] getFileNamesOfImages() {
 
 void draw() {
   performSelfPortrait();
-  // image(kjImage, 10, 0);
-  // must include a default start top-left position - to work with partner
 }
 
 void performSelfPortrait() {
-  // first create boxes of all the pixels
-  
-  // then create boxes of the averages
   int[][][] boxesOfPixels = createBoxes(SIZE_OF_BOXES_TO_REPLACE);
   
   
@@ -147,7 +142,7 @@ int [][][] createBoxes(int SIZE_OF_BOXES_TO_REPLACE) {
       int loc = x + y * kjImage.width;
       int greyscale = gray(kjImage.pixels[loc]);
       
-      boxes[boxIndexX][boxIndexY][boxIndexZ] = greyscale;
+      boxes[boxIndexY][boxIndexX][boxIndexZ] = greyscale;
     }
   }
 

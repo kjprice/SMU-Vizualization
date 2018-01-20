@@ -5,7 +5,7 @@ PImage kjImage;
 
 FamilyImage[] familyImages;
 String imagesPath = "images/family/";
-static final int SIZE_OF_BOXES_TO_REPLACE = 10;
+static final int SIZE_OF_BOXES_TO_REPLACE = 25;
 static final int KJ_STARTING_POSITION_X = 0;
 static final int KJ_STARTING_POSITION_Y = 0;
 
@@ -78,17 +78,6 @@ void paintImagesInPlaceOfPortrait(FamilyImage[][] mostSimilarImages) {
       int y_location = y * SIZE_OF_BOXES_TO_REPLACE + KJ_STARTING_POSITION_Y;
       image(mostSimilarImages[y][x].image, x_location, y_location, SIZE_OF_BOXES_TO_REPLACE, SIZE_OF_BOXES_TO_REPLACE);
     }
-
-    //if (y % SIZE_OF_BOXES_TO_REPLACE == 0) {
-      //currentRow++;
-    //}
-
-    //int x = i * SIZE_OF_BOXES_TO_REPLACE + KJ_STARTING_POSITION_X;
-    //int y = currentRow * SIZE_OF_BOXES_TO_REPLACE + KJ_STARTING_POSITION_Y;
-    // print(currentRow * SIZE_OF_BOXES_TO_REPLACE + KJ_STARTING_POSITION_Y + ", ");
-    // print(y + ", ");
-    
-    //image(mostSimilarImages[i].image, x, y, SIZE_OF_BOXES_TO_REPLACE, SIZE_OF_BOXES_TO_REPLACE);
   }
 }
 
@@ -110,15 +99,10 @@ FamilyImage findMostSimilarImageToPixelColor(int greyscale) {
   int shortestDistance = 255;
   for (int i = 0; i < familyImages.length; i++) {
     int colorDifference = Math.abs(familyImages[i].greyscale - greyscale);
-    println(colorDifference);
     if (colorDifference < shortestDistance) {
       shortestDistance = colorDifference;
       imageWithShortestDistance = familyImages[i];
     }
-  }
-  
-  if (imageWithShortestDistance == null) {
-    // print("null");
   }
     
   return imageWithShortestDistance;

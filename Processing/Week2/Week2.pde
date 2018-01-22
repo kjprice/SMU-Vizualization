@@ -2,7 +2,8 @@
 // KJ global variables
 static final String[] KJ_IMAGE_PATHS = new String[] {
   "images/kj.jpg",
-  "images/kj2.png"
+  "images/kj2.png",
+  "images/viv_selfie_2.png"
 };
 static final String SELECTED_IMAGE = KJ_IMAGE_PATHS[1];
 static final Boolean DEBUG_KJ = false;
@@ -15,18 +16,21 @@ static final int KJ_STARTING_POSITION_Y = 20;
 PImage KJ_IMAGE;
 FamilyImage[] familyImages;
 
-
+// Main Setup and Draw Blocks 
 void setup() {
-  size(880, 440);
+  size(840, 440);
   background(200);
   noLoop();
   KJ_IMAGE = loadImage(SELECTED_IMAGE);
+  VB_IMAGE = loadImage(VIV_SELECTED_IMG);
   familyImages = createFamilyIMages();
 }
 
 void draw() {
   performKjSelfPortrait();
+  performSelfPortraitViv();
 }
+
 
 FamilyImage[] createFamilyIMages() {
   String[] imageFileNames = getFileNamesOfImages();
@@ -59,11 +63,10 @@ String[] getFileNamesOfImages() {
   }
   
   return children;
-}
+} 
 
 void performKjSelfPortrait() {
   int[][][] boxesOfPixels = createBoxes(SIZE_OF_BOXES_TO_REPLACE);
-  
   
   int[][] averageGreyscalePerBox = calculateAverageGreyscalePerBox(boxesOfPixels);
   
@@ -71,6 +74,7 @@ void performKjSelfPortrait() {
   
   paintImagesInPlaceOfPortrait(mostSimilarImages);
 }
+
 
 void paintImagesInPlaceOfPortrait(FamilyImage[][] mostSimilarImages) { 
   for (int y = 0; y < mostSimilarImages.length; y++) {
@@ -81,6 +85,7 @@ void paintImagesInPlaceOfPortrait(FamilyImage[][] mostSimilarImages) {
     }
   }
 }
+
 
 FamilyImage[][] findMostSimilarImagesToPixelColors(int[][] averageGreyscalePerBox) {
   FamilyImage[][] mostSimilarImages = new FamilyImage[averageGreyscalePerBox.length][averageGreyscalePerBox[0].length];
@@ -95,6 +100,8 @@ FamilyImage[][] findMostSimilarImagesToPixelColors(int[][] averageGreyscalePerBo
   return mostSimilarImages;
 }
 
+
+
 FamilyImage findMostSimilarImageToPixelColor(int greyscale) {
   FamilyImage imageWithShortestDistance = null;
   int shortestDistance = 255;
@@ -107,7 +114,8 @@ FamilyImage findMostSimilarImageToPixelColor(int greyscale) {
   }
     
   return imageWithShortestDistance;
-}
+} 
+
 
 int[][] calculateAverageGreyscalePerBox (int[][][] boxes) {
   int[][] averageGreyscalePerBox = new int[boxes.length][boxes[0].length];

@@ -8,7 +8,7 @@ FamilyImage[] familyImages;
 
 // Main Setup and Draw Blocks 
 void setup() {
-  size(840, 440);
+  size(840, 840);
   background(200);
   noLoop();
   KJ_IMAGE = loadImage(SELECTED_IMAGE);
@@ -18,5 +18,5 @@ void setup() {
 
 void draw() {
   performKjSelfPortrait();
-  performSelfPortraitViv();
+  // performSelfPortraitViv();
 }

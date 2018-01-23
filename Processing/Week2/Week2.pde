@@ -1,5 +1,5 @@
 
-static final int SIZE_OF_BOXES_TO_REPLACE = 4;
+static final int SIZE_OF_BOXES_TO_REPLACE = 40;
 static final int KJ_STARTING_POSITION_X = 20;
 static final int KJ_STARTING_POSITION_Y = 20;
 

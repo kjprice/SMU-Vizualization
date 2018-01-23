@@ -14,9 +14,6 @@ void drawAxis(int direction) {
   drawLargeFin(direction);
 }
 
-void drawSmallFin(int direction) {
-  
-}
 void drawLargeFin(int direction) {
 }
 

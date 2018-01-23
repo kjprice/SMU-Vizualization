@@ -1,0 +1,2 @@
+void drawSmallFin(int direction) {
+}

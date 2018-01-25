@@ -47,7 +47,7 @@ class LargeFin {
     this.startX = width/2;
     this.startY = height/2;
     this.firstCurveCenterRadius = width/5;
-    this.finalCurveRadius = width*2/5;
+    this.finalCurveRadius = width*4.5/10;
     
     this.drawLargeFin();
   }
@@ -81,18 +81,15 @@ class LargeFin {
       }
       float x = cos(theta) * radius + ellipseCenterX;
       float y = sin(theta) * radius + ellipseCenterY;
-      // println(x + ", " + y);
       curveVertex(x, y);
       // beginning and end must be drawn twice
       if (i == 0 || i == numberOfPoints -1) {
         curveVertex(x, y);
-        // println(x + ", " + y);
       }
       theta += precision;
       this.currentX = x;
       this.currentY = y;
     }
-    //starting at where we ended with drawFirstCurve, draw an increasingly larger circle with origins at this.startX/this.startY
   }
   
   void drawFirstCurve() {
@@ -108,12 +105,10 @@ class LargeFin {
     for (int i = 0; i < numberOfPoints+1; i++) {
       float x = cos(theta) * firstCurveCenterRadius + ellipseCenterX;
       float y = sin(theta) * firstCurveCenterRadius + ellipseCenterY;
-      // println(x + ", " + y);
       curveVertex(x, y);
       // beginning and end must be drawn twice
       if (i == 0 || i == numberOfPoints -1) {
         curveVertex(x, y);
-        // println(x + ", " + y);
       }
       theta -= precision;
       this.currentX = x;

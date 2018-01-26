@@ -12,7 +12,7 @@ void setup() {
 void draw() {
   background(30, 30, 90);
   drawAxis(1);
-  drawAxis(-1);
+  // drawAxis(-1);
   drawCenterKnob();
 }
 

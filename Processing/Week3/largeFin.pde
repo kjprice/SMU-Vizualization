@@ -23,6 +23,10 @@ class LargeFin {
     // noFill();
     // stroke(171, 129, 100);
     fill(142, 100, 60);
+    pushMatrix();
+    if (this.direction != 1) {
+      rotateY(PI);
+    }
     beginShape();
     // PImage darkWoodImage = loadImage("images/wood_texture.png");
     // texture(darkWoodImage);
@@ -31,6 +35,7 @@ class LargeFin {
     this.drawThirdCurve();
     this.drawFourthCurve();
     endShape();
+    popMatrix();
   }
 
   void drawFirstCurve() {

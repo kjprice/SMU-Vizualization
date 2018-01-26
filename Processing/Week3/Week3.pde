@@ -8,7 +8,7 @@ int originX;
 int originY;
 
 void setup() {
-  size(200, 200);
+  size(200, 200, P3D);
   noStroke();
   noLoop();
   originX = 0;
@@ -24,7 +24,7 @@ void draw() {
   translate(absoluteCenterX, absoluteCenterY);
   background(30, 30, 90);
   drawAxis(1);
-  // drawAxis(-1);
+  drawAxis(-1);
   drawCenterKnob();
 }
 

@@ -11,8 +11,8 @@ class LargeFin {
 
   LargeFin(int direction) {
     this.direction = direction;
-    this.startX = absoluteCenterX;
-    this.startY = absoluteCenterY;
+    this.startX = originX;
+    this.startY = originY;
     this.firstCurveCenterRadius = width/5;
     this.finalCurveRadius = width*4.5/10;
     

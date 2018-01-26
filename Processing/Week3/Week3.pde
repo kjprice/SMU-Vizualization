@@ -2,11 +2,17 @@
 
 float centerKnobRadius;
 float smallFinCenterRadius;
+int absoluteCenterX;
+int absoluteCenterY;
 
 void setup() {
   size(200, 200);
   noStroke();
   noLoop();
+  absoluteCenterX = width / 2;
+  absoluteCenterY = height / 2;
+  // absoluteCenterX = 0;
+  // absoluteCenterY = 0;
   
   centerKnobRadius = width *.05;
   smallFinCenterRadius = width *.10;
@@ -27,7 +33,7 @@ void drawAxis(int direction) {
 
 void drawSmallFinCenter() {
   fill(200, 200, 200);
-  ellipse(width/2, height/2, smallFinCenterRadius, smallFinCenterRadius);
+  ellipse(absoluteCenterX, absoluteCenterY, smallFinCenterRadius, smallFinCenterRadius);
 }
 
 void drawLargeFin(int direction) {
@@ -37,5 +43,5 @@ void drawLargeFin(int direction) {
 
 void drawCenterKnob() {
   fill(255);
-  ellipse(width/2, height/2, centerKnobRadius, centerKnobRadius);
+  ellipse(absoluteCenterX, absoluteCenterY, centerKnobRadius, centerKnobRadius);
 }

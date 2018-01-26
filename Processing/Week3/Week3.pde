@@ -1,12 +1,15 @@
 // Based on http://www.woodthatworks.com/kinetic-sculptures/nautilus.html
 
-int centerKnobRadius = 10;
-int smallFinCenterRadius = 18;
+float centerKnobRadius;
+float smallFinCenterRadius;
 
 void setup() {
   size(200, 200);
   noStroke();
   noLoop();
+  
+  centerKnobRadius = width *.05;
+  smallFinCenterRadius = width *.10;
 }
 
 void draw() {
@@ -17,9 +20,9 @@ void draw() {
 }
 
 void drawAxis(int direction) {
-  drawSmallFinCenter();
   drawSmallFin(direction); // 6 times
   drawLargeFin(direction);
+  drawSmallFinCenter();
 }
 
 void drawSmallFinCenter() {

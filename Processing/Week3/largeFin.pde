@@ -20,11 +20,16 @@ class LargeFin {
   }
   
   private void drawLargeFin() {
-    noFill();
-    stroke(111);
+    // noFill();
+    // stroke(171, 129, 100);
+    fill(142, 100, 60);
     beginShape();
+    // PImage darkWoodImage = loadImage("images/wood_texture.png");
+    // texture(darkWoodImage);
     this.drawFirstCurve();
     this.drawSecondCurve();
+    this.drawThirdCurve();
+    this.drawFourthCurve();
     endShape();
   }
 
@@ -50,14 +55,35 @@ class LargeFin {
     drawCurve(startingRadius, endingRadius, thetaStart, thetaEnd, ellipseCenterX, ellipseCenterY, direction);
   }
 
+  void drawThirdCurve() {
+    float ellipseCenterX =  this.startX;
+    float ellipseCenterY =  this.startY;
+    float thetaEnd = PI/2*.97;
+    float thetaStart = TWO_PI * 3/4;
+    float startingRadius =  this.finalCurveRadius*.97;
+    float endingRadius = this.finalCurveRadius*0.822;
+    int direction = -1;
+    drawCurve(startingRadius, endingRadius, thetaStart, thetaEnd, ellipseCenterX, ellipseCenterY, direction);
+  }
+
+  void drawFourthCurve() {
+    float ellipseCenterX =  firstCurveCenterRadius * cos(firstCurveCenterDirection) + this.startX*.992;
+    float ellipseCenterY =  firstCurveCenterRadius * sin(firstCurveCenterDirection) + this.startY;
+    
+    float thetaEnd = this.firstCurveCenterDirection + PI;
+    float thetaStart = PI / 2;
+
+    int direction = -1;
+    float startingRadius = firstCurveCenterRadius*.855;
+    float endingRadius = firstCurveCenterRadius*.76;
+    drawCurve(startingRadius, endingRadius, thetaStart, thetaEnd, ellipseCenterX, ellipseCenterY, direction);
+  }
+
   void drawCurve(float startingRadius, float endingRadius, float thetaStart, float thetaEnd, float ellipseCenterX, float ellipseCenterY, int direction) {
     float radius = startingRadius;
     float precision = .05;
     float numberOfPoints = (abs((thetaEnd - thetaStart) / precision));
     float radiusIncrement = (endingRadius - startingRadius) / (numberOfPoints / 2);
-    println(numberOfPoints);
-    
-    println(firstCurveCenterRadius, firstCurveCenterRadius, thetaStart, thetaEnd, ellipseCenterX, ellipseCenterY, direction);
     
     float theta = thetaStart;
     for (int i = 0; i < numberOfPoints+1; i++) {
@@ -74,7 +100,10 @@ class LargeFin {
       else {
         theta -= precision;
       }
-      if (i < numberOfPoints/2) {
+      if (direction == 1 && i < numberOfPoints/2) {
+        radius += radiusIncrement;
+      }
+      if (direction != 1 && i > numberOfPoints/2) {
         radius += radiusIncrement;
       }
       this.currentX = x;

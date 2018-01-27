@@ -14,7 +14,7 @@ float[] rotSpd;
 void setup() {
   size(500, 500, P3D);
   noStroke();
-  // noLoop();
+  //noLoop();
   originX = 0;
   originY = 0;
   absoluteCenterX = width / 2;
@@ -33,9 +33,9 @@ void draw() {
   translate(absoluteCenterX, absoluteCenterY);
   background(250, 250, 245);
   
-  // Clockwise rotation
-  drawAxis(0);
   // Anti Clockwise rotation
+  drawAxis(0);
+  // Clockwise rotation
   drawAxis(1);
   
   drawCenterKnob();
@@ -52,6 +52,8 @@ void drawAxis(int index) {
   popMatrix();
 
   theta[index] -= rotSpd[index];
+  // for a linear speed (without shifts of velocity) comment out this line
+  performAcceleration(index);
 }
 
 void drawSmallFinCenter() {

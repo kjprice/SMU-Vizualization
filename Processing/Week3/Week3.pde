@@ -51,11 +51,11 @@ void drawAxis(int index) {
   drawSmallFinCenter();
   popMatrix();
 
-  theta[index] += rotSpd[index];
+  theta[index] -= rotSpd[index];
 }
 
 void drawSmallFinCenter() {
-  fill(200, 200, 200);
+  fill(smallFinColor);
   ellipse(originX, originY, smallFinCenterRadius, smallFinCenterRadius);
 }
 

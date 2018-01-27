@@ -10,9 +10,9 @@ void drawSmallFin(int direction) {
   float deg = 185;     //starting position of the 1st Fin at center
   
   float[] rad = {radius*1/5,radius*2/5,radius*3/5,radius*4/5,radius}; // Number of samples circles taken from the center points
-  int grd = 20*rot;        // rotation required as we go to outer circle
+  int grd = 20*rot;        // Control the curve of the small fin. Increase to have move curved fin.
   
-  fill(200,200,200);   // Colour of the small fins
+  //fill(200,200,200);   // Colour of the small fins
  
   //Each loop for 6 fins
   fill(smallFinColor);

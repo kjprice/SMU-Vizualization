@@ -1,17 +1,18 @@
 
-int numberFramesSwitchDirection[] =  new int[] { 600, 950 };
+int numberFramesSwitchDirection = 60 * 10; // 10 seconds
+int startingFrameToCountSwich[] =  new int[] { 0, numberFramesSwitchDirection / 2 };
 float accelerationWeight[] = new float[] {0, 0};
 int accelerationDirections[] = new int[]{ -1, 1 };
 float accelerationRangeWeight = PI / 2000;
 float accelerationRange[] = new float[] { -accelerationRangeWeight, accelerationRangeWeight };
-float accelerationBias = accelerationRangeWeight * .9;
+float accelerationBias = accelerationRangeWeight;
 float maximumSpeed = PI/120;
 float maximumAcceleration = maximumSpeed / 60;
 
 // When acceleration is too much, queue it up to be used in a later frame
 float accelerationQueue[] = new float[] { 0, 0 };
 
-float maximumQueue = maximumAcceleration * 5;
+float maximumQueue = maximumAcceleration * 2;
 
 /* Too avoid jumps of acceleration during a single frame, spread the acceleration into multiple frames */
 float getCappedAcceleration(float acceleration, int index) {
@@ -52,8 +53,8 @@ float getCappedAcceleration(float acceleration, int index) {
 }
 
 void performAcceleration(int index) {
-  accelerationWeight[index] = accelerationWeight[index] * (1/numberFramesSwitchDirection[index] * accelerationDirections[index]);
-  if (frameCount % numberFramesSwitchDirection[index] == 0) {
+  accelerationWeight[index] = accelerationWeight[index] + (1/numberFramesSwitchDirection * accelerationDirections[index]);
+  if ((frameCount + startingFrameToCountSwich[index]) % numberFramesSwitchDirection == 0) {
     accelerationDirections[index] = -accelerationDirections[index]; 
   }
   float biasDirection = accelerationBias * accelerationWeight[index];

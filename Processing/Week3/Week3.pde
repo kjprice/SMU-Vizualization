@@ -7,12 +7,13 @@ int absoluteCenterY;
 int originX;
 int originY;
 
-float theta, theta2, rotSpd, rotSpd2;
+float[] theta;
+float[] rotSpd;
 
 void setup() {
   size(500, 500, P3D);
   noStroke();
-  //noLoop();
+  // noLoop();
   originX = 0;
   originY = 0;
   absoluteCenterX = width / 2;
@@ -21,38 +22,33 @@ void setup() {
   centerKnobRadius = width *.05;
   smallFinCenterRadius = width *.10;
   
-  rotSpd = PI/180;
-  rotSpd2 = -PI/180;
+  rotSpd = new float[]{ PI/180, -PI/180 };
+  theta = new float[]{ 0, 0 };
 }
 
 void draw() {
   translate(absoluteCenterX, absoluteCenterY);
   background(30, 30, 90);
-  //drawAxis(1);
-  //drawAxis(-1);
   
   // Clockwise rotation
-  pushMatrix();
-  rotate(theta);
-  drawAxis(1);
-  popMatrix();
-  
+  drawAxis(0);
   // Anti Clockwise rotation
-  pushMatrix();
-  rotate(theta2);
-  drawAxis(-1);
-  popMatrix();
+  drawAxis(1);
   
   drawCenterKnob();
-  
-  theta += rotSpd;
-  theta2 += rotSpd2;
 }
 
-void drawAxis(int direction) {
+void drawAxis(int index) {
+  int direction = (index == 0 ? 1 : -1);
+
+  pushMatrix();
+  rotate(theta[index]);
   drawLargeFin(direction);
-  drawSmallFin(direction); // 6 times
+  drawSmallFin(direction);
   drawSmallFinCenter();
+  popMatrix();
+
+  theta[index] += rotSpd[index];
 }
 
 void drawSmallFinCenter() {

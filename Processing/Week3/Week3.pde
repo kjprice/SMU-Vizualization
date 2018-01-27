@@ -23,12 +23,12 @@ void setup() {
   smallFinCenterRadius = width *.10;
   
   rotSpd = new float[]{ PI/180, -PI/180 };
-  theta = new float[]{ 0, 0 };
+  theta = new float[]{ 10, 0 };
 }
 
 void draw() {
   translate(absoluteCenterX, absoluteCenterY);
-  background(30, 30, 90);
+  background(250, 250, 245);
   
   // Clockwise rotation
   drawAxis(0);

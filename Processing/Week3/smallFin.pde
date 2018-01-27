@@ -15,6 +15,7 @@ void drawSmallFin(int direction) {
   fill(200,200,200);   // Colour of the small fins
  
   //Each loop for 6 fins
+  fill(230, 210, 180);
   for(int fin=0; fin < 6 ; fin++) {
     beginShape();
     curveVertex(originX,originY);

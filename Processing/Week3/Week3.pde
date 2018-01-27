@@ -7,6 +7,7 @@ int absoluteCenterY;
 int originX;
 int originY;
 
+color smallFinColor;
 float[] theta;
 float[] rotSpd;
 
@@ -18,6 +19,8 @@ void setup() {
   originY = 0;
   absoluteCenterX = width / 2;
   absoluteCenterY = height / 2;
+  
+  smallFinColor = color(230, 210, 180);
   
   centerKnobRadius = width *.05;
   smallFinCenterRadius = width *.10;

@@ -30,6 +30,7 @@ void drawSmallFin(int direction) {
     curveVertex(originX + rad[i]*cos(radians(deg+(grd*i))), originX + rad[i]*sin(radians(deg+(grd*i))));
       }
     curveVertex(originX,originY);
+    curveVertex(originX,originY);
     endShape();
     deg = deg+18;     // Space between two fins
    }

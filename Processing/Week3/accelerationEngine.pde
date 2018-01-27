@@ -1,15 +1,17 @@
 
-int numberFramesSwitchDirection = 200;
+int numberFramesSwitchDirection[] =  new int[] { 300, 450 };
 float accelerationWeight[] = new float[] {0, 0};
 int accelerationDirections[] = new int[]{ -1, 1 };
-float accelerationRangeWeight = PI / 3000;
+float accelerationRangeWeight = PI / 2000;
 float accelerationRange[] = new float[] { -accelerationRangeWeight, accelerationRangeWeight };
-float accelerationBias = accelerationRangeWeight * .5;
+float accelerationBias = accelerationRangeWeight * .9;
 float maximumSpeed = PI/120;
 float maximumAcceleration = maximumSpeed / 60;
 
 // When acceleration is too much, queue it up to be used in a later frame
 float accelerationQueue[] = new float[] { 0, 0 };
+
+float maximumQueue = maximumAcceleration * 5;
 
 /* Too avoid jumps of acceleration during a single frame, spread the acceleration into multiple frames */
 float getCappedAcceleration(float acceleration, int index) {
@@ -27,7 +29,7 @@ float getCappedAcceleration(float acceleration, int index) {
     if (abs(accelerationQueue[index] + acceleration) > maximumAcceleration) {
       float accelerationDifference = maximumAcceleration - abs(acceleration);
       newAcceleration = multiplier * maximumAcceleration;
-      
+
       if (accelerationQueue[index] < 0) {
         accelerationQueue[index] += accelerationDifference;
       } else {
@@ -40,12 +42,18 @@ float getCappedAcceleration(float acceleration, int index) {
       accelerationQueue[index] = 0;
     }
   }
+
+  if (accelerationQueue[index] < -maximumQueue) {
+    accelerationQueue[index] = -maximumQueue;
+  } else if (accelerationQueue[index] > maximumQueue) {
+    accelerationQueue[index] = maximumQueue;
+  }
   return newAcceleration;
 }
 
 void performAcceleration(int index) {
   accelerationWeight[index] = accelerationWeight[index] * (1/300 * accelerationDirections[index]); 
-  if (frameCount % numberFramesSwitchDirection == 0) {
+  if (frameCount % numberFramesSwitchDirection[index] == 0) {
     accelerationDirections[index] = -accelerationDirections[index]; 
   }
   float biasDirection = accelerationBias * accelerationWeight[index];

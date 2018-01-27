@@ -1,5 +1,5 @@
 
-int numberFramesSwitchDirection[] =  new int[] { 300, 450 };
+int numberFramesSwitchDirection[] =  new int[] { 600, 950 };
 float accelerationWeight[] = new float[] {0, 0};
 int accelerationDirections[] = new int[]{ -1, 1 };
 float accelerationRangeWeight = PI / 2000;
@@ -52,7 +52,7 @@ float getCappedAcceleration(float acceleration, int index) {
 }
 
 void performAcceleration(int index) {
-  accelerationWeight[index] = accelerationWeight[index] * (1/300 * accelerationDirections[index]); 
+  accelerationWeight[index] = accelerationWeight[index] * (1/numberFramesSwitchDirection[index] * accelerationDirections[index]);
   if (frameCount % numberFramesSwitchDirection[index] == 0) {
     accelerationDirections[index] = -accelerationDirections[index]; 
   }

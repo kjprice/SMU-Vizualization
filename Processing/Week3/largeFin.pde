@@ -9,14 +9,14 @@ class LargeFin {
   private float currentX;
   private float currentY;
 
-  LargeFin(int direction) {
+  LargeFin(int direction, color finColor) {
     this.direction = direction;
     this.firstCurveCenterRadius = width/5;
     this.finalCurveRadius = width*4.5/10;
     
     // this.drawShadow();
     
-    this.drawLargeFin(largeFinColorBase, originX, originY);
+    this.drawLargeFin(finColor, originX, originY);
   }
   
   void drawShadow() {
@@ -29,8 +29,6 @@ class LargeFin {
   private void drawLargeFin(color c, float x, float y) {
     this.startX = x;
     this.startY = y;
-    // noFill();
-    // stroke(171, 129, 100);
     fill(c);
     pushMatrix();
     if (this.direction != 1) {

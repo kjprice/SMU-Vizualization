@@ -11,7 +11,10 @@ int originX;
 int originY;
 
 color smallFinColorBase;
-int largeFinColorBase = color(142, 100, 60);
+int largeFinColorBase[] = new int[] {
+  color(122, 90, 44),
+  color(142, 100, 60)
+};
 int largeFinColorShadow = color(200, 200, 200);
 float[] theta;
 float[] rotSpd;
@@ -59,7 +62,7 @@ void drawAxis(int index) {
 
   pushMatrix();
   rotate(theta[index]);
-  drawLargeFin(direction);
+  drawLargeFin(direction, largeFinColorBase[index]);
   drawSmallFin(direction);
   drawSmallFinCenter();
   popMatrix();
@@ -74,9 +77,9 @@ void drawSmallFinCenter() {
   ellipse(originX, originY, smallFinCenterRadius, smallFinCenterRadius);
 }
 
-void drawLargeFin(int direction) {
+void drawLargeFin(int direction, color c) {
   // draw two curveVertex groups by using circles
-  new LargeFin(direction);
+  new LargeFin(direction, c);
 }
 
 void drawCenterKnob() {

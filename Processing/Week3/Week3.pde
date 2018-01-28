@@ -1,5 +1,8 @@
 // Based on http://www.woodthatworks.com/kinetic-sculptures/nautilus.html
 
+int NUMBER_SMALL_FINS = 6;
+int NUMBER_AXISES = 2;
+
 float centerKnobRadius;
 float smallFinCenterRadius;
 int absoluteCenterX;
@@ -7,9 +10,11 @@ int absoluteCenterY;
 int originX;
 int originY;
 
-color smallFinColor;
+color smallFinColorBase;
 float[] theta;
 float[] rotSpd;
+
+int[][] smallFinColorsByAxis = new int[NUMBER_AXISES][NUMBER_SMALL_FINS];
 
 void setup() {
   size(500, 500, P3D);
@@ -20,13 +25,14 @@ void setup() {
   absoluteCenterX = width / 2;
   absoluteCenterY = height / 2;
   
-  smallFinColor = color(230, 210, 180);
+  smallFinColorBase = color(230, 210, 180);
   
   centerKnobRadius = width *.05;
   smallFinCenterRadius = width *.10;
   
   rotSpd = new float[]{ PI/180, -PI/180 };
   theta = new float[]{ 10, 0 };
+  createSmallFinColor();
 }
 
 void draw() {
@@ -57,7 +63,7 @@ void drawAxis(int index) {
 }
 
 void drawSmallFinCenter() {
-  fill(smallFinColor);
+  fill(smallFinColorBase);
   ellipse(originX, originY, smallFinCenterRadius, smallFinCenterRadius);
 }
 

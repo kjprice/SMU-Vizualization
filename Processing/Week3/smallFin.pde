@@ -1,8 +1,29 @@
 
-// (x,y) coordinate on a circle perimeter : (TranslatedCenterX + radius * cos(angle), TranslatedCenterY + radius * sin(angle))
+// part of setup - multiple strategies to choose from
+void createSmallFinColor() {
+  // predefine colors by axis here
+  int axisColors[] = new int[] {
+    color(220, 200, 170),
+    color(240, 220, 190)
+  };
+  for (int i = 0; i < NUMBER_AXISES; i++) {
+    // use random colors for access here
+    // int axisColor = color(random(220, 240), random(200, 220), random(170, 190));
+    int axisColor = axisColors[i];
+    for (int n = 0; n < NUMBER_SMALL_FINS; n++) {
+      // give random colors to each fin
+      //smallFinColorsByAxis[i][n] = color(random(225, 235), random(205, 215), random(175, 185));
+      // sinply use smallFinColorBase for all fins
+      //smallFinColorsByAxis[i][n] = smallFinColorBase;
+      // define each fin based on the axis they are on
+      smallFinColorsByAxis[i][n] = axisColor;
+    }
+  }
+}
 
 
 void drawSmallFin(int direction) {
+  int axisIndex = (direction == 1 ? 0 : 1);
   
   float radius = width*.87/2 ; //Radius of the outermost tip of the fin
   
@@ -15,8 +36,8 @@ void drawSmallFin(int direction) {
   //fill(200,200,200);   // Colour of the small fins
  
   //Each loop for 6 fins
-  fill(smallFinColor);
-  for(int fin=0; fin < 6 ; fin++) {
+  for(int fin=0; fin < NUMBER_SMALL_FINS; fin++) {
+    fill(smallFinColorsByAxis[axisIndex][fin]);
     beginShape();
     curveVertex(originX,originY);
     curveVertex(originX,originY);

@@ -11,10 +11,14 @@ int originX;
 int originY;
 
 color smallFinColorBase;
+int largeFinColorBase = color(142, 100, 60);
+int largeFinColorShadow = color(200, 200, 200);
 float[] theta;
 float[] rotSpd;
 
 int[][] smallFinColorsByAxis = new int[NUMBER_AXISES][NUMBER_SMALL_FINS];
+float shadowDirectionX;
+float shadowDirectionY;
 
 void setup() {
   size(500, 500, P3D);
@@ -33,6 +37,9 @@ void setup() {
   rotSpd = new float[]{ PI/180, -PI/180 };
   theta = new float[]{ 10, 0 };
   createSmallFinColor();
+
+  shadowDirectionX = width * .006;
+  shadowDirectionY = height * .002;
 }
 
 void draw() {

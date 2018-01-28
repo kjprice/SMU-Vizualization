@@ -1,8 +1,8 @@
 
 class LargeFin {
   private int direction;
-  private int startX;
-  private int startY;
+  private float startX;
+  private float startY;
   private int firstCurveCenterRadius;
   private float firstCurveCenterDirection = PI*5/10;
   private float finalCurveRadius;
@@ -11,18 +11,27 @@ class LargeFin {
 
   LargeFin(int direction) {
     this.direction = direction;
-    this.startX = originX;
-    this.startY = originY;
     this.firstCurveCenterRadius = width/5;
     this.finalCurveRadius = width*4.5/10;
     
-    this.drawLargeFin();
+    // this.drawShadow();
+    
+    this.drawLargeFin(largeFinColorBase, originX, originY);
   }
   
-  private void drawLargeFin() {
+  void drawShadow() {
+    float x = shadowDirectionX + originX;
+    float y = shadowDirectionY + originY;
+    
+    this.drawLargeFin(largeFinColorShadow, x, y);
+  }
+
+  private void drawLargeFin(color c, float x, float y) {
+    this.startX = x;
+    this.startY = y;
     // noFill();
     // stroke(171, 129, 100);
-    fill(142, 100, 60);
+    fill(c);
     pushMatrix();
     if (this.direction != 1) {
       rotateY(PI);
@@ -37,7 +46,7 @@ class LargeFin {
     endShape();
     popMatrix();
   }
-
+  
   void drawFirstCurve() {
     float ellipseCenterX =  firstCurveCenterRadius * cos(firstCurveCenterDirection) + this.startX;
     float ellipseCenterY =  firstCurveCenterRadius * sin(firstCurveCenterDirection) + this.startY;

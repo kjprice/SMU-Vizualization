@@ -1,9 +1,13 @@
+float slopeYPosition() {
+  return height * 5/8;
+}
+
 void drawSlope() {
   float startingX = width * 1/8;
-  float startingY = height * 2/3;
+  float startingY = slopeYPosition();
   
   float endingX = width * 9/10;
-  float endingY = width * 1/4;
+  float endingY = slopeYPosition();
   
   line(startingX, startingY, endingX, endingY);
 }

@@ -2,7 +2,9 @@ int DELAY_BETWEEN_BARRELS = 60 * 2; // 2 seconds
 
 float barrelStartingPositionX;
 float barrelStartingPositionY;
+
 float characterHeight;
+
 float characterPositionX;
 float characterPositionY;
 
@@ -11,12 +13,15 @@ float slopePositionStartY;
 float slopePositionEndX;
 float slopePositionEndY;
 
+float characterRunningSpeed;
+
 void setup() {
   size(800, 500);
   barrelStartingPositionX = width * 5/8;
   barrelStartingPositionY = width * 1/4;
   
-  loadCharacterImages();
+  setupCharacter();
+
   characterHeight = height / 6;
   
   slopePositionStartX = width * 1/8;
@@ -29,6 +34,8 @@ void setup() {
 }
 
 void draw() {
+  background(255);
+  calculateCharacterPosition();
   drawCharacter();
   drawBarrels();
   drawSlope();

@@ -1,71 +1,52 @@
-int DELAY_BETWEEN_BARRELS =  1 ; // 2 seconds
-
+float characterHeight;
 float barrelStartingPositionX;
 float barrelStartingPositionY;
 float barrelRadius ; 
-float x, y;
-float spdX, spdY;
-
-float characterHeight;
-
-float characterPositionX;
-float characterPositionY;
+float x, y, w;
+float spdX, spdY, theta, rotSpd;
 
 float slopePositionStartX;
 float slopePositionStartY;
 float slopePositionEndX;
 float slopePositionEndY;
 
-float characterRunningSpeed;
-
 void setup() {
-  size(800, 800);
-  
-  setupCharacter();
-
+  size(600, 600);
   characterHeight = height / 6;
-  
   slopePositionStartX = width * 1/8;
   slopePositionStartY = height * 5/8;
   slopePositionEndX = width * 9/10;
   slopePositionEndY = slopePositionStartY;
-
-  characterPositionX = slopePositionStartX;
-  characterPositionY = slopePositionStartY - characterHeight;
   
+  // initialize global variables
   barrelStartingPositionX = width * 9/10;
   barrelStartingPositionY = width * 1/4;
-  barrelRadius = characterHeight*5/8;
   
   x = barrelStartingPositionX;
-  y = barrelStartingPositionX;
-  spdX = 2.1;
-  spdY = 1.5;
-  
-}
+  y = barrelStartingPositionY;
+  barrelRadius = characterHeight*5/8;
+  spdX = 1;
+  spdY = 2.1;
+  //rotSpd = PI/180;
+  fill(0, 175, 175);
+  //noStroke();
+} // end setup
 
 void draw() {
-  background(255);
-
-  calculateCharacterPosition();
-  drawCharacter();
+  background(255, 127, 0);
   
-  drawSlope();
+  line(slopePositionStartX, slopePositionStartY, slopePositionEndX, slopePositionEndY);
   
   pushMatrix();
-  drawBarrels();
+  ellipse(x, y, barrelRadius, barrelRadius);
   popMatrix();
   
-  //x += spdX;
-  //y += spdY;
-  
-  collideBarrel();
-  
-  
-}
+  collide();
+
+} 
 
 
-void collideBarrel() {
+void collide() {
   if (y < slopePositionStartY-barrelRadius/2) {
     y += spdY;
   }

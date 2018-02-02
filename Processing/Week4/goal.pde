@@ -30,7 +30,6 @@ void setupGoal() {
   goalWidth =  (goalImage.width / float(goalImage.height)) * goalHeight;
   goalPositionX = width - goalWidth;
   goalPositionY = slopePositionEndY - goalHeight;
-  println(goalPositionX, goalPositionY, goalWidth, goalHeight);
 }
 
 void drawGoal() {

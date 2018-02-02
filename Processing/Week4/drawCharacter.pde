@@ -87,7 +87,7 @@ void performCharacterCollisionDetection() {
 }
 
 void calculateCharacterPosition() {
-  characterRunningSpeed = (width * .75) / frameRate;
+  characterRunningSpeed = (width) / frameRate;
   calculateCharacterVelocity();
   performCharacterCollisionDetection();
 

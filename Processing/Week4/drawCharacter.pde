@@ -65,12 +65,12 @@ boolean characterTooFarRight() {
    return characterPositionX + maxCharacterWidth > width;
 }
 
-boolean characterAboveAndInsideSlope() {
-  return characterHeight + characterPositionY > slopePositionEndY;
-}
-
 void winTheGame() {
   gameOver = true;
+}
+
+boolean characterAtBottomOfScreen() {
+  return (characterPositionY + characterHeight) > height;
 }
 
 void performCharacterCollisionDetection() {
@@ -89,6 +89,11 @@ void performCharacterCollisionDetection() {
   
   if (characterAboveAndInsideSlope()) {
     characterPositionY = slopePositionEndY - characterHeight;
+    characterVelocityY = 0;
+  }
+  
+  if (characterAtBottomOfScreen()) {
+    characterPositionY = height - characterHeight;
     characterVelocityY = 0;
   }
 

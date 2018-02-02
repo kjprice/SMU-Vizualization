@@ -37,7 +37,15 @@ void drawGoal() {
   image(goalImage, goalPositionX, goalPositionY, goalWidth, goalHeight);
 }
 
-boolean characterGoalCollision() {
-  // if charPosX + charWidth >= goalPositionX
+boolean characterGoalCollionsX() {
   return characterWidth + characterPositionX >= goalPositionX;
+}
+
+boolean characterGoalCollionsY() {
+  return characterHeight + characterPositionY >= goalPositionY
+    && characterPositionY <= (goalPositionY + goalHeight);
+}
+
+boolean characterGoalCollision() {
+  return characterGoalCollionsX() && characterGoalCollionsY();
 }

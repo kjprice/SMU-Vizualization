@@ -23,7 +23,7 @@ float forceOfGravity;
 boolean gameOver = false;
 
 void setup() {
-  size(800, 800);
+  size(800, 600);
   
   setupCharacter();
 

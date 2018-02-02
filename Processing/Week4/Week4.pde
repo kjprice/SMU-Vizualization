@@ -33,7 +33,7 @@ void setup() {
   slopePositionEndY = slopePositionStartY;
 
   characterPositionX = slopePositionStartX;
-  characterPositionY = slopePositionStartY - characterHeight;
+  characterPositionY = 0;
   
   barrelStartingPositionX = width * 9/10;
   barrelStartingPositionY = width * 1/4;

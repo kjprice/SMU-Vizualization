@@ -20,6 +20,8 @@ float characterRunningSpeed;
 
 float forceOfGravity;
 
+boolean gameOver = false;
+
 void setup() {
   size(800, 800);
   
@@ -44,10 +46,19 @@ void setup() {
   spdX = 2.1;
   spdY = 1.5;
   
+  setupGameOverText();
+  setupGoal();  
 }
 
 void draw() {
   background(255);
+  if (gameOver) {
+    gameOverText();
+    drawCharacter();
+    return;
+  }
+
+  calculateCharacterPosition();
   drawCharacter();
   
   drawSlope();
@@ -55,12 +66,10 @@ void draw() {
   pushMatrix();
   drawBarrels();
   popMatrix();
-  
-  //x += spdX;
-  //y += spdY;
-  
+
   collideBarrel();
   
+  drawGoal();
   
 }
 

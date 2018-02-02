@@ -69,7 +69,15 @@ boolean characterAboveAndInsideSlope() {
   return characterHeight + characterPositionY > slopePositionEndY;
 }
 
+void winTheGame() {
+  gameOver = true;
+}
+
 void performCharacterCollisionDetection() {
+  if (characterGoalCollision()) {
+    winTheGame();
+    // return;
+  }
   if (characterTooFarLeft()) {
     characterPositionX = 0;
     characterVelocityX = 0;
@@ -98,7 +106,6 @@ void calculateCharacterPosition() {
 }
 
 void drawCharacter() {
-  calculateCharacterPosition();
   PImage currentImage = getImageByAction();
   characterWidth = ((float)currentImage.width / (float)currentImage.height) * characterHeight;
   image(currentImage, characterPositionX, characterPositionY, characterWidth, characterHeight);

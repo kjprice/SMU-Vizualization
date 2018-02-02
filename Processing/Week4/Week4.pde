@@ -18,6 +18,8 @@ float slopePositionEndY;
 
 float characterRunningSpeed;
 
+float forceOfGravity;
+
 void setup() {
   size(800, 800);
   
@@ -46,8 +48,6 @@ void setup() {
 
 void draw() {
   background(255);
-
-  calculateCharacterPosition();
   drawCharacter();
   
   drawSlope();

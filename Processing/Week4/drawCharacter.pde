@@ -16,7 +16,7 @@ float maxCharacterWidth = 0;
 
 void performJump() {
   if (characterVelocityY == 0) {
-    characterAcceleration = characterHeight * 4;
+    characterVelocityY = -characterHeight * .6;
   }
 }
 
@@ -51,6 +51,8 @@ void calculateCharacterVelocity() {
   } else {
     characterVelocityX = 0;
   }
+  
+  characterVelocityY = newVelocityWithGravity(characterVelocityY);
 }
 
 boolean characterTooFarLeft() {
@@ -59,6 +61,10 @@ boolean characterTooFarLeft() {
 
 boolean characterTooFarRight() {
    return characterPositionX + maxCharacterWidth > width;
+}
+
+boolean characterAboveAndInsideSlope() {
+  return characterHeight + characterPositionY > slopePositionEndY;
 }
 
 void performCharacterCollisionDetection() {
@@ -70,10 +76,18 @@ void performCharacterCollisionDetection() {
     characterPositionX = width - maxCharacterWidth;
     characterVelocityX = 0;
   }
+  
+  if (characterAboveAndInsideSlope()) {
+    characterPositionY = slopePositionEndY - characterHeight;
+    characterVelocityY = 0;
+  }
+
+  // TODO if we are outside of the slope, let fall
+  // TODO if user's feet are below slope, prevent from running into slope
 }
 
 void calculateCharacterPosition() {
-  characterRunningSpeed = (width / 2) / frameRate;
+  characterRunningSpeed = (width * .75) / frameRate;
   calculateCharacterVelocity();
   performCharacterCollisionDetection();
 
@@ -82,6 +96,7 @@ void calculateCharacterPosition() {
 }
 
 void drawCharacter() {
+  calculateCharacterPosition();
   PImage currentImage = getImageByAction();
   characterWidth = ((float)currentImage.width / (float)currentImage.height) * characterHeight;
   image(currentImage, characterPositionX, characterPositionY, characterWidth, characterHeight);

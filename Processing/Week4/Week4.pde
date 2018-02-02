@@ -1,7 +1,8 @@
-int DELAY_BETWEEN_BARRELS = 60 * 2; // 2 seconds
+int DELAY_BETWEEN_BARRELS =  60*2 ; // 2 seconds
 
 float barrelStartingPositionX;
 float barrelStartingPositionY;
+float barrelRadius ; 
 
 float characterHeight;
 
@@ -31,6 +32,11 @@ void setup() {
 
   characterPositionX = slopePositionStartX;
   characterPositionY = slopePositionStartY - characterHeight;
+  
+  
+  barrelStartingPositionX = slopePositionEndX;
+  barrelStartingPositionY = height * 2/8;
+  barrelRadius = characterHeight*5/8;
 }
 
 void draw() {

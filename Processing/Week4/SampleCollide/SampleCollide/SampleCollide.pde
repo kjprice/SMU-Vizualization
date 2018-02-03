@@ -51,6 +51,6 @@ void collide() {
     y += spdY;
   }
   else if (y == slopePositionStartY-barrelRadius/2) { 
-    x -= spdX*2;
+    x -= spdX;
   } 
 } 

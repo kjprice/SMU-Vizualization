@@ -14,14 +14,12 @@ void drawBarrels() {
 
 void drawBarrel() {
     createNewBarrel();
-  
-
 }
 
 void createNewBarrel() {
   fill(#9B6605);
-    ellipse(barrelStartingPositionX,barrelStartingPositionY,barrelRadius,barrelRadius);
-    ellipse(barrelStartingPositionX,barrelStartingPositionY,barrelRadius*0.6,barrelRadius*0.6);
-    ellipse(barrelStartingPositionX,barrelStartingPositionY,barrelRadius*0.5,barrelRadius*0.5);
-    ellipse(barrelStartingPositionX,barrelStartingPositionY,barrelRadius*0.07,barrelRadius*0.07);
+    ellipse(x,y,barrelRadius,barrelRadius);
+    ellipse(x,y,barrelRadius*0.6,barrelRadius*0.6);
+    ellipse(x,y,barrelRadius*0.5,barrelRadius*0.5);
+    ellipse(x,y,barrelRadius*0.07,barrelRadius*0.07);
 }

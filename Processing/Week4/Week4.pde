@@ -4,7 +4,7 @@ float barrelStartingPositionX;
 float barrelStartingPositionY;
 float barrelRadius ; 
 float x, y;
-float spdX, spdY;
+float spdX, spdY,theta;
 
 float characterHeight;
 
@@ -42,9 +42,11 @@ void setup() {
   barrelRadius = characterHeight*5/8;
   
   x = barrelStartingPositionX;
-  y = barrelStartingPositionX;
-  spdX = 2.1;
+  y = barrelStartingPositionY;
+  spdX = 6;
   spdY = 1.5;
+  theta = PI/2;
+  
   
   setupGameOverText();
   setupGoal();  
@@ -63,22 +65,22 @@ void draw() {
   
   drawSlope();
   
-  pushMatrix();
-  drawBarrels();
-  popMatrix();
 
-  collideBarrel();
+  drawBarrels();
+  x -= spdX;
+  collide();
   
   drawGoal();
   
 }
 
 
-void collideBarrel() {
+void collide() {
   if (y < slopePositionStartY-barrelRadius/2) {
     y += spdY;
+    x += spdX;
   }
   else if (y == slopePositionStartY-barrelRadius/2) { 
-    x -= spdX*2;
+    x -= spdX;
   } 
 } 

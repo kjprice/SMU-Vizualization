@@ -1,4 +1,4 @@
-int DELAY_BETWEEN_BARRELS =  60*1 ; 
+int timer =  0 ; 
 
 float barrelStartingPositionX;
 float barrelStartingPositionY;
@@ -45,7 +45,7 @@ void setup() {
   x = barrelStartingPositionX;
   y = barrelStartingPositionY;
   spdX = 6;
-  spdY = 1.5;
+  spdY = 3;
   
   setupGameOverText();
   setupGoal();  
@@ -73,7 +73,6 @@ void draw() {
   drawGoal();
  
   drawBarrel();
-  x -= spdX;
   collideBarrelSlope();
   collideBarrelChar();
   

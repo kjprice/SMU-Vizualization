@@ -12,18 +12,15 @@ void drawBarrel() {
 void collideBarrelSlope() {
   if (y < slopePositionStartY-barrelRadius/2) {
     y += spdY;
-    x += spdX;
   }
-  else if (y == slopePositionStartY-barrelRadius/2) { 
-    if (x > barrelRadius/2 ) {
+  else if ((y >  slopePositionStartY-barrelRadius/2) && (x > slopePositionStartX - 15 )) { 
       x -= spdX;
-    }
-    else if (x < barrelRadius/2) {  
-      x += spdX;
+  }
+  else { 
+      x -= spdX;
       y += spdY;
-    }
-  } 
-} 
+  }  
+ }
 
 
 void collideBarrelChar() {

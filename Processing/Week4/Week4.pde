@@ -1,10 +1,10 @@
-int DELAY_BETWEEN_BARRELS =  1 ; // 2 seconds
+int DELAY_BETWEEN_BARRELS =  60*1 ; 
 
 float barrelStartingPositionX;
 float barrelStartingPositionY;
 float barrelRadius ; 
 float x, y;
-float spdX, spdY,theta;
+float spdX, spdY;
 
 float characterHeight;
 
@@ -21,6 +21,7 @@ float characterRunningSpeed;
 float forceOfGravity;
 
 boolean gameOver = false;
+boolean gameOverFail = false;
 
 void setup() {
   size(800, 600);
@@ -45,8 +46,6 @@ void setup() {
   y = barrelStartingPositionY;
   spdX = 6;
   spdY = 1.5;
-  theta = PI/2;
-  
   
   setupGameOverText();
   setupGoal();  
@@ -54,33 +53,28 @@ void setup() {
 
 void draw() {
   background(255);
+  
   if (gameOver) {
     gameOverText();
     drawCharacter();
     return;
   }
 
+  if (gameOverFail) {
+    gameOverTextFail();
+    drawCharacter();
+    drawBarrel();
+    return;
+  }
+
   calculateCharacterPosition();
   drawCharacter();
-  
   drawSlope();
-  
-
-  drawBarrels();
-  x -= spdX;
-  collide();
-  
   drawGoal();
+ 
+  drawBarrel();
+  x -= spdX;
+  collideBarrelSlope();
+  collideBarrelChar();
   
 }
-
-
-void collide() {
-  if (y < slopePositionStartY-barrelRadius/2) {
-    y += spdY;
-    x += spdX;
-  }
-  else if (y == slopePositionStartY-barrelRadius/2) { 
-    x -= spdX;
-  } 
-} 

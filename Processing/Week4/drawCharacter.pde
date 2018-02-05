@@ -14,7 +14,7 @@ float characterAcceleration = 0;
 float characterWidth;
 float maxCharacterWidth = 0;
 
-float JUMP_PLAYER_MULTIPIER = .3; // strength of jump compared to height of character
+float JUMP_PLAYER_MULTIPIER = .23; // strength of jump compared to height of character
 
 void performJump() {
   if (characterVelocityY == 0) {

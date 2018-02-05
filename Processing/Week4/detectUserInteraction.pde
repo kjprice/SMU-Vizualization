@@ -12,6 +12,7 @@ void keyPressed() {
   }
 }
 
+
 void keyReleased() {
   if (keyCode == RIGHT) {
     rightArrowPressed = false;

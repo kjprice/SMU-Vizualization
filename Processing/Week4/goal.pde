@@ -15,8 +15,13 @@ void gameOverText() {
   text("YOU WIN!!", textPositionX, textPositionY); 
 }
 
+void gameOverTextFail() {
+  fill(255, 40, 40);
+  text("OOPS!! TRY AGAIN!!", textPositionX, textPositionY); 
+}
+
 void setupGameOverText() {
-  textSize = width * .10;
+  textSize = width * .08;
   textPositionX = textSize;
   textPositionY = height / 2 - textSize;
   textSize(textSize);

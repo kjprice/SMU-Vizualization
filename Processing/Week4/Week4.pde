@@ -1,4 +1,5 @@
-int timer =  0 ; 
+
+ArrayList <barrel> barrels = new ArrayList <barrel> ();
 
 float barrelStartingPositionX;
 float barrelStartingPositionY;
@@ -42,13 +43,14 @@ void setup() {
   barrelStartingPositionY = width * 1/4;
   barrelRadius = characterHeight*5/8;
   
-  x = barrelStartingPositionX;
-  y = barrelStartingPositionY;
-  spdX = 6;
-  spdY = 3;
+  //x = barrelStartingPositionX;
+  //y = barrelStartingPositionY;
+  //spdX = 6;
+  //spdY = 3;
   
   setupGameOverText();
   setupGoal();  
+  
 }
 
 void draw() {
@@ -63,7 +65,7 @@ void draw() {
   if (gameOverFail) {
     gameOverTextFail();
     drawCharacter();
-    drawBarrel();
+    //drawBarrel();
     return;
   }
 
@@ -72,8 +74,25 @@ void draw() {
   drawSlope();
   drawGoal();
  
-  drawBarrel();
-  collideBarrelSlope();
-  collideBarrelChar();
+
+  if (frameCount % 100 == 0) {
+    barrels.add(new barrel());
+    println(barrels.size());
+ //   barrel b = new barrel();
+ //   b.collideBarrelSlope();
+ //   b.collideBarrelChar();
+  }
+  
+  
+ for (int i=barrels.size()-1; i>=0; i--) {
+    barrel b = barrels.get(i);
+    b.display();
+    b.collideBarrelSlope();
+    b.collideBarrelChar();
+  }
+ //drawBarrel();
+  //collideBarrelSlope();
+  //collideBarrelChar();
+
   
 }

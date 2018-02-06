@@ -1,13 +1,19 @@
+class barrel {
 
-
-void drawBarrel() {  
+barrel() {
+  x = barrelStartingPositionX; //width * 9/10;
+  y = barrelStartingPositionY; //width * 1/4;
+  spdX = 6;
+  spdY = 3;
+}
+  
+void display() {
     fill(#9B6605);
     ellipse(x,y,barrelRadius,barrelRadius);
     ellipse(x,y,barrelRadius*0.6,barrelRadius*0.6);
     ellipse(x,y,barrelRadius*0.5,barrelRadius*0.5);
     ellipse(x,y,barrelRadius*0.07,barrelRadius*0.07);  
-}
-
+  }
 
 void collideBarrelSlope() {
   if (y < slopePositionStartY-barrelRadius/2) {
@@ -22,9 +28,10 @@ void collideBarrelSlope() {
   }  
  }
 
-
 void collideBarrelChar() {
    if (( abs(characterPositionX + characterWidth - x) < barrelRadius/2) && ( abs(characterPositionY + characterHeight/2 - y) < barrelRadius/2)  ) {  
      gameOverFail = true;
   }  
+}
+
 }

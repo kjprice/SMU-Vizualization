@@ -1,0 +1,22 @@
+TODOs:
+color picker
+ - follow mouse with circle
+ - When user hovers over pixel, circle becomes the color of the pixel
+ - When user clicks on pixel, circle stays that pixel's color
+ - Show "Reset" button and instructions about hitting escape
+ - When user clicks on any pixel again, the previously-selected color is applied to the pixel - you can drag to apply to multiple pixels
+ - A blur effect will be made by averaging the 9 pixels around the selected pixel with the selected color
+image
+
+Three settings:
+ 1. Pick Color
+ 2. Blur/draw color
+ 3. Reset button or hit escape - Pick color again
+
+Katya - image, blur
+KJ - Pixel circle color thing
+Preeti - select blur rdKius
+
+reset button/escape
+
+https://processing.org/reference/filter_.html

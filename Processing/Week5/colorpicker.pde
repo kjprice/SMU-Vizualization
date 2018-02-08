@@ -26,6 +26,10 @@ void setHoverColor() {
 }
 
 void drawColorpicker() {
+  if (!mouseMoved) {
+    return;
+  }
+
   float[] colorPosiition = calculateColorPickerPosition();
   if (colorIsSet) {
     fill(selectedColor);

@@ -6,7 +6,7 @@ void setup() {
 
 void draw() {
   drawImage();
-  blur(100);
+  blur(20);
   drawColorpicker();
   drawButtons();
   drawBlurWidthOptions();

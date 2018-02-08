@@ -7,11 +7,9 @@ void blur (float r){
    }
    else{
      if(mousePressed == true){
-        loadPixels();
-        //populate array with pixels within mixing circle
+        selectedImage.loadPixels();
+        //get pixels within mixing circle
         //https://stackoverflow.com/questions/14487322/get-all-pixel-array-inside-circle
-        //int[] xWithinCircle = new int[int(PI*sq(r))];
-       // int[] yWithinCircle = new int[int(PI*sq(r))];
         float blurRed = red(selectedColor);
         float blurGreen = green(selectedColor);
         float blurBlue = blue(selectedColor);
@@ -20,6 +18,7 @@ void blur (float r){
             float dx = x1 - x;
             float dy = y1 - y;
             float distanceSquared = sq(dx) + sq(dy);
+            //change colors within mixing circle
             if (distanceSquared <= sq(r)){
               for (int i=0; i<int(PI*sq(r)); i++){
                   //xWithinCircle[i] = x1;
@@ -31,14 +30,18 @@ void blur (float r){
                   float red = (rPixel+blurRed)/2;
                   float green = (gPixel+blurGreen)/2;
                   float blue = (bPixel+blurBlue)/2;
-                  pixels[x1+y1*width] = color (red, green, blue);
+                  selectedImage.pixels[x1+y1*width] = color (red, green, blue);
               }
              }
             }
           }
        }
+       //shows the area to draw
+       else{              
+         fill(selectedColor,50);
+         ellipse(x,y,r*2,r*2);}
   }
-  updatePixels();
+  selectedImage.updatePixels();
 }
 void setBlurDefaults() {
   blurWidth = 1;

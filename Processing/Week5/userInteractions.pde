@@ -4,4 +4,5 @@ void keyPressed() {
 }
 
 void mouseClicked() {
+  colorIsSet = !colorIsSet;
 }

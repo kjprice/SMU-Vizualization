@@ -6,8 +6,7 @@ void setup() {
 
 void draw() {
   drawImage();
-  color pickedColor = color(255,30,40);
-  blur(200,400,100,pickedColor);
+  blur(100);
   drawColorpicker();
   drawButtons();
   drawBlurWidthOptions();

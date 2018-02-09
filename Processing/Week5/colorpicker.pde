@@ -26,6 +26,7 @@ void setHoverColor() {
 }
 
 void drawColorpicker() {
+  if(!colorIsSet){
   if (!mouseMoved) {
     return;
   }
@@ -39,4 +40,5 @@ void drawColorpicker() {
     fill(hoverColor);
   }
   ellipse(colorPosiition[0], colorPosiition[1], COLOR_PICKER_WIDTH, COLOR_PICKER_WIDTH);
+}
 }

@@ -30,8 +30,8 @@ void blur (float r){
                   float red = (rPixel+blurRed)/2;
                   float green = (gPixel+blurGreen)/2;
                   float blue = (bPixel+blurBlue)/2;
-                  println("red, green, blue", red, green, blue);
-                  println("original color", rPixel, gPixel, bPixel);
+                  //println("red, green, blue", red, green, blue);
+                  //println("original color", rPixel, gPixel, bPixel);
                   println("chosen color", blurRed, blurGreen, blurBlue);
                   selectedImage.pixels[x1+y1*width] = color (red, green, blue);
               }

@@ -9,6 +9,7 @@ final static int COLOR_OFFSET_POSITION_Y = 0;
 void setColorPickerDefaults() {
   selectedColor = color(255, 255, 255);
   colorIsSet = false;
+  THICKNESS = 10;
 }
 
 float[] calculateColorPickerPosition() {

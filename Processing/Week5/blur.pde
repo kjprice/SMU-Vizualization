@@ -9,6 +9,7 @@ int matrixsize = 5;
 void blur (float r){
   float x = mouseX;
   float y = mouseY;
+  //println("r",r);
   float blurRed = red(selectedColor);
   float blurGreen = green(selectedColor);
   float blurBlue = blue(selectedColor);
@@ -49,17 +50,17 @@ void blur (float r){
              }
             }
           }
+          
           }
-          //shows area to make changes to color
-          else{
             fill(selectedColor, 50);
             ellipse(x,y,r*2,r*2);
-       }
+            // ellipse(mouseX,mouseY,thickness,thickness);
+       //}
   }
   selectedImage.updatePixels();
 }
 void setBlurDefaults() {
-  blurWidth = 1;
+  THICKNESS = 10;
 }
 
 color convolution(int x, int y, float[][] matrix, int matrixsize, PImage img) {

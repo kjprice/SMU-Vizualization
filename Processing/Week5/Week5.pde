@@ -6,6 +6,7 @@ Team: Ekatrina, KJ Price, Preeti
 void setup() {
   size(334, 800);
   setDefaultValues();
+  // frameRate(4);
 }
 
 

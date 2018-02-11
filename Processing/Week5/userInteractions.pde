@@ -9,45 +9,19 @@ void keyPressed() {
   }
 }
 
+// only one mouse click event can be consumed at a time
 void mouseClicked() {
+  if (checkBlurWidthUserChanged()) {
+    return;
+  }
+  if (checkResetButtonClicked()) {
+     return;
+  }
+  
+  // if none of the buttons were clicked, then we selected a color or are bluring (which is handled in the draw method)
   if (!colorIsSet) {
     colorIsSet = true;
-  }
-  // events for selection of width
-  strokeWeight(0);
- // text( "x: " + mouseX + " y: " + mouseY, mouseX, mouseY );
- // println("mouseX",mouseX,"mouseY",mouseY);
-  if (mouseX >= bx_a && 
-      mouseX <= bx_a+box_width_a && 
-      mouseY >= by_a && 
-      mouseY <= by_a+box_height_a) 
-   {
-      noFill();
-      THICKNESS = THICKNESS_a;
-  } else 
-    if (mouseX >= bx_b && 
-        mouseX <= bx_b+box_width_b && 
-        mouseY >= by_b && 
-        mouseY <= by_b+box_height_b
-        )
-  {
-    //println("thickness selected is b");
-    noFill();
-    THICKNESS = THICKNESS_b;
-  } else
-  // on click of reset
-  if (
-      mouseX >= BUTTON_x && 
-      mouseX <= BUTTON_x+BUTTON_WIDTH && 
-      mouseY >= BUTTON_y && 
-      mouseY <= BUTTON_y+BUTTON_HEIGHT
-      ) {
-        // println("inside reset");
-          loadImageToFix();
-          drawImage();
-          setColorPickerDefaults();
-    }
-  
+  }  
 }
 
 void mouseMoved() {

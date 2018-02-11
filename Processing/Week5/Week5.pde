@@ -12,7 +12,7 @@ void setup() {
 
 void draw() {
   drawImage();
-  blur(THICKNESS);
+  blur(blurWidth);
   drawColorpicker();
   // This is reset button to bring image back to original
   drawButtons();

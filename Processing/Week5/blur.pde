@@ -62,7 +62,7 @@ void blur (float r) {
   selectedImage.updatePixels();
 }
 void setBlurDefaults() {
-  THICKNESS = 10;
+  blurWidth = 10;
 }
 
 // created using https://processing.org/examples/convolution.html

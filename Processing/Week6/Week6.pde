@@ -7,7 +7,6 @@ Query query;
 Twitter twitter;
 
 void setup() {
-  //Set the size of the stage, and the background to black.
   setupCountriesList();
   setupAuthentication();
 

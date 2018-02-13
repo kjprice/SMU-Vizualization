@@ -3,7 +3,7 @@
 ConfigurationBuilder cb;
 ArrayList<String> words = new ArrayList();
 
-Query query;
+StatusListener listener;
 Twitter twitter;
 
 void setup() {

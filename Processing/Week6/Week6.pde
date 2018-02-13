@@ -4,20 +4,20 @@ ConfigurationBuilder cb;
 ArrayList<String> words = new ArrayList();
 
 StatusListener listener;
-Twitter twitter;
+TwitterStream twitterStream;
 
 void setup() {
   setupCountriesList();
   setupAuthentication();
 
   //Make the twitter object and prepare the query
-  twitter = new TwitterFactory(cb.build()).getInstance();
-  query = new Query("#OLYMPICS");
+  twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
+  fetchQuery();
 
   // Only pull 10 queries / second
   frameRate(10);
 }
 
 void draw() {
-  fetchQuery();
+  
 }

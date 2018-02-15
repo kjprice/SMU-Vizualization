@@ -7,7 +7,7 @@ StatusListener listener;
 TwitterStream twitterStream;
 
 void setup() {
-  setupCountriesList();
+  size(500, 500);
   setupAuthentication();
 
   //Make the twitter object and prepare the query

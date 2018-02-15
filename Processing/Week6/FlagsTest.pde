@@ -1,35 +1,40 @@
 
 
-Country c1,c2;
+Country[] countries;
+
 PImage img;
 
 void setupFlags() {
-  c1 = new Country("US.GIF");
-  c1.setFlagPositions(10,10);
-  c2 = new Country("RS.png");
-  c2.setFlagPositions(10,40);
+  Country usa = new Country("US.GIF", "usa");
+  usa.setFlagPositions(10,10);
+  Country rsu = new Country("RS.png", "rsu");
+  rsu.setFlagPositions(10,40);
+  
+  countries = new Country[]{
+    usa,
+    rsu
+  };
 }
 
 void drawFlags() {
-  // Displaying one image
-  c1.move();
-  c2.move();
-  c1.display();
-  c2.display();
-  updateInformation();
+  background(200);
+  for (int i = 0; i < countries.length; i++) {
+    Country country = countries[i];
+    country.move();
+    country.display();
+    updateInformation(country);
+  }
 }
 
-void updateInformation(){
+void updateInformation(Country country){
   // just to test
   
   for(int i =0; i< 1000; i++){
     if(i<900){
-      c1.setSpeed(3,1);
-      c2.setSpeed(0.1,1);
+      country.setSpeed(3,1);
     }
     else {
-      c1.setSpeed(0.1,1);
-      c2.setSpeed(0.5,1);
+      country.setSpeed(0.1,1);
     }
   }
   

@@ -3,13 +3,13 @@ class Country{
   String flag;
   int position;
   int currentScore;
-  String countryName;
+  String[] countryNames;
   float flag_position_x, flag_position_y; // location
   float xspeed, yspeed; // speed
   
-  Country(String flagFilePath, String countryName){
+  Country(String flagFilePath, String[] countryNames){
     img = loadImage(flagFilePath);
-    this.countryName = countryName;
+    this.countryNames = countryNames;
     img.resize(15,10);
   }
   
@@ -50,8 +50,8 @@ class Country{
     // y += yspeed; // Increment y
   }
   
-  String getName() {
-    return this.countryName;
+  String[] getNames() {
+    return this.countryNames;
   }
   
   void display(){

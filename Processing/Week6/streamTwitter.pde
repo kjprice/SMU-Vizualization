@@ -16,5 +16,5 @@ void fetchQuery() {
     }
   };
   twitterStream.addListener(listener);
-  twitterStream.filter("#olympic", "#winterolympics", "#pyeongchang2018");
+  twitterStream.filter("#nbcolympics", "#olympic", "#winterolympics", "#pyeongchang2018");
 }

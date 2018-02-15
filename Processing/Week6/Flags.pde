@@ -5,9 +5,9 @@ Country[] countries;
 PImage img;
 
 void setupFlags() {
-  Country usa = new Country("US.GIF", "usa");
+  Country usa = new Country("US.GIF", new String[]{"usa"});
   usa.setFlagPositions(10,10);
-  Country rsu = new Country("RS.png", "rsu");
+  Country rsu = new Country("RS.png", new String[]{"rsu"});
   rsu.setFlagPositions(10,40);
   
   countries = new Country[]{

@@ -14,7 +14,7 @@ class Country{
     this.setCountryNamesToLowerCase();
     this.setFlagPositions();
     img = loadImage(flagFilePath);
-    img.resize(15,10);
+    img.resize(flagWidth, flagHeight);
   }
   
   private void setCountryNamesToLowerCase() {

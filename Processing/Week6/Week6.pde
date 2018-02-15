@@ -10,13 +10,20 @@ float flagSpeed;
 float verticalSpaceBetweenFlags;
 float flagsXStartingPosition;
 
+int flagWidth;
+int flagHeight;
+
 void setup() {
   size(500, 500);
   setupAuthentication();
   
-  flagSpeed = width / 20; // arbitrary speed
-  verticalSpaceBetweenFlags = width / 15;
-  flagsXStartingPosition = width / 40;
+  flagSpeed = width / 20;
+
+  flagWidth = int(width / 10);
+  flagHeight = int(flagWidth * 0.5);
+
+  verticalSpaceBetweenFlags = width / 15 + flagHeight;
+  flagsXStartingPosition = width / 40 + flagWidth/2;
 
   //Make the twitter object and prepare the query
   twitterStream = new TwitterStreamFactory(cb.build()).getInstance();

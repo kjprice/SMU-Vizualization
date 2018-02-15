@@ -16,12 +16,11 @@ int flagHeight;
 void setup() {
   size(500, 500);
   setupAuthentication();
-  
-  flagSpeed = width / 20;
 
+  // Setup flag defaults
+  flagSpeed = width / 20;
   flagWidth = int(width / 10);
   flagHeight = int(flagWidth * 0.5);
-
   verticalSpaceBetweenFlags = width / 15 + flagHeight;
   flagsXStartingPosition = width / 40 + flagWidth/2;
 

@@ -3,15 +3,14 @@
 Country c1,c2;
 PImage img;
 
-void setup() {
-  size(500, 500);
+void setupFlags() {
   c1 = new Country("US.GIF");
   c1.setFlagPositions(10,10);
   c2 = new Country("RS.png");
   c2.setFlagPositions(10,40);
 }
 
-void draw() {
+void drawFlags() {
   // Displaying one image
   c1.move();
   c2.move();

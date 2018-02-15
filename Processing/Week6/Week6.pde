@@ -14,10 +14,9 @@ void setup() {
   twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
   fetchQuery();
 
-  // Only pull 10 queries / second
-  frameRate(10);
+  setupFlags();
 }
 
 void draw() {
-  
+  drawFlags();
 }

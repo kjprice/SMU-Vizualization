@@ -10,7 +10,14 @@ class Country{
   Country(String flagFilePath, String[] countryNames){
     img = loadImage(flagFilePath);
     this.countryNames = countryNames;
+    this.setCountryNamesToLowerCase();
     img.resize(15,10);
+  }
+  
+  private void setCountryNamesToLowerCase() {
+    for (int i = 0; i < this.countryNames.length; i++) {
+      this.countryNames[i] = this.countryNames[i].toLowerCase();
+    }
   }
   
   void setFlagPositions(float x,float y){

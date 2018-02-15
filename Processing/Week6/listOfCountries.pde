@@ -1,16 +1,20 @@
-boolean countryIsMentioned(String country, String searchResult) {
-  return searchResult.contains(country);
+boolean countryIsMentioned(Country country, String searchResult) {
+  String[] countryNames = country.getNames();
+  for (int n = 0; n < countryNames.length; n++) {
+    String countryName = countryNames[n];
+    if(searchResult.contains(countryName)) {
+      return true;
+    }
+  }
+  
+  return false;
 }
 
-void incrementCountryCountFromSearchResult(String searchResult) {
+void incrementCountriesCountFromSearchResult(String searchResult) {
   for (int i = 0; i < countries.length; i++) {
     Country country = countries[i];
-    String[] countryNames = country.getNames();
-    for (int n = 0; n < countryNames.length; n++) {
-      String countryName = countryNames[n];
-      if (countryIsMentioned(countryName.toLowerCase(), searchResult.toLowerCase())) {
-        println(countryName, searchResult);
-      }
+    if(countryIsMentioned(country, searchResult.toLowerCase())) {
+      println(country, searchResult);
     }
   }
 }

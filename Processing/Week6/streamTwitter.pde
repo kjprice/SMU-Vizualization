@@ -5,7 +5,7 @@ void fetchQuery() {
     public void onStatus(Status status) {
       // println(" ------ " + status.getUser().getName() + " : " + status.getText());
       // TODO: if this is a duplicate message, then stop
-      incrementCountryCountFromSearchResult(status.getText());
+      incrementCountriesCountFromSearchResult(status.getText());
     }
     public void onStallWarning(StallWarning warning) {}
     public void onScrubGeo(long num1, long num2) {}

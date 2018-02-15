@@ -1,7 +1,10 @@
+// TODO: define duplicates
+
 void fetchQuery() {
   listener = new StatusListener(){
     public void onStatus(Status status) {
-      println(" ------ " + status.getUser().getName() + " : " + status.getText());
+      // println(" ------ " + status.getUser().getName() + " : " + status.getText());
+      // TODO: if this is a duplicate message, then stop
       incrementCountryCountFromSearchResult(status.getText());
     }
     public void onStallWarning(StallWarning warning) {}
@@ -13,6 +16,5 @@ void fetchQuery() {
     }
   };
   twitterStream.addListener(listener);
-  // sample() method internally creates a thread which manipulates TwitterStream and calls these adequate listener methods continuously.
-  twitterStream.filter("#olympics");
+  twitterStream.filter("#olympic", "#winterolympics", "#pyeongchang2018");
 }

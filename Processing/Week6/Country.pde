@@ -1,3 +1,5 @@
+int numberOfCountriesCreated = 0;
+
 class Country{
   PImage img;
   String flag;
@@ -7,9 +9,11 @@ class Country{
   float flag_position_x, flag_position_y; // location
   
   Country(String flagFilePath, String[] countryNames){
-    img = loadImage(flagFilePath);
+    numberOfCountriesCreated++;
     this.countryNames = countryNames;
     this.setCountryNamesToLowerCase();
+    this.setFlagPositions();
+    img = loadImage(flagFilePath);
     img.resize(15,10);
   }
   
@@ -19,9 +23,9 @@ class Country{
     }
   }
   
-  void setFlagPositions(float x,float y){
-      flag_position_x= x;
-      flag_position_y = y;
+  void setFlagPositions(){
+      flag_position_x=  flagsXStartingPosition;
+      flag_position_y = verticalSpaceBetweenFlags * numberOfCountriesCreated;
   }
   
   PImage getFlag() {

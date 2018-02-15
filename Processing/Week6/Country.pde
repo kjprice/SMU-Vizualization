@@ -5,7 +5,6 @@ class Country{
   int currentScore;
   String[] countryNames;
   float flag_position_x, flag_position_y; // location
-  float xspeed, yspeed; // speed
   
   Country(String flagFilePath, String[] countryNames){
     img = loadImage(flagFilePath);
@@ -25,11 +24,6 @@ class Country{
       flag_position_y = y;
   }
   
-  void setSpeed(float x,float y){
-    xspeed = x; 
-    yspeed = y;
-  }
-  
   PImage getFlag() {
     return img;
   }
@@ -44,17 +38,14 @@ class Country{
   int getCurrentScore(){
     return currentScore;
   }
-  void setCurrentScore(int score){
-    currentScore = score;
-  }
   
   PImage showFlag(){
     return img;
   }
   
-  void move() {
-    flag_position_x += xspeed; // Increment x
-    // y += yspeed; // Increment y
+  void receiveMentionFromTwitter() {
+    this.currentScore++;
+    this.flag_position_x += flagSpeed; // Increment x
   }
   
   String[] getNames() {

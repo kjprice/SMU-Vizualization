@@ -1,8 +1,9 @@
-boolean countryIsMentioned(Country country, String tweat) {
+boolean countryIsMentioned(Country country, String tweet) {
   String[] countryNames = country.getNames();
   for (int n = 0; n < countryNames.length; n++) {
     String countryName = countryNames[n];
-    if(tweat.contains(countryName)) {
+    if(tweet.contains(countryName)) {
+      println(countryName, tweet);
       return true;
     }
   }
@@ -10,15 +11,15 @@ boolean countryIsMentioned(Country country, String tweat) {
   return false;
 }
 
-void incrementCountriesCountFromSearchResult(String tweat) {
+void incrementCountriesCountFromSearchResult(String tweet) {
   for (int i = 0; i < countries.length; i++) {
     Country country = countries[i];
-    if(countryIsMentioned(country, tweat.toLowerCase())) {
-      println(country, tweat);
+    if(countryIsMentioned(country, tweet.toLowerCase())) {
+      country.receiveMentionFromTwitter();
     }
   }
 }
 
-void analyzeTwitterResults(String tweat) {
-  incrementCountriesCountFromSearchResult(tweat);
+void analyzeTwitterResults(String tweet) {
+  incrementCountriesCountFromSearchResult(tweet);
 }

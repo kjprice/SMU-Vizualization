@@ -19,13 +19,12 @@ float lastTweetTextPositionY;
 float lastMatchedTweetTextPositionX;
 float lastMatchedTweetTextPositionY;
 int startSecond = second();
-int frames=0;
+int frameRate=30;
 
 void setup() {
 
   size(1500, 800);
   setupAuthentication();
-  frameRate(30);
   // Setup flag defaults
   flagSpeed = width / 40;
   flagWidth = int(width / 10);
@@ -47,14 +46,14 @@ void setup() {
 void draw() {
   int currentSecond = second();
   //get the previous score to calculate change of score
-  if (currentSecond==startSecond && frames%30==0){
+  if (currentSecond==startSecond && frameCount%frameRate==0){
     for (int i = 0; i < countries.length; i++) {
       Country country = countries[i];
       country.previousScore=country.getCurrentScore();
     }
   }  
   //get curve points
-  if(currentSecond==startSecond-1 && frames%30==0){
+  if(currentSecond==startSecond-1 && frameCount%frameRate==0){
      for (int i = 0; i < countries.length; i++) {
         Country country = countries[i];
         if(country.thisScore!=0){
@@ -63,12 +62,11 @@ void draw() {
         country.thisScore=country.getCurrentScore();
         country.changeScore=country.thisScore-country.previousScore;
         country.curveVertexX.append(int(flagSpeed));
-        country.curveVertexY.append(int(country.curveFlagPositionY-country.changeScore*5));
-        country.curveFlagPositionY=int(country.curveFlagPositionY-country.changeScore*5);
+        country.curveVertexY.append(int(country.curveFlagPositionY-country.changeScore*2));
+        country.curveFlagPositionY=int(country.curveFlagPositionY-country.changeScore*2);
       }
      flagSpeed+=width / 40;
    }
-  frames+=1;
   drawFlags();  
   printLastTweets();
 }

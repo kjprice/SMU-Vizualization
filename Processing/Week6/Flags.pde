@@ -21,10 +21,7 @@ void setupFlags() {
   };
 }
 
-void drawFlags() {
-  snow=loadImage("snow.jpg");
-  snow.resize(1500,800);
-  background(snow);
+void olympicRings(){
   //olimpyc rings
   noFill();
   strokeWeight(5);
@@ -38,6 +35,13 @@ void drawFlags() {
   ellipse(1330,75,50,50);
   stroke(28,139,60);
   ellipse(1390,75,50,50);
+}
+
+void drawFlags() {
+  snow=loadImage("snow.jpg");
+  snow.resize(1500,800);
+  background(snow);
+  olympicRings();
   for (int i = 0; i < countries.length; i++) {
     Country country = countries[i];
       if(i==0){

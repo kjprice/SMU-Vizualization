@@ -103,11 +103,8 @@ class Country{
     popMatrix();
   }
   
-  void display(){
-    imageMode(CENTER);
-    drawFlagTable();
-    drawTextFotFlagTable();
-    //draw the curve of the score
+  //draw the curve of the score
+  void curvePath(){
     strokeWeight(3);
     noFill();
     beginShape();
@@ -123,5 +120,11 @@ class Country{
     scale(0.3,0.3);
     image(img,0,0);
     popMatrix();
+  }
+  void display(){
+    imageMode(CENTER);
+    drawFlagTable();
+    drawTextFotFlagTable();
+    curvePath();
   }
 }

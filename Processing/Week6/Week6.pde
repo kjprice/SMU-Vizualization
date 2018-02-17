@@ -57,14 +57,14 @@ void draw() {
   if(currentSecond==startSecond-1 && frames%30==0){
      for (int i = 0; i < countries.length; i++) {
         Country country = countries[i];
+        if(country.thisScore!=0){
+          country.previousScore=country.thisScore;
+        }
         country.thisScore=country.getCurrentScore();
         country.changeScore=country.thisScore-country.previousScore;
         country.curveVertexX.append(int(flagSpeed));
         country.curveVertexY.append(int(country.curveFlagPositionY-country.changeScore*5));
         country.curveFlagPositionY=int(country.curveFlagPositionY-country.changeScore*5);
-        if(i==3){
-          println(country.previousScore,country.thisScore,country.changeScore);
-        }
       }
      flagSpeed+=width / 40;
    }

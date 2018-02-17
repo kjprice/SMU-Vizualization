@@ -111,26 +111,5 @@ class Country{
     scale(0.3,0.3);
     image(img,0,0);
     popMatrix();
-    //fill(0);
-    ////text of score
-    //text("Mentioned",curveVertexX.get(i-1)+80,curveVertexY.get(i-1));
-    //text(getCurrentScore(),curveVertexX.get(i-1)+140,curveVertexY.get(i-1));
-    //if (getCurrentScore()<10){
-    //   text("times",curveVertexX.get(i-1)+152,curveVertexY.get(i-1));
-    //}
-    //if (getCurrentScore()>=10&&getCurrentScore()<100){
-    //   text("times",curveVertexX.get(i-1)+160,curveVertexY.get(i-1));
-    //}
-    //if (getCurrentScore()>=100&&getCurrentScore()<1000){
-    //   text("times",curveVertexX.get(i-1)+168,curveVertexY.get(i-1));
-    //}
-    ////draw a small Flag image at curve points
-    //for (int j=0; j<curveVertexX.size(); j++){
-    //  pushMatrix();
-    //  translate(curveVertexX.get(j) + flagWidth/2*0.15,curveVertexY.get(j));
-    //  scale(0.15,0.15);
-    //  image(img,0,0);
-    //  popMatrix();
-    //}
   }
 }

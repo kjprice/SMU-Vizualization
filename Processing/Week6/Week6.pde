@@ -18,18 +18,20 @@ float lastTweetTextPositionX;
 float lastTweetTextPositionY;
 float lastMatchedTweetTextPositionX;
 float lastMatchedTweetTextPositionY;
+int startSecond = second();
+int frames=0;
 
 void setup() {
-  size(800, 500);
-  setupAuthentication();
 
+  size(1500, 800);
+  setupAuthentication();
+  frameRate(30);
   // Setup flag defaults
-  flagSpeed = width / 20;
+  flagSpeed = width / 40;
   flagWidth = int(width / 10);
   flagHeight = int(flagWidth * 0.5);
-  verticalSpaceBetweenFlags = width / 30 + flagHeight;
+  verticalSpaceBetweenFlags = flagHeight/1.5;
   flagsXStartingPosition = width / 40 + flagWidth/2;
-  
   // Setup text defaults
   lastTweetTextPositionX = width / 40;
   lastTweetTextPositionY = height - 40;
@@ -39,12 +41,34 @@ void setup() {
   //Make the twitter object and prepare the query
   twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
   fetchQuery();
-
   setupFlags();
 }
 
 void draw() {
-  drawFlags();
-  
+  int currentSecond = second();
+  //get the previous score to calculate change of score
+  if (currentSecond==startSecond && frames%30==0){
+    for (int i = 0; i < countries.length; i++) {
+      Country country = countries[i];
+      country.previousScore=country.getCurrentScore();
+    }
+  }  
+  //get curve points
+  if(currentSecond==startSecond-1 && frames%30==0){
+     for (int i = 0; i < countries.length; i++) {
+        Country country = countries[i];
+        country.thisScore=country.getCurrentScore();
+        country.changeScore=country.thisScore-country.previousScore;
+        country.curveVertexX.append(int(flagSpeed));
+        country.curveVertexY.append(int(country.curveFlagPositionY-country.changeScore*5));
+        country.curveFlagPositionY=int(country.curveFlagPositionY-country.changeScore*5);
+        if(i==3){
+          println(country.previousScore,country.thisScore,country.changeScore);
+        }
+      }
+     flagSpeed+=width / 40;
+   }
+  frames+=1;
+  drawFlags();  
   printLastTweets();
 }

@@ -1,4 +1,5 @@
 void printLastTweet() {
+  textSize(18);
   float x = lastTweetTextPositionX;
   float y = lastTweetTextPositionY;
   if (tweets.size() > 0) {
@@ -12,6 +13,7 @@ void printLastTweet() {
 }
 
 void printLastMatchedTweet() {
+  textSize(18);
   float x = lastMatchedTweetTextPositionX;
   float y = lastMatchedTweetTextPositionY;
   if (matchedTweets.size() > 0) {
@@ -25,6 +27,7 @@ void printLastMatchedTweet() {
 }
 
 void printLoadingMessage(String message, float x, float y) {
+  textSize(18);
   text(message, x, y);  
 }
 

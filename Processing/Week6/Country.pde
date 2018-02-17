@@ -72,14 +72,20 @@ class Country{
   String[] getNames() {
     return this.countryNames;
   }
-
-  void display(){
-    imageMode(CENTER);
-    //draw flag in a left upper corner
+  
+  //draw flag table in a left upper corner
+  void drawFlagTable(){
     pushMatrix();
     translate(flag_position_x-flagWidth/2,flag_position_y_table);
     scale(0.5,0.5);
     image(img,0,0);
+    popMatrix();
+  }
+   //draw text for score to the table
+  void drawTextFotFlagTable(){
+    pushMatrix();
+    translate(flag_position_x-flagWidth/2,flag_position_y_table);
+    scale(0.5,0.5);
     //text of score
     fill(0);
     textSize(32);
@@ -95,6 +101,12 @@ class Country{
        text("times",380,0);
     }
     popMatrix();
+  }
+  
+  void display(){
+    imageMode(CENTER);
+    drawFlagTable();
+    drawTextFotFlagTable();
     //draw the curve of the score
     strokeWeight(3);
     noFill();

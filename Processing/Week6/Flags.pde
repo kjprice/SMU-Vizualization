@@ -25,6 +25,19 @@ void drawFlags() {
   snow=loadImage("snow.jpg");
   snow.resize(1500,800);
   background(snow);
+  //olimpyc rings
+  noFill();
+  strokeWeight(5);
+  stroke(8,133,194);
+  ellipse(1300,50,50,50);
+  stroke(0);
+  ellipse(1360,50,50,50);
+  stroke(237,51,78);
+  ellipse(1420,50,50,50);
+  stroke(251,177,50);
+  ellipse(1330,75,50,50);
+  stroke(28,139,60);
+  ellipse(1390,75,50,50);
   for (int i = 0; i < countries.length; i++) {
     Country country = countries[i];
       if(i==0){

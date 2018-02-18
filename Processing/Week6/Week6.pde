@@ -21,7 +21,7 @@ float lastMatchedTweetTextPositionY;
 int startSecond = second();
 int startMinute = minute();
 int startHour = hour();
-int frameRate=10;
+int frameRate=30;
 int currentSecond;
 int currentMinute;
 int currentHour;
@@ -51,17 +51,13 @@ void draw() {
   currentSecond = second();
   currentMinute = minute();
   currentHour = hour();
-  //get the previous score to calculate change of score
-   for (int i = 0; i < countries.length; i++) {
-          Country country = countries[i];
-          if(country.thisScore!=0){
-            country.previousScore=country.thisScore;
-          }
-      }  
   //get curve points
-  if(currentSecond==startSecond-1 && frameCount%frameRate==0){
+  if(currentSecond==startSecond && frameCount%frameRate==0){
      for (int i = 0; i < countries.length; i++) {
         Country country = countries[i];
+        if(country.thisScore!=0){
+            country.previousScore=country.thisScore;
+          }
         country.thisScore=country.getCurrentScore();
         country.changeScore=country.thisScore-country.previousScore;
         if(country.curveVertexX.size()<=width/40 - 1){//taking array of x positions   //40

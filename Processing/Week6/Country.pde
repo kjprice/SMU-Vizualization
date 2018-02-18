@@ -42,8 +42,14 @@ class Country{
     }
       flag_position_y_table = verticalSpaceBetweenFlags * numberOfCountriesCreated;
       //flag_position_y = height - height/10;
-      flag_position_y = 200 + 70 * numberOfCountriesCreated;
+      flag_position_y = 200 + 100 * numberOfCountriesCreated;
       curveFlagPositionY=flag_position_y;
+  }
+  
+  //draws line below the score line
+  void zeroScore(){
+    strokeWeight(1);
+    line(0,curveFlagPositionY,width,curveFlagPositionY);
   }
   
   PImage getFlag() {
@@ -119,7 +125,7 @@ class Country{
     text("in",750,80);
     text(currentHour-startHour,800,80);
     text("hours", 840,80);
-    text(currentMinute-startMinute,900,80);
+    text(abs(currentMinute-startMinute),900,80);
     text("minutes", 940,80);
   }
   
@@ -141,8 +147,10 @@ class Country{
     image(img,0,0);
     popMatrix();
   }
+  
   void display(){
     imageMode(CENTER);
+    zeroScore();
     drawFlagTable();
     drawTextFotFlagTable();
     curvePath();

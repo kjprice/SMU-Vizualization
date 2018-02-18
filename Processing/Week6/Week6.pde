@@ -30,10 +30,10 @@ void setup() {
   size(1500, 800);
   setupAuthentication();
   // Setup flag defaults
-  flagSpeed = width / 40;
+  flagSpeed = width / 60;
   flagWidth = int(width / 10);
   flagHeight = int(flagWidth * 0.5);
-  verticalSpaceBetweenFlags = flagHeight/3;
+  verticalSpaceBetweenFlags = flagHeight/2.5;
   flagsXStartingPosition = width / 40 + flagWidth/2;
   // Setup text defaults
   lastTweetTextPositionX = width / 40;
@@ -60,7 +60,7 @@ void draw() {
           }
         country.thisScore=country.getCurrentScore();
         country.changeScore=country.thisScore-country.previousScore;
-        if(country.curveVertexX.size()<=width/40 - 1){//taking array of x positions   //40
+        if(country.curveVertexX.size()<=width/60 - 1){//taking array of x positions   //40
           country.curveVertexX.append(int(flagSpeed));
           //y curve position boundary
           if (country.curveFlagPositionY-country.changeScore*5 >= 0 + flagHeight*2){
@@ -87,7 +87,7 @@ void draw() {
           }
         }
       }
-     flagSpeed+=width / 40;
+     flagSpeed+=width / 60;
    }
   drawFlags();  
   printLastTweets();

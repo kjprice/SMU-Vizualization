@@ -54,27 +54,21 @@ void draw() {
   //get the previous score to calculate change of score
    for (int i = 0; i < countries.length; i++) {
           Country country = countries[i];
-           if (country.thisScore == 0){
-            country.previousScore=0;
+          if(country.thisScore!=0){
+            country.previousScore=country.thisScore;
           }
       }  
   //get curve points
   if(currentSecond==startSecond-1 && frameCount%frameRate==0){
      for (int i = 0; i < countries.length; i++) {
         Country country = countries[i];
-        if(country.thisScore!=0){
-          country.previousScore=country.thisScore;
-        }
         country.thisScore=country.getCurrentScore();
         country.changeScore=country.thisScore-country.previousScore;
-        country.differenceScore=country.changeScore - country.previousChangeScore;
-        country.previousChangeScore = country.changeScore;
         if(country.curveVertexX.size()<=width/40 - 1){//taking array of x positions   //40
           country.curveVertexX.append(int(flagSpeed));
           //y curve position boundary
-          if (country.curveFlagPositionY-country.differenceScore*2 >= 0 + flagHeight*2){
-            country.curveVertexY.append(int(country.curveFlagPositionY-country.differenceScore*7));
-            country.curveFlagPositionY=int(country.curveFlagPositionY-country.differenceScore*7);
+          if (country.curveFlagPositionY-country.changeScore*5 >= 0 + flagHeight*2){
+            country.curveVertexY.append(int(country.curveFlagPositionY-country.changeScore*5));
           }
           //if y of curve goes from the screen, y = 30;
           else{
@@ -87,9 +81,8 @@ void draw() {
           //remove first y position of the curve
           country.curveVertexY.remove(0);
           //append new last y position of the curve
-         if (country.curveFlagPositionY-country.differenceScore*2 >= 0 + flagHeight*2){
-            country.curveVertexY.append(int(country.curveFlagPositionY-country.differenceScore*7));
-            country.curveFlagPositionY=int(country.curveFlagPositionY-country.differenceScore*7);
+         if (country.curveFlagPositionY-country.changeScore*5 >= 0 + flagHeight*2){
+            country.curveVertexY.append(int(country.curveFlagPositionY-country.changeScore*5));
           }
           //if y of curve goes from the screen, y = 30;
           else{

@@ -12,8 +12,6 @@ class Country{
   int previousScore;
   int thisScore;
   int changeScore;
-  int previousChangeScore;
-  int differenceScore;
   float curveFlagPositionY;
   float flag_position_x_table;
   
@@ -24,7 +22,6 @@ class Country{
     this.setFlagPositions();
     this.curveVertexX.append(0);
     this.curveVertexY.append(int(flag_position_y));
-    this.previousChangeScore=0;
     img = loadImage(flagFilePath);
     img.resize(flagWidth, flagHeight);
   }

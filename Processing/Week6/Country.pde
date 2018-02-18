@@ -117,18 +117,7 @@ class Country{
     popMatrix();
   }
   
-  //time of tweets gathering
-  void textOfTime(){
-    strokeWeight(1);
-    fill(0);
-    textSize(18);
-    text("in",750,80);
-    text(currentHour-startHour,800,80);
-    text("hours", 840,80);
-    text(abs(currentMinute-startMinute),900,80);
-    text("minutes", 940,80);
-  }
-  
+ 
   //draw the curve of the score
   void curvePath(){
     strokeWeight(3);
@@ -154,6 +143,5 @@ class Country{
     drawFlagTable();
     drawTextFotFlagTable();
     curvePath();
-    textOfTime();
   }
 }

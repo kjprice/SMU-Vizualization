@@ -19,17 +19,21 @@ float lastTweetTextPositionY;
 float lastMatchedTweetTextPositionX;
 float lastMatchedTweetTextPositionY;
 int startSecond = second();
-int frameRate=30;
+int startMinute = minute();
+int startHour = hour();
+int frameRate=10;
+int currentSecond;
+int currentMinute;
+int currentHour;
 
 void setup() {
-
   size(1500, 800);
   setupAuthentication();
   // Setup flag defaults
   flagSpeed = width / 40;
   flagWidth = int(width / 10);
   flagHeight = int(flagWidth * 0.5);
-  verticalSpaceBetweenFlags = flagHeight/1.5;
+  verticalSpaceBetweenFlags = flagHeight/3;
   flagsXStartingPosition = width / 40 + flagWidth/2;
   // Setup text defaults
   lastTweetTextPositionX = width / 40;
@@ -44,14 +48,16 @@ void setup() {
 }
 
 void draw() {
-  int currentSecond = second();
+  currentSecond = second();
+  currentMinute = minute();
+  currentHour = hour();
   //get the previous score to calculate change of score
-  if (currentSecond==startSecond && frameCount%frameRate==0){
-    for (int i = 0; i < countries.length; i++) {
-      Country country = countries[i];
-      country.previousScore=country.getCurrentScore();
-    }
-  }  
+   for (int i = 0; i < countries.length; i++) {
+          Country country = countries[i];
+           if (country.thisScore == 0){
+            country.previousScore=0;
+          }
+      }  
   //get curve points
   if(currentSecond==startSecond-1 && frameCount%frameRate==0){
      for (int i = 0; i < countries.length; i++) {
@@ -61,9 +67,36 @@ void draw() {
         }
         country.thisScore=country.getCurrentScore();
         country.changeScore=country.thisScore-country.previousScore;
-        country.curveVertexX.append(int(flagSpeed));
-        country.curveVertexY.append(int(country.curveFlagPositionY-country.changeScore*2));
-        country.curveFlagPositionY=int(country.curveFlagPositionY-country.changeScore*2);
+        country.differenceScore=country.changeScore - country.previousChangeScore;
+        country.previousChangeScore = country.changeScore;
+        if(country.curveVertexX.size()<=width/40 - 1){//taking array of x positions   //40
+          country.curveVertexX.append(int(flagSpeed));
+          //y curve position boundary
+          if (country.curveFlagPositionY-country.differenceScore*2 >= 0 + flagHeight*2){
+            country.curveVertexY.append(int(country.curveFlagPositionY-country.differenceScore*7));
+            country.curveFlagPositionY=int(country.curveFlagPositionY-country.differenceScore*7);
+          }
+          //if y of curve goes from the screen, y = 30;
+          else{
+            country.curveVertexY.append(30);
+            country.curveFlagPositionY=30;
+          }
+        }
+        //when we got all x positions
+        else{
+          //remove first y position of the curve
+          country.curveVertexY.remove(0);
+          //append new last y position of the curve
+         if (country.curveFlagPositionY-country.differenceScore*2 >= 0 + flagHeight*2){
+            country.curveVertexY.append(int(country.curveFlagPositionY-country.differenceScore*7));
+            country.curveFlagPositionY=int(country.curveFlagPositionY-country.differenceScore*7);
+          }
+          //if y of curve goes from the screen, y = 30;
+          else{
+            country.curveVertexY.append(30);
+            country.curveFlagPositionY=30;
+          }
+        }
       }
      flagSpeed+=width / 40;
    }

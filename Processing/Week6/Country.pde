@@ -12,7 +12,10 @@ class Country{
   int previousScore;
   int thisScore;
   int changeScore;
+  int previousChangeScore;
+  int differenceScore;
   float curveFlagPositionY;
+  float flag_position_x_table;
   
   Country(String flagFilePath, String[] countryNames){
     numberOfCountriesCreated++;
@@ -21,6 +24,7 @@ class Country{
     this.setFlagPositions();
     this.curveVertexX.append(0);
     this.curveVertexY.append(int(flag_position_y));
+    this.previousChangeScore=0;
     img = loadImage(flagFilePath);
     img.resize(flagWidth, flagHeight);
   }
@@ -33,8 +37,15 @@ class Country{
   
   void setFlagPositions(){
       flag_position_x =  flagsXStartingPosition;
+    if(numberOfCountriesCreated%2!=0){
+      flag_position_x_table =  flagsXStartingPosition;
+    }
+    else{
+      flag_position_x_table =  flagsXStartingPosition+400;
+    }
       flag_position_y_table = verticalSpaceBetweenFlags * numberOfCountriesCreated;
-      flag_position_y = height - height/10;
+      //flag_position_y = height - height/10;
+      flag_position_y = 200 + 70 * numberOfCountriesCreated;
       curveFlagPositionY=flag_position_y;
   }
   
@@ -76,7 +87,7 @@ class Country{
   //draw flag table in a left upper corner
   void drawFlagTable(){
     pushMatrix();
-    translate(flag_position_x-flagWidth/2,flag_position_y_table);
+    translate(flag_position_x_table-flagWidth/2,flag_position_y_table);
     scale(0.5,0.5);
     image(img,0,0);
     popMatrix();
@@ -84,7 +95,7 @@ class Country{
    //draw text for score to the table
   void drawTextFotFlagTable(){
     pushMatrix();
-    translate(flag_position_x-flagWidth/2,flag_position_y_table);
+    translate(flag_position_x_table-flagWidth/2,flag_position_y_table);
     scale(0.5,0.5);
     //text of score
     fill(0);
@@ -101,6 +112,18 @@ class Country{
        text("times",380,0);
     }
     popMatrix();
+  }
+  
+  //time of tweets gathering
+  void textOfTime(){
+    strokeWeight(1);
+    fill(0);
+    textSize(18);
+    text("in",750,80);
+    text(currentHour-startHour,800,80);
+    text("hours", 840,80);
+    text(currentMinute-startMinute,900,80);
+    text("minutes", 940,80);
   }
   
   //draw the curve of the score
@@ -126,5 +149,6 @@ class Country{
     drawFlagTable();
     drawTextFotFlagTable();
     curvePath();
+    textOfTime();
   }
 }

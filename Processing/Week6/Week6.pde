@@ -31,7 +31,7 @@ void setup() {
   flagSpeed = width / 60;
   flagWidth = int(width / 10);
   flagHeight = int(flagWidth * 0.5);
-  verticalSpaceBetweenFlags = flagHeight/2.5;
+  verticalSpaceBetweenFlags = flagHeight/3.5;
   flagsXStartingPosition = width / 40 + flagWidth/2;
   // Setup text defaults
   lastTweetTextPositionX = width / 40;

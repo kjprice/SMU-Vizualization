@@ -80,8 +80,7 @@ void draw() {
             //if y of curve goes from the screen, y = 30;
             else{
               country.curveVertexY.append(30);
-              country.curveFlagPositionY=30;
-          }
+            }
         }
       }
      flagSpeed+=width / 60;

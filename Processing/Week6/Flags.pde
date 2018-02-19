@@ -6,11 +6,12 @@ PImage img;
 PImage snow;
 
 void setupFlags() {
+  Country canada       = new Country("can.png", new String[]{"#can", "canada", "канада"});
+  Country usa          = new Country("usa.gif", new String[]{"#usa", "america", "u.s.a", "сша"});
   Country germany      = new Country("deu.png", new String[]{"#deu", "germany", "deutsche","Deutschland", "германия"});
   Country netherlands  = new Country("nld.png", new String[]{"#nld", "netherlands", "nederland", "нидерланды"});
   Country norway       = new Country("nor.png", new String[]{"#nor", "norway", "norge", "норвегия"});
-  Country canada       = new Country("can.png", new String[]{"#can", "canada", "канада"});
-  Country usa          = new Country("usa.gif", new String[]{"#usa", "america", "u.s.a", "сша"});
+
   
   countries = new Country[]{
     usa,

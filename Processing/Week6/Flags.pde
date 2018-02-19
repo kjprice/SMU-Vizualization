@@ -45,21 +45,6 @@ void drawFlags() {
   olympicRings();
   for (int i = 0; i < countries.length; i++) {
     Country country = countries[i];
-      if(i==0){
-         stroke(0);
-       }
-      if(i==1){
-         stroke(11,1,186);
-       }
-      if(i==2){
-         stroke(255,0,128);
-       }
-      if(i==3){
-         stroke(255,0,0);
-       }
-       if(i==4){
-         stroke(118,1,19);
-       }
     country.display();
   }
 }

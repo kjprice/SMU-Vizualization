@@ -1,5 +1,13 @@
 int numberOfCountriesCreated = 0;
 
+color[] countryStrokeColors = new color[]{
+  color(0),
+  color(11,1,186),
+  color(255,0,128),
+  color(255,0,0),
+  color(118,1,19)
+};
+
 class Country{
   PImage img;
   String flag;
@@ -14,8 +22,11 @@ class Country{
   int changeScore;
   float curveFlagPositionY;
   float flag_position_x_table;
+  private color strokeColor;
   
   Country(String flagFilePath, String[] countryNames){
+    this.setStrokeColor();
+
     numberOfCountriesCreated++;
     this.countryNames = countryNames;
     this.setCountryNamesToLowerCase();
@@ -23,7 +34,11 @@ class Country{
     this.curveVertexX.append(0);
     this.curveVertexY.append(int(flag_position_y));
     img = loadImage(flagFilePath);
-    img.resize(flagWidth, flagHeight);
+    img.resize(flagWidth, flagHeight);    
+  }
+  
+  private void setStrokeColor() {
+    this.strokeColor = countryStrokeColors[numberOfCountriesCreated];
   }
   
   private void setCountryNamesToLowerCase() {
@@ -33,7 +48,7 @@ class Country{
   }
   
   void setFlagPositions(){
-      flag_position_x =  flagsXStartingPosition;
+    flag_position_x =  flagsXStartingPosition;
     if(numberOfCountriesCreated%2!=0){
       flag_position_x_table =  flagsXStartingPosition;
     }
@@ -49,6 +64,8 @@ class Country{
   //draws line below the score line
   void zeroScore(){
     strokeWeight(1);
+    // make light grey
+    stroke(180);
     line(0,curveFlagPositionY,width,curveFlagPositionY);
   }
   
@@ -120,6 +137,7 @@ class Country{
  
   //draw the curve of the score
   void curvePath(){
+    stroke(this.strokeColor);
     strokeWeight(3);
     noFill();
     beginShape();

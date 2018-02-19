@@ -57,7 +57,7 @@ void draw() {
           }
         country.thisScore=country.getCurrentScore();
         country.changeScore=country.thisScore-country.previousScore;
-        if(country.curveVertexX.size()<=width/25 - 1){//taking array of x positions   //60 25=1500/60 60 - speed flag
+        if(country.curveVertexX.size()<=width/25 - 2){//taking array of x positions   25=1500/60 60 - speed flag
           country.curveVertexX.append(int(flagSpeed));
           //y curve position boundary
           if (country.curveFlagPositionY-country.changeScore*7 >= 0 + flagHeight*2){

@@ -14,15 +14,12 @@ int flagWidth;
 int flagHeight;
 
 
-float lastTweetTextPositionX;
-float lastTweetTextPositionY;
-float lastMatchedTweetTextPositionX;
-float lastMatchedTweetTextPositionY;
 int startSecond = second();
 int frameRate=30;
 int currentSecond;
 StopWatchTimer sw = new StopWatchTimer(); 
 StreamTwitter streamTwitter;
+PrintTweet printTweet;
   
 
 void setup() {
@@ -34,15 +31,17 @@ void setup() {
   flagHeight = int(flagWidth * 0.5);
   verticalSpaceBetweenFlags = flagHeight/3.5;
   flagsXStartingPosition = width / 40 + flagWidth/2;
-  // Setup text defaults
-  lastTweetTextPositionX = width / 40;
-  lastTweetTextPositionY = height - 40;
-  lastMatchedTweetTextPositionX = lastTweetTextPositionX;
-  lastMatchedTweetTextPositionY = height - 20;
 
   //Make the twitter object and prepare the query
   twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
   streamTwitter = new StreamTwitter();
+
+  float lastTweetTextPositionX = width / 40;
+  float lastTweetTextPositionY = height - 40;
+  float lastMatchedTweetTextPositionX = lastTweetTextPositionX;
+  float lastMatchedTweetTextPositionY = height - 20;
+  printTweet = new PrintTweet(lastTweetTextPositionX, lastTweetTextPositionY, lastMatchedTweetTextPositionX, lastMatchedTweetTextPositionY);
+
   setupFlags();
   sw.start();//start timer
 }
@@ -86,6 +85,6 @@ void draw() {
      flagSpeed+=width / 60;
    }
   drawFlags();  
-  printLastTweets();
+    printTweet.printLastTweets();
   textOfTime();
 }

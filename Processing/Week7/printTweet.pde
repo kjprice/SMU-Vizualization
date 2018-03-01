@@ -2,8 +2,8 @@ void printLastTweet() {
   textSize(18);
   float x = lastTweetTextPositionX;
   float y = lastTweetTextPositionY;
-  if (tweets.size() > 0) {
-    String lastTweet = tweets.get(tweets.size() - 1).replace("\n", "");
+  if (streamTwitter.tweets.size() > 0) {
+    String lastTweet = streamTwitter.tweets.get(streamTwitter.tweets.size() - 1).replace("\n", "");
     
     text("Last Tweet: " + lastTweet, lastTweetTextPositionX, lastTweetTextPositionY);
   }

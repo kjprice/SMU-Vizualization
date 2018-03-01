@@ -22,6 +22,7 @@ int startSecond = second();
 int frameRate=30;
 int currentSecond;
 StopWatchTimer sw = new StopWatchTimer(); 
+StreamTwitter streamTwitter;
   
 
 void setup() {
@@ -41,7 +42,7 @@ void setup() {
 
   //Make the twitter object and prepare the query
   twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
-  fetchQuery();
+  streamTwitter = new StreamTwitter();
   setupFlags();
   sw.start();//start timer
 }

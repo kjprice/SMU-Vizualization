@@ -25,5 +25,6 @@ class StreamTwitter {
     };
     twitterStream.addListener(listener);
     twitterStream.filter("#nbcolympics", "#olympic", "#winterolympics", "#pyeongchang2018");
+    //twitterStream.filter("#Putin","#russia","#military");
   }
 }

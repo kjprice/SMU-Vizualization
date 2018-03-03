@@ -1,5 +1,6 @@
 ArrayList<String> matchedTweets = new ArrayList<String>();
 
+
 boolean countryIsMentioned(Country country, String tweet) {
   String[] countryNames = country.getNames();
   for (int n = 0; n < countryNames.length; n++) {

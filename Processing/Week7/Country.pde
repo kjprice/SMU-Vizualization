@@ -8,7 +8,7 @@ color[] countryStrokeColors = new color[]{
   color(118,1,19)
 };
 
-class Country{
+class Country extends Flag{
   PImage img;
   String flag;
   int position;

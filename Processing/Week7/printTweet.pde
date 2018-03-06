@@ -3,6 +3,13 @@ public class PrintTweet {
   private float lastTweetTextPositionY;
   private float lastMatchedTweetTextPositionX;
   private float lastMatchedTweetTextPositionY;
+  
+  PrintTweet() {
+    this.lastTweetTextPositionX = width / 40;
+    this.lastTweetTextPositionY = height - 40;
+    this.lastMatchedTweetTextPositionX = lastTweetTextPositionX;
+    this.lastMatchedTweetTextPositionY = height - 20;
+  }
 
   PrintTweet(float x1, float y1, float x2, float y2) {
     this.lastTweetTextPositionX = x1;

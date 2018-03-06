@@ -1,5 +1,10 @@
+
+
 class Flag{
   PImage snow;
+  
+  Flag() {
+  }
   
   private void curve(int currentSecond, int startSecond, float frameCount, float frameRate, float flagSpeed){  
     if(currentSecond==startSecond && frameCount%frameRate==0){
@@ -40,6 +45,7 @@ class Flag{
   }
   
   private void drawFlags() {
+    this.curve(currentSecond, startSecond, frameCount, frameRate, flagSpeed);
     snow=loadImage("snow.jpg");
     snow.resize(1500,800);
     background(snow);

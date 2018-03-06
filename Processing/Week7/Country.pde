@@ -1,6 +1,6 @@
 int numberOfCountriesCreated = 0;
 
-color[] countryStrokeColors = new color[]{
+color[] COUNTRY_STROKER_COLORS = new color[]{
   color(0),
   color(11,1,186),
   color(255,0,128),
@@ -24,6 +24,9 @@ class Country extends Flag{
   float flag_position_x_table;
   private color strokeColor;
   
+  Country() {
+  }
+  
   Country(String flagFilePath, String[] countryNames){
     this.setStrokeColor();
 
@@ -38,7 +41,7 @@ class Country extends Flag{
   }
   
   private void setStrokeColor() {
-    this.strokeColor = countryStrokeColors[numberOfCountriesCreated];
+    this.strokeColor = COUNTRY_STROKER_COLORS[numberOfCountriesCreated];
   }
   
   private void setCountryNamesToLowerCase() {
@@ -112,7 +115,8 @@ class Country extends Flag{
     image(img,0,0);
     popMatrix();
   }
-   //draw text for score to the table
+
+  //draw text for score to the table
   void drawTextFotFlagTable(){
     pushMatrix();
     translate(flag_position_x_table-flagWidth/2,flag_position_y_table);

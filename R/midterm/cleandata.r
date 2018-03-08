@@ -7,6 +7,7 @@ gun.violence$GDP = as.integer(gsub(",", "", gun.violence$GDP))
 gun.violence$Homicides = as.numeric(gsub("\\s\\([0-9]{4}\\)", "", gun.violence$Homicides))
 gun.violence$Suicides = as.numeric(gsub("\\s\\([0-9]{4}\\)", "", gun.violence$Suicides))
 
-gun.violence$Cultural.Diversity.Index
+# Turn into a true number
+gun.violence$Cultural.Diversity.Index = as.numeric(gsub("unavailable", "", gun.violence$Cultural.Diversity.Index))
 
 write.csv(gun.violence, 'data/GunViolenceClean.csv')

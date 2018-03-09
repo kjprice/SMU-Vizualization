@@ -1,4 +1,4 @@
-gun.violence = read.csv('data/GunViolence.csv')
+gun.violence = read.csv('../data/GunViolence.csv')
 
 # Turn "12,000" into a true number 12000
 gun.violence$GDP = as.integer(gsub(",", "", gun.violence$GDP))
@@ -11,4 +11,4 @@ gun.violence$Suicides = as.numeric(gsub("\\s\\([0-9]{4}\\)", "", gun.violence$Su
 gun.violence$Cultural.Diversity.Index = as.numeric(gsub("unavailable", "", gun.violence$Cultural.Diversity.Index))
 gun.violence$Guns.Per.Capita = as.numeric(gsub("unavailable", "", gun.violence$Guns.Per.Capita))
 
-write.csv(gun.violence, 'data/GunViolenceClean.csv')
+write.csv(gun.violence, '../data/GunViolenceClean.csv')

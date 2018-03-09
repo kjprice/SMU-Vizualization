@@ -11,4 +11,4 @@ gun.violence$Suicides = as.numeric(gsub("\\s\\([0-9]{4}\\)", "", gun.violence$Su
 gun.violence$Cultural.Diversity.Index = as.numeric(gsub("unavailable", "", gun.violence$Cultural.Diversity.Index))
 gun.violence$Guns.Per.Capita = as.numeric(gsub("unavailable", "", gun.violence$Guns.Per.Capita))
 
-write.csv(gun.violence, '../data/GunViolenceClean.csv')
+write.csv(gun.violence, '../data/GunViolenceClean.csv', row.names = FALSE)

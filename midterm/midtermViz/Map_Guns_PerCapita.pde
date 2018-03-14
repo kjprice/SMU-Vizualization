@@ -33,13 +33,13 @@ public class MapGunsPerCapita extends DashboardPage {
     float cx = mercX(clon);
     float cy = mercY(clat);
     for (TableRow row : inputData.rows()) {
-      float lat = row.getFloat("latitude");
-      float lon = row.getFloat("longitude");
-      float GunsPerCapita = row.getFloat("Guns.Per.Capita");
+      float lat = row.getFloat("Latitude");
+      float lon = row.getFloat("Longitude");
+      float GunsPerCapita = row.getFloat("Guns_Per_Capita");
       String country = row.getString("Country");
       // I want to use this value to add a thick stroke width for circle for developed. 
       // not working
-      String economy = trim(row.getString("Developed"));
+      String economy = trim(row.getString("developed_nation"));
       int stroke_W = 1;
       if (economy.equals("Yes") == true) {
           stroke_W = 5;

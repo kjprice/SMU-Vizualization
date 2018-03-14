@@ -22,4 +22,4 @@ gun.violence$Suicides[is.na(gun.violence$Suicides)] = median(gun.violence$Suicid
 gun.violence$Cultural_Diversity_Index[is.na(gun.violence$Cultural_Diversity_Index)] = median(gun.violence$Cultural_Diversity_Index[!is.na(gun.violence$Cultural_Diversity_Index)])
 
 
-write.csv(gun.violence, '../data/GunViolenceClean.csv', row.names = FALSE)
+write.csv(gun.violence, '../midtermViz/data/GunViolenceClean.csv', row.names = FALSE)

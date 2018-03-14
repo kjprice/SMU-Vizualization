@@ -38,10 +38,8 @@ public class MapGunsPerCapita {
       String economy = trim(row.getString("Developed"));
       int stroke_W = 1;
       if (economy.equals("Yes") == true) {
-          println("if");
           stroke_W = 5;
       }
-      println(economy,stroke_W);
       float x = mercX(lon) - cx;
       float y = mercY(lat) - cy;
       

@@ -16,14 +16,21 @@ class Dashboard {
     button_start_y = 720;
   }
   
+  void setupDashboardPages() {
+    // TODO
+  }
+  
   void draw() {
     this.displayButtons();
   }
 
-
   void drawButton(int startX) {
     int start_y = button_start_y;
     rect(startX, start_y, button_w, button_h);
+  }
+  
+  void drawDashboardPage() {
+    // TODO
   }
     
   void displayButtons(){
@@ -52,6 +59,8 @@ class Dashboard {
           heading = "Gun availability Per Capita of Country ";
           heading = i + "";
           println("first button");
+          
+          // TODO set dashboardPage
           
         }
         

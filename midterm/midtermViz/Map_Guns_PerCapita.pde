@@ -1,7 +1,11 @@
-public class MapGunsPerCapita {
+public class MapGunsPerCapita extends DashboardPage {
   int ww = 1000;
   int hh = 700;
   PImage mapimg;
+  
+  MapGunsPerCapita() {
+    super("Guns Per Capita", "Gun availability Per Capita of Country");
+  }
 
   float mercX(float lon) {
     lon = radians(lon);

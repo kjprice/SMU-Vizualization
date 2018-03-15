@@ -1,11 +1,10 @@
-public class MapGunsPerCapita extends Visualization {
-  int vizualizationNum = 0;
+public class MapGunsPerCapita extends DashboardPage {
   int ww = 1000;
   int hh = 700;
   PImage mapimg;
   
   MapGunsPerCapita() {
-    //super("Guns Per Capita", "Gun availability Per Capita of Country");
+    super("Guns Per Capita", "Gun availability Per Capita of Country");
   }
 
   float mercX(float lon) {
@@ -23,7 +22,7 @@ public class MapGunsPerCapita extends Visualization {
     return a * c;
   }
 
-  void draw(Table inputData){
+  void showMapPerCapita(Table inputData){
     mapimg = loadImage("earth.jpg");
     mapimg.resize(ww,hh);
     text("Heading ",ww / 2,10);
@@ -77,8 +76,5 @@ public class MapGunsPerCapita extends Visualization {
   }
   void showLegends(){
     // TODO
-  }
-  int getVizualizationNum(){
-    return vizualizationNum;
   }
 }

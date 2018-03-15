@@ -2,7 +2,9 @@ int clat = 0;
 int clon = 0;
 int zoom = 1;
 Table table;
-
+float i1=1;
+float i2=0;
+boolean change=false;
 int offset = 100 ;
 MapGunsPerCapita mapData;
 Dashboard dashboard;
@@ -17,20 +19,19 @@ void setup() {
 void draw(){
   background(180);
   dashboard.draw();   
-  //mapData.showMapPerCapita(table);
-  // Preeti added case statement to test how viz are looking. 
-  // to be changed once Dashboard is ready
-  switch(vizToDisplay) {
-      case 1: 
-        mapData.showMapPerCapita(table);
-        println("showMapPerCapita");  
-        break;
-      case 2: 
-        mapData.showTop10GDP(table);
-        println("showTop5GDP");
-        break;
-      default:             
-        println("None");
-        break;
-    }
+  dashboard.drawViz();
+  if (change == true){
+    i2+=0.2;
+    i1-=0.1;
+    if(i2>=2){
+       i2=2;
+       change = false;
+      }
+    if(i1<=0){
+        i1=0.0001;
+        change = false;
+         }
+         
+  }
+
 }

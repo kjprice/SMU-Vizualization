@@ -1,5 +1,6 @@
 class Viz2 extends Visualization{
-  int vizualizationNum = 1;
+  int vizualizationNum = 2;
+  String heading = "Top 10 countries by GDP";
   Viz2(){}
   void draw(Table inputData){
     
@@ -35,11 +36,11 @@ class Viz2 extends Visualization{
         
         // loop thru sorted table
         for (TableRow row : inputData.rows()) {
-          println(i);
+          //println(i);
           if(i < top) {
             String country = row.getString("Country");
             int GDP = row.getInt("iGDP");
-            println(GDP);
+            //println(GDP);
             
             // scaled GDP
             GDP_bar_size[i] = GDP / 300; // resize as required
@@ -69,5 +70,9 @@ class Viz2 extends Visualization{
     }
   int getVizualizationNum(){
     return vizualizationNum;
+  }
+  
+  String getHeading(){
+    return heading;
   }
 }

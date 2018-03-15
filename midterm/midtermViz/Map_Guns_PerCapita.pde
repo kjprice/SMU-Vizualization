@@ -1,8 +1,9 @@
 public class MapGunsPerCapita extends Visualization {
-  int vizualizationNum = 0;
+  int vizualizationNum = 1;
   int ww = 1000;
   int hh = 700;
   PImage mapimg;
+  String heading = "Gun availability Per Capita of Country ";
   
   MapGunsPerCapita() {
     //super("Guns Per Capita", "Gun availability Per Capita of Country");
@@ -80,5 +81,8 @@ public class MapGunsPerCapita extends Visualization {
   }
   int getVizualizationNum(){
     return vizualizationNum;
+  }
+  String getHeading(){
+    return heading;
   }
 }

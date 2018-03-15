@@ -4,9 +4,10 @@ class Dashboard extends DashboardPage{
   private int button_start_y;
   private int button_w = 80;
   private int button_h = 50;
-  private String heading = "Gun availability Per Capita of Country ";
-  private int lastVizualization = 1;
+  private String heading;
+  private int lastVizualization = 0;
   private int chosenVizualization = 1;
+  private int buttonClicked;
   private Visualization[] viz;
   MapGunsPerCapita mapData;
   Viz2 v2;
@@ -67,14 +68,24 @@ class Dashboard extends DashboardPage{
     fill(25);
     noStroke();
     int start_x = button_start_x;
-    int start_y = button_start_y;
     for (int i = 0; i < NUMBER_OF_BUTTONS; i++) {
       drawButton(start_x);
       start_x = start_x + offset;
     }
-    textAlign(LEFT);
-    textSize(25);
-    text(heading,start_x + 20,start_y+30);
+   int start_y = button_start_y;
+   for (int j=0; j<vizNum; j++){
+      if (buttonClicked==viz[j].getVizualizationNum()){
+        println("button clicked", buttonClicked);
+        println("viz num", viz[j].getVizualizationNum());
+         heading=viz[j].getHeading();
+         println(heading);
+        textAlign(LEFT);
+        textSize(25);
+        text(heading,start_x + 20,start_y+30);
+      }
+    }
+
+
   }
   
   void checkButtonsClicked() {
@@ -88,82 +99,16 @@ class Dashboard extends DashboardPage{
         ) {
           lastVizualization = chosenVizualization;
           chosenVizualization=i;
-
-          //println(chosenVizualization);
-          heading = "Gun availability Per Capita of Country ";
-          heading = i + "";
-          //println("first button");
+          buttonClicked = i;
+          //heading = i + "";
+          //this variables for listing visualizations
           i1=1;
           i2=0;
+
           // TODO set dashboardPage
           
-        }
-        // Preeti added below set of code for rest of buttons
-            else if (
-              mouseX >= button_start_x + offset && 
-              mouseX <= button_start_x +offset +button_w && 
-              mouseY >= button_start_y && 
-              mouseY <= button_start_y+button_h
-            ) {
-                  heading = " Top 10 countries by GDP ";
-                  // needs to be updated. is not showing viz2
-                  //lastVizualization = chosenVizualization;
-                  //chosenVizualization=i;
-                  
-                  i1=2;
-                  i2=1;
-                  // TODO set dashboardPage
-            }
-            else if (
-              mouseX >= button_start_x + (offset *2) && 
-              mouseX <= button_start_x + (offset *2) +button_w && 
-              mouseY >= button_start_y && 
-              mouseY <= button_start_y+button_h
-            ) {
-                  heading = " What comes here? ";
-                  lastVizualization = chosenVizualization;
-                  chosenVizualization=i;
-                  //heading = i + "";
-                  //println("first button");
-                  i1=1;
-                  i2=0;
-                  // TODO set dashboardPage
-                  println("3nd button");
-            }
-            else if (
-              mouseX >= button_start_x + (offset *3) && 
-              mouseX <= button_start_x + (offset *3) +button_w && 
-              mouseY >= button_start_y && 
-              mouseY <= button_start_y+button_h
-            ) {
-                  heading = " 4th viz ";
-                  lastVizualization = chosenVizualization;
-                  chosenVizualization=i;
-                  //heading = i + "";
-                  //println("first button");
-                  i1=1;
-                  i2=0;
-                  // TODO set dashboardPage
-                  println("4th button");
-            }
-            else if (
-              mouseX >= button_start_x + (offset *4) && 
-              mouseX <= button_start_x + (offset *4) +button_w && 
-              mouseY >= button_start_y && 
-              mouseY <= button_start_y+button_h
-            ) {
-                  heading = " 5th Viz ";
-                  lastVizualization = chosenVizualization;
-                  chosenVizualization=i;
-                  //heading = i + "";
-                  //println("first button");
-                  i1=1;
-                  i2=0;
-                  // TODO set dashboardPage
-                  println("5th button");
-            }
-        
-        
+      
+    }
         start_x += offset;
     }
   }
@@ -171,22 +116,27 @@ class Dashboard extends DashboardPage{
   void drawViz(){
      println("chosen",chosenVizualization);
      println("last",lastVizualization);
-     for (int j=0; j<vizNum; j++){
-       if(viz[j].getVizualizationNum() + 1 == lastVizualization){
-            for (int k=0; k<vizNum; k++){
-               if(viz[k].getVizualizationNum() + 1 == chosenVizualization){
-                 viz[k].draw(table);
-               }
-             }
-             change = true;
-             //list flipping of last visualization
-             pushMatrix();
-             translate(0,0);
-             scale(i1,1);
-             rotate(i2);
-             viz[j].draw(table);
-             popMatrix();
+     if (lastVizualization==0){
+         viz[0].draw(table);
          }
+     for (int j=0; j<vizNum; j++){
+       if(lastVizualization!=0){
+         if(viz[j].getVizualizationNum() == lastVizualization){
+              for (int k=0; k<vizNum; k++){
+                 if(viz[k].getVizualizationNum() == chosenVizualization){
+                   viz[k].draw(table);
+                 }
+               }
+               change = true;
+               //list flipping of last visualization
+               pushMatrix();
+               translate(0,0);
+               scale(i1,1);
+               rotate(i2);
+               viz[j].draw(table);
+               popMatrix();
+           }
+       }
      }     
   }
 }

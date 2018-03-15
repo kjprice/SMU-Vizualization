@@ -3,4 +3,5 @@ abstract class Visualization{
   Visualization(){}
   abstract void draw(Table inputData);
   abstract int getVizualizationNum();
+  abstract String getHeading();
 }

@@ -1,5 +1,6 @@
 class Viz4 extends Visualization{
-  int vizualizationNum = 3;
+  int vizualizationNum = 4;
+  String heading = "Viz4";
   Viz4(){}
   void draw(Table inputData){
     fill(5,120,190);
@@ -7,5 +8,8 @@ class Viz4 extends Visualization{
   }
   int getVizualizationNum(){
     return vizualizationNum;
+  }
+  String getHeading(){
+    return heading;
   }
 }

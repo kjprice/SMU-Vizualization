@@ -17,5 +17,20 @@ void setup() {
 void draw(){
   background(180);
   dashboard.draw();   
-  mapData.showMapPerCapita(table);
+  //mapData.showMapPerCapita(table);
+  // Preeti added case statement to test how viz are looking. 
+  // to be changed once Dashboard is ready
+  switch(vizToDisplay) {
+      case 1: 
+        mapData.showMapPerCapita(table);
+        println("showMapPerCapita");  
+        break;
+      case 2: 
+        mapData.showTop10GDP(table);
+        println("showTop5GDP");
+        break;
+      default:             
+        println("None");
+        break;
+    }
 }

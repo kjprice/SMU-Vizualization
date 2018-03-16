@@ -2,8 +2,8 @@ int clat = 0;
 int clon = 0;
 int zoom = 1;
 Table table;
-float i1=1;
-float i2=0;
+float scaleAngle=1;
+float rotationAngle=0;
 boolean change=false;
 int offset = 150 ;
 MapGunsPerCapita mapData;
@@ -21,14 +21,14 @@ void draw(){
   dashboard.drawViz();
   dashboard.draw();
   if (change == true){
-    i2+=0.2;
-    i1-=0.3;
-    if(i2>=1.7){
-     i2=1.7;
+    rotationAngle+=0.2;
+    scaleAngle-=0.3;
+    if(rotationAngle>=1.7){
+     rotationAngle=1.7;
      change = false;
     }
-    if(i1<=0){
-      i1=0.0001;
+    if(scaleAngle<=0){
+      scaleAngle=0.0001;
       change = false;
      }
   }

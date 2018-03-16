@@ -97,8 +97,8 @@ class Dashboard{
           buttonClicked = i;
           //heading = i + "";
           //this variables for listing visualizations
-          i1=1;
-          i2=0;
+          scaleAngle=1;
+          rotationAngle=0;
     }
         start_x += offset;
     }
@@ -120,8 +120,8 @@ class Dashboard{
           //list flipping of last visualization
           pushMatrix();
           translate(0,0);
-          scale(i1,1);
-          rotate(i2);
+          scale(scaleAngle,1);
+          rotate(rotationAngle);
           viz[j].draw(table);
           popMatrix();
         }

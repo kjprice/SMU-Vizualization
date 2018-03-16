@@ -18,8 +18,8 @@ void setup() {
 
 void draw(){
   background(180);
-  dashboard.draw();   
   dashboard.drawViz();
+  dashboard.draw();
   if (change == true){
     i2+=0.2;
     i1-=0.3;

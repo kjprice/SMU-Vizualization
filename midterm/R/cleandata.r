@@ -4,8 +4,9 @@ gun.violence = read.csv('../data/GunViolence.csv')
 gun.violence$GDP = as.integer(gsub(",", "", gun.violence$GDP))
   
 # Turn "1.03 (2016)" into a true number 1.03
-gun.violence$Homicides = as.numeric(gsub("\\s\\([0-9]{4}\\)", "", gun.violence$Homicides))
-gun.violence$Suicides = as.numeric(gsub("\\s\\([0-9]{4}\\)", "", gun.violence$Suicides))
+gun.violence$Homicides = as.numeric(gsub("\\s\\([0-9]{4}\\)", "", gun.violence$Homicides)) #per 100 000
+gun.violence$Suicides = as.numeric(gsub("\\s\\([0-9]{4}\\)", "", gun.violence$Suicides)) #per 100 000
+
 
 
 # Turn into a true number

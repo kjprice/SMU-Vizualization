@@ -74,6 +74,7 @@ class Dashboard{
    for (int j=0; j<vizNum; j++){
       if (buttonClicked==viz[j].getVizualizationNum()){
         heading=viz[j].getHeading();
+        fill(230,70,30);
         textAlign(LEFT);
         textSize(25);
         text(heading,start_x + 10,start_y+30);

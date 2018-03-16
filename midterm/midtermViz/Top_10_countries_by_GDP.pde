@@ -13,7 +13,7 @@ class Top_10_countries_by_GDP extends Visualization{
             row.setInt("iGDP",GDP);
         }
         
-        // sort in desc order of GDP, pick top 5 for display
+        // sort in desc order of GDP, pick top 10 for display
         inputData.sortReverse("iGDP");
         int i = 0; // loop counter
         int top = 10; // change this to increase or decrease # of countries
@@ -68,6 +68,8 @@ class Top_10_countries_by_GDP extends Visualization{
              break;
           }
         }
+       textSize(30);
+       text("GDP in $ per capita according to International Monetary Fund",550,100);
     }
   int getVizualizationNum(){
     return vizualizationNum;

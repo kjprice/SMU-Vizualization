@@ -1,4 +1,4 @@
-Id,Country,CountryCode,GDP,Homicides,Suicides,Guns.Per.Capita,Cultural.Diversity.Index,Continent,latitude,longitude,Developed
+Id,Country,CountryCode,GDP,Homicides,Suicides,Guns per 100,Cultural.Diversity.Index,Continent,latitude,longitude,Developed
 1,Argentina,Arg,20700,2.58,1.57,4.6,0,LATIN AMER. & CARIB    ,-38.416097,-63.616672,No
 2,Australia,Aus,49900,0.16,0.76,24.1,0.147,OCEANIA                            ,-25.274398,133.775136,Yes
 3,Austria,Aus,49200,0.1,2.43,30.4,0.1,WESTERN EUROPE                     ,47.516231,14.550072,Yes
@@ -41,7 +41,7 @@ Id,Country,CountryCode,GDP,Homicides,Suicides,Guns.Per.Capita,Cultural.Diversity
 40,Kyrgyzstan,Kyr,3700,0.53,0.07,0.9,0.624,C.W. OF IND. STATES ,41.20438,74.766098,No
 41,Latvia,Lat,27300,0.18,0.94,19,0.441,BALTICS                            ,56.879635,24.603189,Yes
 42,Luxembourg,Lux,109100,0,1.16,15.3,0.22458,WESTERN EUROPE                     ,49.815273,6.129583,Yes
-43,Macedonia,Mac,15200,0.91,0.63,14.61767,0.432,EASTERN EUROPE                     ,41.6086,21.7453,No
+43,Macedonia,Mac,15200,0.91,0.63,24.1,0.432,EASTERN EUROPE                     ,41.6086,21.7453,No
 44,Mexico,Mex,19500,6.34,0.44,15,0.434,LATIN AMER. & CARIB    ,23.634501,-102.552784,No
 45,Moldova,Mol,5700,0.45,0.42,7.1,0.401,C.W. OF IND. STATES ,47.411631,28.369885,No
 46,Montenegro,Mon,36203.27869,2.42,6.49,23.1,0.22458,WESTERN EUROPE                     ,42.708678,19.37439,No
@@ -67,7 +67,7 @@ Id,Country,CountryCode,GDP,Homicides,Suicides,Guns.Per.Capita,Cultural.Diversity
 66,Swaziland,Swa,36203.27869,37.16,1.0575,6.4,0.143,SUB-SAHARAN AFRICA                 ,-26.522503,31.465866,No
 67,Sweden,Swe,51300,0.19,1.2,21,0.189,WESTERN EUROPE                     ,60.128161,18.643501,Yes
 68,Switzerland,Swi,61400,0.21,2.74,24.45,0.418,WESTERN EUROPE                     ,46.818188,8.227512,Yes
-69,Taiwan,Tai,49800,0.6,0.12,14.61767,0.169,ASIA (EX. NEAR EAST)         ,23.69781,120.960515,No
+69,Taiwan,Tai,49800,0.6,0.12,4.6,0.169,ASIA (EX. NEAR EAST)         ,23.69781,120.960515,No
 70,Turkey,Tur,36203.27869,1.03,0.81,12.5,0.299,NEAR EAST                          ,38.963745,35.243322,No
 71,Ukraine,Ukr,36203.27869,0.24,1.0575,6.6,0.22458,C.W. OF IND. STATES ,48.379433,31.16558,No
 72,United Kingdom,gbr,43600,0.06,0.15,6.2,0.184,WESTERN EUROPE                     ,55.378051,-3.435973,Yes

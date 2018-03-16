@@ -75,7 +75,7 @@ public class MapGunsPerCapita extends Visualization {
     for (TableRow row : inputData.rows()) {
       float lat = row.getFloat("latitude");
       float lon = row.getFloat("longitude");
-      float GunsPerCapita = row.getFloat("Guns.Per.Capita");
+      float GunsPerCapita = row.getFloat("Guns per 100");//Guns.Per.Capita
       String country = row.getString("Country");
       // I want to use this value to add a thick stroke width for circle for developed. 
       // not working

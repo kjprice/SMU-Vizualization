@@ -6,14 +6,17 @@ float scaleAngle=1;
 float rotationAngle=0;
 boolean change=false;
 int offset = 150 ;
-MapGunsPerCapita mapData;
 Dashboard dashboard;
+
+Viz3 v;
 
 void setup() {
   size(1100, 800);
-  table = loadTable("GunViolenceClean.csv", "header");
-  mapData = new MapGunsPerCapita();
+  //table = loadTable("GunViolenceClean.csv", "header");
+  table = loadTable("newData.csv", "header");
   dashboard = new Dashboard();
+  v = new Viz3();
+  println("col count",table.getColumnCount());  
 }
 
 void draw(){
@@ -32,4 +35,6 @@ void draw(){
       change = false;
      }
   }
+  v.fillArrays(table);
+  
 }

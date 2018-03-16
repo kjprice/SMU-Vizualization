@@ -5,7 +5,7 @@ Table table;
 float i1=1;
 float i2=0;
 boolean change=false;
-int offset = 100 ;
+int offset = 150 ;
 MapGunsPerCapita mapData;
 Dashboard dashboard;
 
@@ -22,9 +22,9 @@ void draw(){
   dashboard.drawViz();
   if (change == true){
     i2+=0.2;
-    i1-=0.1;
-    if(i2>=2){
-       i2=2;
+    i1-=0.3;
+    if(i2>=1.7){
+       i2=1.7;
        change = false;
       }
     if(i1<=0){

@@ -2,15 +2,15 @@ class Dashboard extends DashboardPage{
   private int NUMBER_OF_BUTTONS = 5;
   private int button_start_x;
   private int button_start_y;
-  private int button_w = 80;
-  private int button_h = 50;
+  private int button_w = 132;//80
+  private int button_h = 100;//50
   private String heading;
   private int lastVizualization = 0;
   private int chosenVizualization = 1;
   private int buttonClicked;
   private Visualization[] viz;
-  MapGunsPerCapita mapData;
-  Viz2 v2;
+  MapGunsPerCapita v1;
+  Top_10_countries_by_GDP v2;
   Viz3 v3;
   Viz4 v4;
   Viz5 v5;
@@ -27,13 +27,13 @@ class Dashboard extends DashboardPage{
     //number of created visualizations
     viz = new Visualization[vizNum];
     //class instances of each visualization.
-    mapData = new MapGunsPerCapita();
-    v2 = new Viz2();
+    v1 = new MapGunsPerCapita();
+    v2 = new Top_10_countries_by_GDP();
     v3 = new Viz3();
     v4 = new Viz4();
     v5 = new Viz5();
     //populate array with visualizations
-    viz[0]=mapData;
+    viz[0]=v1;
     viz[1]=v2;
     viz[2]=v3;
     viz[3]=v4;
@@ -48,18 +48,7 @@ class Dashboard extends DashboardPage{
     this.displayButtons();
   }
 
-  void drawButton(int startX) {
-    int start_y = button_start_y;
-    rect(startX, start_y, button_w, button_h);
-    //for (int j=0; j<vizNum; j++){
-    //  pushMatrix();
-    //  translate(startX, start_y);
-    //  scale(-0.2,
-    //  viz[j].draw(table);
-    //  popMatrix();
-    //}
-  }
-  
+
   void drawDashboardPage() {
     // TODO
   }
@@ -68,20 +57,26 @@ class Dashboard extends DashboardPage{
     fill(25);
     noStroke();
     int start_x = button_start_x;
+    int start_y = button_start_y;
     for (int i = 0; i < NUMBER_OF_BUTTONS; i++) {
-      drawButton(start_x);
+      for (int j=0; j<vizNum; j++){
+        if (viz[j].getVizualizationNum()==i+1){
+          pushMatrix();
+          translate(start_x, start_y);
+          scale(0.12,0.12);
+          viz[j].draw(table);
+          popMatrix();
+        }
+      }
+      //drawButton(start_x);
       start_x = start_x + offset;
     }
-   int start_y = button_start_y;
    for (int j=0; j<vizNum; j++){
       if (buttonClicked==viz[j].getVizualizationNum()){
-        println("button clicked", buttonClicked);
-        println("viz num", viz[j].getVizualizationNum());
-         heading=viz[j].getHeading();
-         println(heading);
+        heading=viz[j].getHeading();
         textAlign(LEFT);
         textSize(25);
-        text(heading,start_x + 20,start_y+30);
+        text(heading,start_x + 10,start_y+30);
       }
     }
 

@@ -1,4 +1,4 @@
-class Dashboard extends DashboardPage{
+class Dashboard{
   private int NUMBER_OF_BUTTONS = 5;
   private int button_start_x;
   private int button_start_y;
@@ -99,39 +99,33 @@ class Dashboard extends DashboardPage{
           //this variables for listing visualizations
           i1=1;
           i2=0;
-
-          // TODO set dashboardPage
-          
-      
     }
         start_x += offset;
     }
   }
   
   void drawViz(){
-     println("chosen",chosenVizualization);
-     println("last",lastVizualization);
-     if (lastVizualization==0){
-         viz[0].draw(table);
-         }
-     for (int j=0; j<vizNum; j++){
-       if(lastVizualization!=0){
-         if(viz[j].getVizualizationNum() == lastVizualization){
-              for (int k=0; k<vizNum; k++){
-                 if(viz[k].getVizualizationNum() == chosenVizualization){
-                   viz[k].draw(table);
-                 }
-               }
-               change = true;
-               //list flipping of last visualization
-               pushMatrix();
-               translate(0,0);
-               scale(i1,1);
-               rotate(i2);
-               viz[j].draw(table);
-               popMatrix();
-           }
-       }
-     }     
+    if (lastVizualization==0){
+      viz[0].draw(table);
+    }
+    for (int j=0; j<vizNum; j++){
+      if(lastVizualization!=0){
+        if(viz[j].getVizualizationNum() == lastVizualization){
+          for (int k=0; k<vizNum; k++){
+            if(viz[k].getVizualizationNum() == chosenVizualization){
+              viz[k].draw(table);
+            }
+          }
+          change = true;
+          //list flipping of last visualization
+          pushMatrix();
+          translate(0,0);
+          scale(i1,1);
+          rotate(i2);
+          viz[j].draw(table);
+          popMatrix();
+        }
+      }
+    }     
   }
 }

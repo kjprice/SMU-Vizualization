@@ -24,14 +24,12 @@ void draw(){
     i2+=0.2;
     i1-=0.3;
     if(i2>=1.7){
-       i2=1.7;
-       change = false;
-      }
+     i2=1.7;
+     change = false;
+    }
     if(i1<=0){
-        i1=0.0001;
-        change = false;
-         }
-         
+      i1=0.0001;
+      change = false;
+     }
   }
-
 }

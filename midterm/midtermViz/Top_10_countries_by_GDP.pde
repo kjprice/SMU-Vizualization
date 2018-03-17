@@ -48,7 +48,7 @@ class Top_10_countries_by_GDP extends Visualization{
             // X position relative to left spacem required width and space
             bar_position_x[i] = int(lb + (i + .5) * (w + s));
             bar_position_y[i] = ground_position - bb - GDP_bar_size[i]/2;
-            flag[i] = loadImage((country.substring(0,3)).toLowerCase() + ".png");
+            flag[i] = loadImage(trim(country.substring(0,3)).toLowerCase() + ".png");
     
             // load image
             imageMode(CENTER);

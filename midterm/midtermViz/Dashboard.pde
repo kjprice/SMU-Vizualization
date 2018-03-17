@@ -84,6 +84,10 @@ class Dashboard{
 
   }
   
+  public int getHeight() {
+    return this.button_h;
+  }
+  
   void checkButtonsClicked() {
     int start_x = button_start_x;
     for(int i = 1; i <= NUMBER_OF_BUTTONS; i++) {

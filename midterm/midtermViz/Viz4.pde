@@ -1,10 +1,17 @@
 class Viz4 extends Visualization{
   int vizualizationNum = 4;
   String heading = "Viz4";
-  Viz4(){}
+  Scatterplot scatterplot;
+
+Viz4(){}
+  void setup(Table inputData) {
+    scatterplot = new Scatterplot(inputData);
+  }
   void draw(Table inputData){
-    fill(5,120,190);
-    rect(0,0,width,height-400);
+    if (this.scatterplot == null) {
+      this.setup(inputData);
+    }
+    scatterplot.draw();
   }
   int getVizualizationNum(){
     return vizualizationNum;

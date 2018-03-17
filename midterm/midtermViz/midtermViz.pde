@@ -36,5 +36,4 @@ void draw(){
      }
   }
   v.fillArrays(table);
-  
 }

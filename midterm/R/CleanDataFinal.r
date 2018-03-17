@@ -70,5 +70,8 @@ gsghll$Developed=ifelse(gsghll$GDP>=12000, 'yes','no')
 #delete countries without gdp
 gsghll = gsghll[!is.na(gsghll$GDP),]
 
+#trim white spaces
+gsghll$Country = gsub(" ", "" ,gsghll$Country)
 
-write.csv(gsgll, '../data/newData.csv', row.names = FALSE)
+
+write.csv(gsghll, '../data/newData.csv', row.names = FALSE)

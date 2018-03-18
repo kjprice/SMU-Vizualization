@@ -11,7 +11,7 @@ class Dashboard{
   public Visualization[] viz;
   MapGunsPerCapita v1;
   Top_10_countries_by_GDP v2;
-  Viz3 v3;
+  GDP_Homicide v3;
   Viz4 v4;
   Viz5 v5;
   public int vizNum = 5;//number of visualizations
@@ -29,7 +29,7 @@ class Dashboard{
     //class instances of each visualization.
     v1 = new MapGunsPerCapita();
     v2 = new Top_10_countries_by_GDP();
-    v3 = new Viz3();
+    v3 = new GDP_Homicide();
     v4 = new Viz4();
     v5 = new Viz5();
     //populate array with visualizations
@@ -76,8 +76,8 @@ class Dashboard{
         heading=viz[j].getHeading();
         fill(230,70,30);
         textAlign(LEFT);
-        textSize(25);
-        text(heading,start_x + 10,start_y+30);
+        textSize(20);
+        text(heading,start_x,start_y+30);
       }
     }
 

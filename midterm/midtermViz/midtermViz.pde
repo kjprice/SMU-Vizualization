@@ -9,6 +9,7 @@ int offset = 150 ;
 Dashboard dashboard;
 
 
+
 void setup() {
   size(1100, 800);
   //table = loadTable("GunViolenceClean.csv", "header");
@@ -32,5 +33,6 @@ void draw(){
       change = false;
      }
   }
+
 
 }

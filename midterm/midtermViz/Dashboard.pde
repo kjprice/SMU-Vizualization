@@ -8,13 +8,13 @@ class Dashboard{
   private int lastVizualization = 0;
   private int chosenVizualization = 1;
   private int buttonClicked;
-  private Visualization[] viz;
+  public Visualization[] viz;
   MapGunsPerCapita v1;
   Top_10_countries_by_GDP v2;
   Viz3 v3;
   Viz4 v4;
   Viz5 v5;
-  int vizNum = 5;//number of visualizations
+  public int vizNum = 5;//number of visualizations
 
 
   Dashboard() {

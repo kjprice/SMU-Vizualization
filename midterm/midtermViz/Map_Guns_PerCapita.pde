@@ -81,39 +81,6 @@ public class MapGunsPerCapita extends Visualization {
       // not working
       String economy = trim(row.getString("Developed"));
       int stroke_W = 1;
-<<<<<<< HEAD
-      if (economy.equals("yes") == true) {
-          stroke_W = 5;
-      }
-      float x = mercX(lon) - cx;
-      float y = mercY(lat) - cy;
-      
-      // This addition fixes the case where the longitude is non-zero and
-      // points can go off the screen.
-      if(x < - ww/2) {
-        x += ww;
-      } else if(x > ww / 2) {
-        x -= ww;
-      }
-      
-      // scale circle to match variable
-      float mag = GunsPerCapita * pow(10, 7);
-      mag = sqrt(mag);
-      float magmax = sqrt(pow(10, 10));
-      float d = map(mag, 0, magmax, 0, 180);
-      
-      // draw circle and change thickness
-      stroke(0, 0, 123);
-      strokeWeight(stroke_W);
-      fill(55, 123, 55, 200);
-      ellipse(x, y, d, d);
-      
-      // show country name
-      fill(255, 10, 10, 200);
-      textAlign(LEFT);
-      textSize(12);
-      text(country,x,y);
-=======
       // display data of developed country only
       if (economy.equals("yes") == true) {
           //stroke_W = 5;
@@ -147,7 +114,7 @@ public class MapGunsPerCapita extends Visualization {
           textSize(12);
           text(country,x,y);
       }// end if economy = yes
->>>>>>> 443dd1ba094f231285a37a41751301526bb77f3f
+
     }
   }
 

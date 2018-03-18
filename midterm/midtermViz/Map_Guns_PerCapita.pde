@@ -1,9 +1,5 @@
 public class MapGunsPerCapita extends Visualization {
   int vizualizationNum = 1;
-  int ww = 1000;
-  int hh = 700;
-  int startX = 0;
-  int startY = 0;
   PImage mapimg;
   PImage vizImage; // the rendered/cached version of this visual
   String heading = "Guns-homicide per capita of developed countries ";
@@ -17,7 +13,7 @@ public class MapGunsPerCapita extends Visualization {
   float legend_lon = -170;
   
   MapGunsPerCapita() {
-    //super("Guns Per Capita", "Gun availability Per Capita of Country");
+    super();
   }
 
   float mercX(float lon) {
@@ -35,39 +31,13 @@ public class MapGunsPerCapita extends Visualization {
     return a * c;
   }
 
+  void prerender(Table inputData) {
+    this.drawMap(inputData);
+    this.createVizImage();
+  }
+
   void draw(Table inputData){
-    if (this.vizImage != null) {
-      this.drawVizImage();
-    }
-    else {
-      this.drawMap(inputData);
-      this.createVizImage();
-    }
-  }
-  
-  void drawVizImage() {
-    imageMode(CORNERS);
-    image(this.vizImage, this.startX, this.startY);
-  }
-  
-  void createVizImage() {
-    this.vizImage = createImage(this.ww, this.hh, RGB);
-    this.vizImage.loadPixels();
-    loadPixels();
-    
-    int widthOffset = width - this.ww;
-    
-    for (int x = 0; x < this.ww; x++) {
-      for (int y = 0; y < this.hh; y++) {
-        int locViz = (x + this.startX) + ((y + this.startY) * this.ww);
-        // our map does not fill the entire screen - so deduct the actual width when scaping pixels
-        int locCanvas = locViz + (widthOffset * y);
-        // pull pixels directly on screen and write to vizImage
-        this.vizImage.pixels[locViz] = pixels[locCanvas];
-      }
-    }
-    
-    this.vizImage.updatePixels();
+    this.drawVizImage();
   }
 
   void drawMap(Table inputData) {

@@ -52,6 +52,13 @@ class Dashboard{
   void drawDashboardPage() {
     // TODO
   }
+
+  void prerender() {
+    for (int j=0; j < vizNum; j++){
+      viz[j].prerender(table);
+      background(180);
+    }
+  }
     
   void displayButtons(){
     fill(25);

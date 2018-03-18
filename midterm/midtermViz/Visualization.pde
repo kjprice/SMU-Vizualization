@@ -1,6 +1,16 @@
 abstract class Visualization{
   Table inputData;
-  Visualization(){}
+  PImage vizImage;
+  int ww;
+  int hh;
+  int startX;
+  int startY;
+  Visualization(){
+    ww = 1000;
+    hh = 700;
+    startX = 0;
+    startY = 0;
+  }
   abstract void draw(Table inputData);
   abstract int getVizualizationNum();
   abstract String getHeading();
@@ -53,5 +63,31 @@ abstract class Visualization{
             }
          }
        }
+  }
+  void prerender(Table inputData) {
+  }
+  void createVizImage() {
+    this.vizImage = createImage(this.ww, this.hh, RGB);
+    this.vizImage.loadPixels();
+    loadPixels();
+    
+    int widthOffset = width - this.ww;
+    
+    for (int x = 0; x < this.ww; x++) {
+      for (int y = 0; y < this.hh; y++) {
+        int locViz = (x + this.startX) + ((y + this.startY) * this.ww);
+        // our map does not fill the entire screen - so deduct the actual width when scaping pixels
+        int locCanvas = locViz + (widthOffset * y);
+        // pull pixels directly on screen and write to vizImage
+        this.vizImage.pixels[locViz] = pixels[locCanvas];
+      }
+    }
+    
+    this.vizImage.updatePixels();
+  }
+
+  void drawVizImage() {
+    imageMode(CORNERS);
+    image(this.vizImage, this.startX, this.startY);
   }
 }

@@ -18,6 +18,9 @@ void setup() {
 }
 
 void draw(){
+  if (frameCount == 1) {
+    dashboard.prerender();
+  }
   background(180);
   dashboard.drawViz();
   dashboard.draw();

@@ -22,29 +22,34 @@ class Viz5 extends Visualization{
              guns = row.getFloat("Guns per 100");
              gdp = row.getFloat("GDP");
              country = row.getString("Country");
-             circleY = sq(height*0.8-gdp/180-mouseY);
-             if (homicide>suicide){
-                RadiusOfcirle = sq(homicide/2);
+             circleY = sq(height*0.8-guns*6-mouseY);
+           
+             
+              //RadiusOfcirle = sq(gdp/2000);
+             if(homicide>suicide){
+                RadiusOfcirle = sq(homicide);
              }
              else{
-               RadiusOfcirle = sq(suicide/2);
+               RadiusOfcirle = sq(suicide);
              }
-             if(guns*10+10<=width){
+             if((homicide+suicide)*25+10<=width){
                //get points within circle
-               circleX = sq(guns*10+10-mouseX);
+               circleX = sq((homicide+suicide)*25+10-mouseX);
                inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gdp);
-               fill(243,197,10,150);
-               ellipse(guns*10+10,height*0.8-gdp/180,homicide,homicide);
+               fill(255,0,10,150);
+               //ellipse((homicide+suicide)*25+10,height*0.8-guns*6,gdp/1000,gdp/1000);
+               ellipse((homicide+suicide)*25+10,height*0.8-guns*6,homicide*2,homicide*2);
                fill(0,150);
-               ellipse(guns*10+10,height*0.8-gdp/180,suicide,suicide);
+               ellipse((homicide+suicide)*25+10,height*0.8-guns*6,suicide*2,suicide*2);
              }
              else{
-               circleX=sq(width-guns/2-mouseX);
+               circleX=sq(width-suicide-mouseX);
                inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gdp);
                fill(243,197,10,150);
-               ellipse(width-guns/2,height*0.8-gdp/180,homicide,homicide);
+               //ellipse(width-gdp/2000,height*0.8-guns*6,gdp/1000,gdp/1000);
+               ellipse(width-homicide,height*0.8-guns*6,homicide*2,homicide*2);
                fill(0,150);
-               ellipse(guns*10+10,height*0.8-gdp/180,suicide,suicide);
+               ellipse(width-suicide,height*0.8-guns*6,suicide*2,suicide*2);
              }
          }
     }
@@ -63,8 +68,8 @@ class Viz5 extends Visualization{
    fill(0);
     textAlign(LEFT);
     textSize(20);
-    text("GDP",25,25);
-    text("Guns",width-250,height*0.85);
+    text("Guns per 100",25,25);
+    text("Homicide and Suicide per 100k combined",width-450,height*0.85);
     
   }
   int getVizualizationNum(){

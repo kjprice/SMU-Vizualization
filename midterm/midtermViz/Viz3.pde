@@ -2,6 +2,13 @@ class Viz3 extends Visualization{
   int vizualizationNum = 3;
   String heading = "Viz3";
   float RadiusOfcirle;
+  float circleX;
+  float circleY;
+  float homicide;
+  float suicide;
+  float gdp;
+  String country;
+  float guns;
   
   Viz3(){}
   
@@ -14,38 +21,25 @@ class Viz3 extends Visualization{
     for (TableRow row : inputData.rows()) {
          String economy = trim(row.getString("Developed"));
          if (economy.equals("yes")==true){
-             float homicide = row.getFloat("Homicide per 100k");
-             float suicide = row.getFloat("Suicide per 100k");
-             float guns = row.getFloat("Guns per 100");
-             float gdp = row.getFloat("GDP");
-             //homicide + suicide, But suicide typically much more than homicide. So will try visualization without suicide
-             //fill(155,155,30);
-             //ellipse((homicide+suicide)*40,height*0.8-guns*6,guns,guns);
-             ////suicide ellipse
-             //fill(0);
-             //ellipse((homicide+suicide)*40-guns/2-suicide/2,height*0.8-guns*6,suicide,suicide);
-             ////homicide ellipse
-             //fill(255,0,0);
-             //ellipse((homicide+suicide)*40+guns/2+homicide/2,height*0.8-guns*6,homicide,homicide);
+             homicide = row.getFloat("Homicide per 100k");
+             suicide = row.getFloat("Suicide per 100k");
+             guns = row.getFloat("Guns per 100");
+             gdp = row.getFloat("GDP");
+             country = row.getString("Country");
+             circleY = sq(height*0.8-gdp/180-mouseY);
+             RadiusOfcirle = sq(guns/2);
              if(homicide*200+10<=width){
-               fill(0,180);
+               //get points within circle
+               circleX = sq(homicide*200+10-mouseX);
+               inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gdp);
+               fill(255,120,150,150);
                ellipse(homicide*200+10,height*0.8-gdp/180,guns,guns);
-               circleX = abs(width-guns/2-guns);
-               circleY = abs(height*0.8-gdp/180-guns);
-               RadiusOfcirle = guns;
-               homicideC = homicide;
-               inCircle(RadiusOfcirle, homicide, homicide*200+10+guns,height*0.8-gdp/180-guns);
-                fill(255,0,0,50);
-                //ellipse(homicide*200+10,height*0.8-gdp/180,suicide,suicide);
              }
              else{
-               fill(0,180);
+               fill(255,120,150,150);
                ellipse(width-guns/2,height*0.8-gdp/180,guns,guns);
-              // circleX = abs(width-guns/2-guns);
-               //circleY = abs(height*0.8-gdp/180-guns);
-               RadiusOfcirle = guns;
-               fill(255,0,0,50);
-              // ellipse(width-guns/2,height*0.8-gdp/180,suicide,suicide);
+               circleX=sq(width-guns/2-mouseX);
+               inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gdp);
              }
          }
     }
@@ -76,7 +70,56 @@ class Viz3 extends Visualization{
     return vizualizationNum;
   }
   
-
+  void inCircle(float circleX, float circleY, float RadiusOfcirle, float homicide, float suicide, float guns, String country, float gdp){
+    int offset=20;
+    if(circleX+circleY<=RadiusOfcirle){
+         if(homicide*200+10<=width-200){
+           if(height*0.8-gdp/180>25){
+              fill(128,0,64);
+              textAlign(LEFT);
+              textSize(12);
+              text(country,homicide*200+10+guns,height*0.8-gdp/180-guns);
+              text("Homicide per 100k "+homicide,homicide*200+10+guns,height*0.8-gdp/180-guns+offset);
+              text("Suicide per 100k "+suicide,homicide*200+10+guns,height*0.8-gdp/180-guns-20+offset*3);
+              text("Guns per 100 people "+guns,homicide*200+10+guns,height*0.8-gdp/180-guns-20+offset*4);
+              text("GDP per capita "+gdp,homicide*200+10+guns,height*0.8-gdp/180-guns-20+offset*5);
+           }
+           else{
+              fill(128,0,64);
+              textAlign(LEFT);
+              textSize(12);
+              text(country,homicide*200+10-guns*2,offset);
+              text("Homicide per 100k "+homicide,homicide*200+10-guns*2,offset*2);
+              text("Suicide per 100k "+suicide,homicide*200+10-guns*2,offset*3);
+              text("Guns per 100 people "+guns,homicide*200+10-guns*2,offset*4);
+              text("GDP per capita "+gdp,homicide*200+10-guns*2,offset*5);
+             
+           }
+         }
+         else{
+           if(height*0.8-gdp/180>25){
+              fill(128,0,64);
+              textAlign(LEFT);
+              textSize(12);
+              text(country,width-300,height*0.8-gdp/180-guns);
+              text("Homicide per 100k "+homicide,width-300,height*0.8-gdp/180-guns+offset);
+              text("Suicide per 100k "+suicide,width-300,height*0.8-gdp/180-guns-20+offset*3);
+              text("Guns per 100 people "+guns,width-300,height*0.8-gdp/180-guns-20+offset*4);
+              text("GDP per capita "+gdp,width-300,height*0.8-gdp/180-guns-20+offset*5);
+           }
+           else{
+              fill(128,0,64);
+              textAlign(LEFT);
+              textSize(12);
+              text(country,width-300,offset);
+              text("Homicide per 100k "+homicide,width-300,offset*2);
+              text("Suicide per 100k "+suicide,width-300,offset*3);
+              text("Guns per 100 people "+guns,width-300,offset*4);
+              text("GDP per capita "+gdp,width-300,offset*5);
+            }
+         }
+       }
+  }
   
   String getHeading(){
     return heading;

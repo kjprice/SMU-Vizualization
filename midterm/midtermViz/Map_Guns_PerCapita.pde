@@ -79,7 +79,7 @@ public class MapGunsPerCapita extends Visualization {
   
     float cx = mercX(clon);
     float cy = mercY(clat);
-    println("***************cx",cx,cy);
+   // println("***************cx",cx,cy);
     // set heading
     setHeading();
     
@@ -92,7 +92,7 @@ public class MapGunsPerCapita extends Visualization {
       int stroke_W = round(homicide);
       //filter out non-developed countries 
       String economy = trim(row.getString("Developed"));
-      
+            
       // display data of developed country only
       if (economy.equals("yes") == true) {
           //stroke_W = 5;
@@ -123,9 +123,9 @@ public class MapGunsPerCapita extends Visualization {
           // show country name
           fill(255, 10, 10, 200);
           textAlign(LEFT);
-          textSize(12);
+          textSize(13);
           text(country,x,y);
-          //text(heading,x,y);
+          
       }// end if economy = yes
 
     }
@@ -139,8 +139,20 @@ public class MapGunsPerCapita extends Visualization {
     float x = mercX(legend_lon) - cx;
     float y = mercY(legend_lat) - cy;
     fill(2, 12, 255, 200);
-    textSize(12);
-    text("legend comes here // TODO",x,y);
+    textSize(20);
+    
+    // legend for blue outer circle
+    stroke(0, 0, 123);
+    strokeWeight(5);
+    noFill();
+    ellipse(x , y + 20, 15, 15);
+    text("Homicide per 100k",x + 20, y + 27); 
+    
+    // legend for green inner circle
+    noStroke();
+    fill(55, 123, 55, 200);
+    ellipse(x, y + 50, 20, 20);
+    text("Guns per 100",x + 20, y + 57); 
   }
   int getVizualizationNum(){
     return vizualizationNum;
@@ -158,5 +170,16 @@ public class MapGunsPerCapita extends Visualization {
     fill(2, 12, 255, 200);
     textSize(27);
     text(heading,x,y);
+  }
+  
+  void showStatistics(Table inputData){
+    // TODO
+    
+     // convert GDP to integer by creating a new variable
+        for (TableRow row : inputData.rows()) {
+            int GDP = row.getInt("GDP");
+            row.setInt("iGDP",GDP);
+        }
+        
   }
 }

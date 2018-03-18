@@ -6,7 +6,11 @@ public class MapGunsPerCapita extends Visualization {
   int startY = 0;
   PImage mapimg;
   PImage vizImage; // the rendered/cached version of this visual
-  String heading = "Gun availability Per Capita of Country ";
+  String heading = "Guns per capita of developed countries ";
+  
+  // co-ordniates of white area of the map. This is where i am placing heading
+  float heading_lat = -75;
+  float heading_lon = -30;
   
   MapGunsPerCapita() {
     //super("Guns Per Capita", "Gun availability Per Capita of Country");
@@ -65,20 +69,22 @@ public class MapGunsPerCapita extends Visualization {
   void drawMap(Table inputData) {
     mapimg = loadImage("earth.jpg");
     mapimg.resize(ww,hh);
-    text("Heading ",ww / 2,10);
     translate(ww / 2, hh / 2);
     imageMode(CENTER);
     image(mapimg, 0, 0);
   
     float cx = mercX(clon);
     float cy = mercY(clat);
+    println("***************cx",cx,cy);
+    // set heading
+    setHeading();
+    
     for (TableRow row : inputData.rows()) {
       float lat = row.getFloat("latitude");
       float lon = row.getFloat("longitude");
       float GunsPerCapita = row.getFloat("Guns per 100");
       String country = row.getString("Country");
-      // I want to use this value to add a thick stroke width for circle for developed. 
-      // not working
+      //filter out non-developed countries 
       String economy = trim(row.getString("Developed"));
       int stroke_W = 1;
       // display data of developed country only
@@ -113,6 +119,7 @@ public class MapGunsPerCapita extends Visualization {
           textAlign(LEFT);
           textSize(12);
           text(country,x,y);
+          //text(heading,x,y);
       }// end if economy = yes
 
     }
@@ -126,5 +133,16 @@ public class MapGunsPerCapita extends Visualization {
   }
   String getHeading(){
     return heading;
+  }
+  
+  void setHeading(){
+    // set co-ordinates on map where heading needs to be places.
+    float cx = mercX(clon);
+    float cy = mercY(clat);
+    float x = mercX(heading_lon) - cx;
+    float y = mercY(heading_lat) - cy;
+    fill(2, 12, 255, 200);
+    textSize(30);
+    text(heading,x,y);
   }
 }

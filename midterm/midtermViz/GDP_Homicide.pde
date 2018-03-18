@@ -58,6 +58,17 @@ class GDP_Homicide extends Visualization{
     text("GDP",25,25);
     text("Homicide per 100k",width-250,height*0.85);
     
+   //legend
+   fill(243,197,10,150);
+   strokeWeight(1);
+   ellipse(width-200,70,30,30);
+   fill(0);
+   textAlign(LEFT);
+   textSize(20);
+   text("Legend: ",width-220,40);
+   textSize(15);
+   text("Guns per 100 people",width-160,70);
+    
   }
   
   void template(float homicide,float suicide,float guns){

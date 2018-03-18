@@ -6,11 +6,15 @@ public class MapGunsPerCapita extends Visualization {
   int startY = 0;
   PImage mapimg;
   PImage vizImage; // the rendered/cached version of this visual
-  String heading = "Guns per capita of developed countries ";
+  String heading = "Guns-homicide per capita of developed countries ";
   
   // co-ordniates of white area of the map. This is where i am placing heading
   float heading_lat = -75;
-  float heading_lon = -30;
+  float heading_lon = -100;
+  
+  //legends
+  float legend_lat = -0;
+  float legend_lon = -170;
   
   MapGunsPerCapita() {
     //super("Guns Per Capita", "Gun availability Per Capita of Country");
@@ -84,9 +88,11 @@ public class MapGunsPerCapita extends Visualization {
       float lon = row.getFloat("longitude");
       float GunsPerCapita = row.getFloat("Guns per 100");
       String country = row.getString("Country");
+      float homicide = row.getFloat("Homicide per 100k");
+      int stroke_W = round(homicide);
       //filter out non-developed countries 
       String economy = trim(row.getString("Developed"));
-      int stroke_W = 1;
+      
       // display data of developed country only
       if (economy.equals("yes") == true) {
           //stroke_W = 5;
@@ -123,10 +129,18 @@ public class MapGunsPerCapita extends Visualization {
       }// end if economy = yes
 
     }
+    showLegends();
   }
 
   void showLegends(){
-    // TODO
+    // set co-ordinates on map where legend needs to be places.
+    float cx = mercX(clon);
+    float cy = mercY(clat);
+    float x = mercX(legend_lon) - cx;
+    float y = mercY(legend_lat) - cy;
+    fill(2, 12, 255, 200);
+    textSize(12);
+    text("legend comes here // TODO",x,y);
   }
   int getVizualizationNum(){
     return vizualizationNum;
@@ -142,7 +156,7 @@ public class MapGunsPerCapita extends Visualization {
     float x = mercX(heading_lon) - cx;
     float y = mercY(heading_lat) - cy;
     fill(2, 12, 255, 200);
-    textSize(30);
+    textSize(27);
     text(heading,x,y);
   }
 }

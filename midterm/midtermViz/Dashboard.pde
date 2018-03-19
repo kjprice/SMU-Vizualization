@@ -5,8 +5,8 @@ class Dashboard{
   private int button_w = 132;//80
   private int button_h = 100;//50
   private String heading;
-  private int lastVizualization = 0;
-  private int chosenVizualization = 1;
+  private int lastVizualization = 1;
+  private int chosenVizualization = 4;
   private int buttonClicked;
   private boolean change=false;
   private int offset = 150;

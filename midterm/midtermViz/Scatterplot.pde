@@ -8,6 +8,7 @@ class Scatterplot extends GraphObject {
   private float[] y;
   private float[] z;
   private float zSplit;
+
   LinearRegression linearRegression;
   ArrayList<ScatterplotPoint> scatterplotPoints = new ArrayList<ScatterplotPoint>();
   
@@ -83,15 +84,17 @@ class Scatterplot extends GraphObject {
     float slope = this.linearRegression.beta1;
 
     beginShape();
-    stroke(1);
+
     // show yIntercept
     float x1 = this.getWindowPointX(0);
     float y1 = this.getWindowPointY((float)yIntercept);
     vertex(x1, (float)y1);
+
     // last point
     float x2 = this.getWindowPointX(maxX);
     double y2 = this.getWindowPointY(yIntercept + (slope * maxX));
     vertex(x2, (float)y2);
+
     endShape();
   }
   
@@ -99,9 +102,12 @@ class Scatterplot extends GraphObject {
     float[][] xy = getGroupedXy();
     float[] x1 = xy[0];
     float[] y1 = xy[1];
+    stroke(this.group2Color);
+
     showRegressionLine(x1, y1);
     float[] x2 = xy[2];
     float[] y2 = xy[3];
+    stroke(this.group1Color);
     showRegressionLine(x2, y2);
   }
   
@@ -147,7 +153,6 @@ class Scatterplot extends GraphObject {
 
 class ScatterplotPoint extends GraphObject {
   final int POINT_RADIUS = 10;
-  final float OPACITY = .4;
   float x;
   float y;
   float z;
@@ -172,14 +177,13 @@ class ScatterplotPoint extends GraphObject {
   }
   
   void drawColor() {
-    float opacity = OPACITY * 255;
     switch (this.groupName) {
       case "Large":
-        fill(255, 100, 100, opacity);
+        fill(this.group1Color);
         break;
       case "Small":
       default:
-        fill(100, 255, 100, opacity);
+        fill(this.group2Color);
     }
     noStroke();
   }
@@ -201,6 +205,9 @@ class GraphObject {
   float xMargin; // space from left
   float xRatio; // ratio for what a number actually represents against the window
   float yRatio; // ratio for what a number actually represents against the window
+  final float OPACITY = .4 * 255;
+  color group1Color = color(255, 100, 100, OPACITY);
+  color group2Color = color(100, 255, 100, OPACITY);
   GraphObject() {
   }
   

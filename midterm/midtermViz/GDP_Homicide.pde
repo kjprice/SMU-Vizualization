@@ -9,9 +9,11 @@ class GDP_Homicide extends Visualization{
   float gdp;
   String country;
   float guns;
+  PImage gun=loadImage("gun.png");
+  PImage murder=loadImage("murder.jpg");
   
   GDP_Homicide(){}
-  
+ 
 
  
   void draw(Table inputData){
@@ -69,6 +71,8 @@ class GDP_Homicide extends Visualization{
    text("Legend: ",width-220,40);
    textSize(15);
    text("Guns per 100 people",width-160,70);
+   
+   //picture
     
   }
   

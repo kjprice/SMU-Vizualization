@@ -3,7 +3,7 @@ public class MapGunsPerCapita extends Visualization {
   private int clon = 0;
   private int zoom = 1;
   int vizualizationNum = 1;
-  PImage mapimg;
+  PImage mapimg=loadImage("earth.jpg");
   PImage vizImage; // the rendered/cached version of this visual
   String heading = "Guns-homicide per capita of developed countries ";
   
@@ -14,6 +14,11 @@ public class MapGunsPerCapita extends Visualization {
   //legends
   float legend_lat = -0;
   float legend_lon = -170;
+  
+  //circle
+  float d;
+  float x;
+  float y;
   
   MapGunsPerCapita() {
     super();
@@ -34,18 +39,18 @@ public class MapGunsPerCapita extends Visualization {
     return a * c;
   }
 
-  void prerender(Table inputData) {
-    this.drawMap(inputData);
-    this.createVizImage();
-  }
+  //void prerender(Table inputData) {
+  //  this.drawMap(inputData);
+  //  this.createVizImage();
+  //}
 
-  void draw(Table inputData){
-    this.drawVizImage();
-  }
+  //void draw(Table inputData){
+  //  this.drawVizImage();
+  //}
 
-  void drawMap(Table inputData) {
+  void draw(Table inputData) {
     pushMatrix();
-    mapimg = loadImage("earth.jpg");
+    //mapimg = loadImage("earth.jpg");
     mapimg.resize(ww,hh);
     translate(ww / 2, hh / 2);
     imageMode(CENTER);
@@ -71,8 +76,8 @@ public class MapGunsPerCapita extends Visualization {
       if (economy.equals("yes") == true) {
           //stroke_W = 5;
       //}
-          float x = mercX(lon) - cx;
-          float y = mercY(lat) - cy;
+          x = mercX(lon) - cx;
+          y = mercY(lat) - cy;
           
           // This addition fixes the case where the longitude is non-zero and
           // points can go off the screen.
@@ -86,7 +91,7 @@ public class MapGunsPerCapita extends Visualization {
           float mag = GunsPerCapita * pow(10, 7);
           mag = sqrt(mag);
           float magmax = sqrt(pow(10, 10));
-          float d = map(mag, 0, magmax, 0, 180);
+          d = map(mag, 0, magmax, 0, 180);
           
           // draw circle and change thickness
           stroke(0, 0, 123);
@@ -101,7 +106,6 @@ public class MapGunsPerCapita extends Visualization {
           text(country,x,y);
           
       }// end if economy = yes
-
     }
     showLegends();
     popMatrix();

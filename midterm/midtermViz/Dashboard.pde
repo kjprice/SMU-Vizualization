@@ -12,6 +12,7 @@ class Dashboard{
   private int offset = 150;
   private float scaleAngle=1;
   private float rotationAngle=0;
+  private float animationSpeed = .1;
   Table table;
 
   public Visualization[] viz;
@@ -56,13 +57,13 @@ class Dashboard{
   
   void performAnimationPageChange() {
     if (change == true){
-      rotationAngle+=0.2;
-      scaleAngle-=0.3;
-      if(rotationAngle>=1.7){
+      rotationAngle += animationSpeed;
+      scaleAngle -= animationSpeed;
+      if (rotationAngle >= 1.7){
        rotationAngle=1.7;
        change = false;
       }
-      if(scaleAngle<=0){
+      if (scaleAngle <= 0){
         scaleAngle=0.0001;
         change = false;
        }

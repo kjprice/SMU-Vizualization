@@ -10,7 +10,11 @@ class GDP_Homicide extends Visualization{
   String country;
   float guns;
   PImage gun=loadImage("gun.png");
-  PImage murder=loadImage("murder.jpg");
+  PImage blood=loadImage("blood.png");
+  PImage gunMan = loadImage("gunMan.png");
+  PImage murder = loadImage("murder.jpg");
+  int sizeX;
+  int sizeY;
   
   GDP_Homicide(){}
  
@@ -73,7 +77,30 @@ class GDP_Homicide extends Visualization{
    text("Guns per 100 people",width-160,70);
    
    //picture
-    
+    sizeX=50;
+    sizeY=100;
+    pushMatrix();
+    gunMan.resize(sizeX,sizeY);
+    gun.resize(int(sizeX*1.2),sizeY/2);
+    blood.resize(int(sizeX),int(sizeY/2));
+    murder.resize(int(sizeX),int(sizeY/2));
+    translate(width*0.4,height*0.2);
+    imageMode(CENTER);
+    image(gun, 0, 0);
+    image(gunMan, 100, 0);
+    image(murder, 200, 0);
+    image(blood, 200, 0);
+    fill(0);
+    textAlign(LEFT);
+    textSize(30);
+    text("+1",-70,0);
+    text("=",40,0);
+    text("1.2% increase of ", 70,-60);
+    textSize(15);
+    text("per capita",-70,40);
+    text("after human development index and gross national income", 70, 70);
+    text("taken into accaunt", 70, 100);
+    popMatrix();
   }
   
   int getVizualizationNum(){

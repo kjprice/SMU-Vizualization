@@ -50,7 +50,6 @@ public class MapGunsPerCapita extends Visualization {
 
   void draw(Table inputData) {
     pushMatrix();
-    //mapimg = loadImage("earth.jpg");
     mapimg.resize(ww,hh);
     translate(ww / 2, hh / 2);
     imageMode(CENTER);

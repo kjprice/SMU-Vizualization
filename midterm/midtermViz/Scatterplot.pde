@@ -91,8 +91,6 @@ class Scatterplot extends GraphObject {
     // last point
     float x2 = this.getWindowPointX(maxX);
     double y2 = this.getWindowPointY(yIntercept + (slope * maxX));
-    println(y2);
-    // println(x2);
     vertex(x2, (float)y2);
     endShape();
   }

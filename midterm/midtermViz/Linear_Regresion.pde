@@ -26,7 +26,7 @@ public class LinearRegression {
         beta0 = (float)(ybar - beta1 * xbar);
 
         // print results
-        println("y   = " + beta1 + " * x + " + beta0);
+        // println("y   = " + beta1 + " * x + " + beta0);
 
         // analyze results
         int df = n - 2;
@@ -41,14 +41,14 @@ public class LinearRegression {
         double svar  = rss / df;
         double svar1 = svar / xxbar;
         double svar0 = svar/n + xbar*xbar*svar1;
-        println("R^2                 = " + R2);
-        println("std error of beta_1 = " + Math.sqrt(svar1));
-        println("std error of beta_0 = " + Math.sqrt(svar0));
+        // println("R^2                 = " + R2);
+        // println("std error of beta_1 = " + Math.sqrt(svar1));
+        // println("std error of beta_0 = " + Math.sqrt(svar0));
         svar0 = svar * sumx2 / (n * xxbar);
-        println("std error of beta_0 = " + Math.sqrt(svar0));
+        // println("std error of beta_0 = " + Math.sqrt(svar0));
 
-        println("SSTO = " + yybar);
-        println("SSE  = " + rss);
-        println("SSR  = " + ssr);
+        // println("SSTO = " + yybar);
+        // println("SSE  = " + rss);
+        // println("SSR  = " + ssr);
     }
 }

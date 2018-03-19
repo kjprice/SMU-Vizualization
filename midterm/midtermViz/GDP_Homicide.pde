@@ -12,17 +12,9 @@ class GDP_Homicide extends Visualization{
   
   GDP_Homicide(){}
   
-  void prerender(Table inputData) {
-    this.drawPlot(inputData);
-    this.createVizImage();
-  }
-
-  void draw(Table inputData) {
-    this.drawVizImage();
-  }
 
  
-  void drawPlot(Table inputData){
+  void draw(Table inputData){
     strokeWeight(1);
     for (TableRow row : inputData.rows()) {
          String economy = trim(row.getString("Developed"));
@@ -80,9 +72,6 @@ class GDP_Homicide extends Visualization{
     
   }
   
-  void template(float homicide,float suicide,float guns){
-    ellipse(homicide+suicide, guns, guns*10, guns*10);
-  }
   int getVizualizationNum(){
     return vizualizationNum;
   }

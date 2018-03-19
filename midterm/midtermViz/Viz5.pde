@@ -62,19 +62,6 @@ class Viz5 extends Visualization{
      text("Legend: ",width-220,40);
      textSize(15);
      text("GDP",width-160,70);
-   //fill(0,150);
-   //strokeWeight(1);
-   //ellipse(width-200,70,30,30);
-   //fill(255,0,10,150);
-   //ellipse(width-200,110,30,30);
-   //fill(0);
-   //textAlign(LEFT);
-   //textSize(20);
-   //text("Legend: ",width-220,40);
-   //textSize(15);
-   //text("Suicides",width-160,70);
-   //text("Homicides",width-160,110);
-
     //coordinates
     stroke(0);
     strokeWeight(2);

@@ -1,12 +1,12 @@
-class GDP_Homicide extends Visualization{
+class GNI_Homicide extends Visualization{
   int vizualizationNum = 3;
-  String heading = "GDP, Homicide and guns";
+  String heading = "GNI, Homicide and guns";
   float RadiusOfcirle;
   float circleX;
   float circleY;
   float homicide;
   float suicide;
-  float gdp;
+  float gni;
   String country;
   float guns;
   PImage gun=loadImage("gun.png");
@@ -16,7 +16,7 @@ class GDP_Homicide extends Visualization{
   int sizeX;
   int sizeY;
   
-  GDP_Homicide(){}
+  GNI_Homicide(){}
  
 
  
@@ -28,22 +28,22 @@ class GDP_Homicide extends Visualization{
              homicide = row.getFloat("Homicide per 100k");
              suicide = row.getFloat("Suicide per 100k");
              guns = row.getFloat("Guns per 100");
-             gdp = row.getFloat("GDP");
+             gni = row.getFloat("gni2016");
              country = row.getString("Country");
-             circleY = sq(height*0.8-gdp/180-mouseY);
+             circleY = sq(height*0.8-gni/180-mouseY);
              RadiusOfcirle = sq(guns/2);
              if(homicide*200+10<=width){
                //get points within circle
                circleX = sq(homicide*200+10-mouseX);
-               inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gdp);
+               inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gni);
                fill(243,197,10,150);
-               ellipse(homicide*200+10,height*0.8-gdp/180,guns,guns);
+               ellipse(homicide*200+10,height*0.8-gni/180,guns,guns);
              }
              else{
                fill(243,197,10,150);
-               ellipse(width-guns/2,height*0.8-gdp/180,guns,guns);
+               ellipse(width-guns/2,height*0.8-gni/180,guns,guns);
                circleX=sq(width-guns/2-mouseX);
-               inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gdp);
+               inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gni);
              }
          }
     }
@@ -62,13 +62,13 @@ class GDP_Homicide extends Visualization{
    fill(0);
     textAlign(LEFT);
     textSize(20);
-    text("GDP",25,25);
+    text("GNI",25,25);
     text("Homicide per 100k",width-250,height*0.85);
     
    //legend
    fill(243,197,10,150);
    strokeWeight(1);
-   ellipse(width-200,70,30,30);
+   ellipse(width-180,70,30,30);
    fill(0);
    textAlign(LEFT);
    textSize(20);
@@ -82,8 +82,8 @@ class GDP_Homicide extends Visualization{
     pushMatrix();
     gunMan.resize(sizeX,sizeY);
     gun.resize(int(sizeX*1.2),sizeY/2);
-    blood.resize(int(sizeX),int(sizeY/2));
-    murder.resize(int(sizeX),int(sizeY/2));
+    blood.resize(int(sizeX*1.5),int(sizeY/2*1.5));
+    murder.resize(int(sizeX*1.5),int(sizeY/2*1.5));
     translate(width*0.4,height*0.2);
     imageMode(CENTER);
     image(gun, 0, 0);
@@ -95,7 +95,7 @@ class GDP_Homicide extends Visualization{
     textSize(30);
     text("+1",-70,0);
     text("=",40,0);
-    text("1.2% increase of ", 70,-60);
+    text("1.2% increase of homicides", 60,-60);
     textSize(15);
     text("per capita",-70,40);
     text("after human development index and gross national income", 70, 70);

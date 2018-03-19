@@ -12,14 +12,14 @@ class Dashboard{
   private int offset = 150;
   private float scaleAngle=1;
   private float rotationAngle=0;
-  private float animationSpeed = .1;
+  private float animationSpeed = .08;
   Table table;
 
   public Visualization[] viz;
 
   MapGunsPerCapita v1;
   Top_10_countries_by_GDP v2;
-  GDP_Homicide v3;
+  GNI_Homicide v3;
   RegressionVisualization v4;
   Guns_HomicideANDsuicide v5;
   public int vizNum = 5;//number of visualizations
@@ -38,7 +38,7 @@ class Dashboard{
     //class instances of each visualization.
     v1 = new MapGunsPerCapita();
     v2 = new Top_10_countries_by_GDP();
-    v3 = new GDP_Homicide();
+    v3 = new GNI_Homicide();
     v4 = new RegressionVisualization();
     v5 = new Guns_HomicideANDsuicide();
     //populate array with visualizations

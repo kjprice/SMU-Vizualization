@@ -99,7 +99,7 @@ class GDP_Homicide extends Visualization{
     textSize(15);
     text("per capita",-70,40);
     text("after human development index and gross national income", 70, 70);
-    text("taken into accaunt", 70, 100);
+    text("taken into account", 70, 100);
     popMatrix();
   }
   

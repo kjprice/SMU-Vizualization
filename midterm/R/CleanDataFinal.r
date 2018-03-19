@@ -5,16 +5,25 @@ suicides = read.csv('../data/Suicide.csv',header=TRUE)
 gdp = read.csv('../data/weoreptc.aspx',header=TRUE,sep="\t")
 lat_lon = read.csv('../data/LatitudeLongitude.csv',header=TRUE)
 homicide = read.csv('../data/Homicide.csv',header=TRUE)
+hdi = read.csv('../data/hdi.csv',header=TRUE)
+gni = read.csv('../data/gni.csv',header=TRUE)
+ 
 
 #subset only needed columns
 gdp = gdp[c('Country','X2017')]
 suicides = suicides[c(1,3)]
 lat_lon = lat_lon[c(2:4)]
+hdi = hdi[c(2,28)]
 
 #change column names
 colnames(suicides) = c('Country','Suicide per 100k')
 colnames(gdp) = c('Country','GDP $ per capita')
 colnames(lat_lon) = c("Latitude", 'Longitude', 'Country')
+colnames(hdi) = c("Country","HDI2015")
+colnames(gni)=c("Country","code","gni2016")
+
+#get country code by country name
+hdi$code = countrycode(hdi$Country,"country.name", "iso3c")
 
 #get country code by country name
 guns$code = countrycode(guns$Country,"country.name", "iso3c")
@@ -48,30 +57,35 @@ lat_lon$code[lat_lon$Country=='Micronesia']='FSM'
 lat_lon$code[lat_lon$Country=='Netherlands Antilles']='NTA'
 
 
-#merge data on country
+#merge data on code
 gs = merge(guns, suicides, by='code')
 gsg = merge(gs, gdp, by='code')
 gsgh = merge(gsg, homicide, by='code')
 gsghll = merge(gsgh, lat_lon, by='code')
+gsghllh = merge(gsghll, hdi, by = 'code')
+gsghllhg = merge(gsghllh, gni, by = 'code')
 
 #delete duplicate columns
-gsghll = gsghll[,c(1:4,6,8,10:12)]
+gsghllhg = gsghllhg[,c(1:4,6,8,10:12,15,17)]
 
-colnames(gsghll)=c('Code','Rank by gun ownership', 'Country',"Guns per 100","Suicide per 100k","GDP",'Homicide per 100k',
-                   "latitude",	"longitude")
+colnames(gsghllhg)=c('Code','Rank by gun ownership', 'Country',"Guns per 100","Suicide per 100k","GDP",'Homicide per 100k',
+                   "latitude",	"longitude","HDI2015",'gni2016')
 
 
 #delete comma and change column type for gdp
-gsghll$GDP = as.numeric(gsub(",", "" ,gsghll$GDP))
+gsghllhg$GDP = as.numeric(gsub(",", "" ,gsghllhg$GDP))
 
 #add column 'developed' if GDP per capita exceeds 12k - yes, otherwise - no
-gsghll$Developed=ifelse(gsghll$GDP>=12000, 'yes','no')
+#https://blogs.worldbank.org/opendata/new-country-classifications-2016
+gsghllhg$Developed=ifelse(gsghllhg$gni2016>=12476, 'yes','no')
 
 #delete countries without gdp
-gsghll = gsghll[!is.na(gsghll$GDP),]
+gsghllhg = gsghllhg[!is.na(gsghllhg$GDP),]
+#delete countries without developed status
+gsghllhg = gsghllhg[!is.na(gsghllhg$Developed),]
 
 #trim white spaces
-gsghll$Country = gsub(" ", "" ,gsghll$Country)
+gsghllhg$Country = gsub(" ", "" ,gsghllhg$Country)
 
 
-write.csv(gsghll, '../data/newData.csv', row.names = FALSE)
+write.csv(gsghllhg, '../data/newData.csv', row.names = FALSE)

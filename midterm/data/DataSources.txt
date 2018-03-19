@@ -5,3 +5,5 @@ gdp http://www.imf.org/external/pubs/ft/weo/2017/02/weodata/weorept.aspx?pr.x=34
 homicide https://en.wikipedia.org/wiki/List_of_countries_by_intentional_homicide_rate
 suicide http://apps.who.int/gho/athena/data/GHO/SDGSUICIDE?filter=COUNTRY:*;REGION:*&x-sideaxis=COUNTRY;SEX&x-topaxis=GHO;YEAR&profile=crosstable&format=csv
         http://www.who.int/gho/mental_health/suicide_rates_crude/en/
+human development index http://hdr.undp.org/en/data#
+hdi https://data.worldbank.org/indicator/NY.GNP.PCAP.CD?end=2016&start=2012

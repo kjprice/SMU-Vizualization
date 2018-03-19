@@ -3,7 +3,7 @@ class Viz4 extends Visualization{
   String heading = "Viz4";
   Scatterplot scatterplot;
 
-Viz4(){}
+  Viz4(){}
   void setup(Table inputData) {
     scatterplot = new Scatterplot(inputData);
   }

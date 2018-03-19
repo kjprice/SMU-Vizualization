@@ -8,7 +8,14 @@ class Dashboard{
   private int lastVizualization = 0;
   private int chosenVizualization = 1;
   private int buttonClicked;
+  private boolean change=false;
+  private int offset = 150;
+  private float scaleAngle=1;
+  private float rotationAngle=0;
+  Table table;
+
   public Visualization[] viz;
+
   MapGunsPerCapita v1;
   Top_10_countries_by_GDP v2;
   GDP_Homicide v3;
@@ -17,7 +24,8 @@ class Dashboard{
   public int vizNum = 5;//number of visualizations
 
 
-  Dashboard() {
+  Dashboard(Table inputData) {
+    this.table = inputData;
     this.setup();
   }
   
@@ -40,17 +48,25 @@ class Dashboard{
     viz[4]=v5;
   }
   
-  void setupDashboardPages() {
-    // TODO
+  void draw() {
+    this.drawViz();
+    this.displayButtons();
+    this.performAnimationPageChange();
   }
   
-  void draw() {
-    this.displayButtons();
-  }
-
-
-  void drawDashboardPage() {
-    // TODO
+  void performAnimationPageChange() {
+    if (change == true){
+      rotationAngle+=0.2;
+      scaleAngle-=0.3;
+      if(rotationAngle>=1.7){
+       rotationAngle=1.7;
+       change = false;
+      }
+      if(scaleAngle<=0){
+        scaleAngle=0.0001;
+        change = false;
+       }
+    }
   }
 
   void prerender() {
@@ -76,7 +92,7 @@ class Dashboard{
         }
       }
       //drawButton(start_x);
-      start_x = start_x + offset;
+      start_x = start_x + this.offset;
     }
    for (int j=0; j<vizNum; j++){
       if (buttonClicked==viz[j].getVizualizationNum()){

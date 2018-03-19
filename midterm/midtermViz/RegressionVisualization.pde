@@ -1,12 +1,12 @@
 // scatterplot of gun ownership versus homicides (grouped by develop[ed|ing] countries)
 
-class Viz4 extends Visualization{
-  float DEVELOPED_NATION_CUTOFF = 15000;
+class RegressionVisualization extends Visualization{
+  float DEVELOPED_NATION_CUTOFF = 12476;
   int vizualizationNum = 4;
   String heading = "Viz4";
   Scatterplot scatterplot;
   
-  Viz4(){}
+  RegressionVisualization(){}
   void setup(Table inputData) {
     // TODO: somehow color scatterplot points based on GDP
     // TODO: create regression plot

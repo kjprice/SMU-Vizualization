@@ -21,7 +21,7 @@ class Dashboard{
   Top_10_countries_by_GDP v2;
   GDP_Homicide v3;
   Viz4 v4;
-  Viz5 v5;
+  Guns_HomicideANDsuicide v5;
   public int vizNum = 5;//number of visualizations
 
 
@@ -40,7 +40,7 @@ class Dashboard{
     v2 = new Top_10_countries_by_GDP();
     v3 = new GDP_Homicide();
     v4 = new Viz4();
-    v5 = new Viz5();
+    v5 = new Guns_HomicideANDsuicide();
     //populate array with visualizations
     viz[0]=v1;
     viz[1]=v2;

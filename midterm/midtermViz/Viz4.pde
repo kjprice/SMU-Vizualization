@@ -1,10 +1,11 @@
 // scatterplot of gun ownership versus homicides (grouped by develop[ed|ing] countries)
 
 class Viz4 extends Visualization{
+  float DEVELOPED_NATION_CUTOFF = 15000;
   int vizualizationNum = 4;
   String heading = "Viz4";
   Scatterplot scatterplot;
-
+  
   Viz4(){}
   void setup(Table inputData) {
     // TODO: somehow color scatterplot points based on GDP
@@ -14,14 +15,19 @@ class Viz4 extends Visualization{
     float[] y = xyz[1];
     float[] z = xyz[2];
     scatterplot = new Scatterplot(x, y, z);
-    scatterplot.groupByZGreaterThan(15000);
+    scatterplot.groupByZGreaterThan(DEVELOPED_NATION_CUTOFF);
   }
   void draw(Table inputData){
     if (this.scatterplot == null) {
       this.setup(inputData);
     }
     scatterplot.draw();
+    scatterplot.showRegressionLines();
   }
+  
+  void drawRegressionLines() {
+  }
+      
   int getVizualizationNum(){
     return vizualizationNum;
   }

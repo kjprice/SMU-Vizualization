@@ -9,17 +9,23 @@ class Scatterplot {
   Scatterplot() {
   }
   
-  Scatterplot(Table inputData) {
-    this.setup(inputData);
+  Scatterplot(float[] x, float[] y) {
+    float z[] = new float[y.length];
+    this.setup(x, y, z);
   }
   
-  void setup(Table inputData) {
+  Scatterplot(float[] x, float[] y, float[] z) {
+    this.setup(x, y, z);
+  }
+  
+  void setup(float[] xx, float[] yy, float[] zz) {
     this.yOffset = dashboard.getHeight() + 100; // some arbitrary value
-    for (TableRow row : inputData.rows()) {
-      float x = row.getFloat("Guns per 100");
-      float y = row.getFloat("Homicide per 100k");
-      this.createScatterplotPoint(x, y);
-      
+    for (int i = 0; i < xx.length; i++) {
+      float x = xx[i];
+      float y = yy[i];
+      float z = zz[i];
+
+      this.createScatterplotPoint(x, y, z);
       this.checkRangeX(x);
       this.checkRangeY(y);
     }
@@ -31,10 +37,20 @@ class Scatterplot {
     }
   }
   
-  void createScatterplotPoint(float x, float y) {
-    scatterplotPoints.add(new ScatterplotPoint(x, y));
+  void createScatterplotPoint(float x, float y, float z) {
+    scatterplotPoints.add(new ScatterplotPoint(x, y, z));
   }
   
+  void groupByZGreaterThan(float zSplit) {
+    for (ScatterplotPoint point : this.scatterplotPoints) {
+      if (point.z > zSplit) {
+        point.setGroup("Large");
+      } else {
+        point.setGroup("Small");
+      }
+    }
+  }
+
   void checkRangeX(float x) {
     if (x > this.maxX) {
       this.maxX = x;
@@ -43,7 +59,7 @@ class Scatterplot {
       this.minX = x;
     }
   }
-
+  
   void checkRangeY(float y) {
     if (y > this.maxY) {
       this.maxY = y;
@@ -55,9 +71,12 @@ class Scatterplot {
 }
 
 class ScatterplotPoint {
-  final int POINT_RADIUS = 4;
+  final int POINT_RADIUS = 10;
+  final float OPACITY = .4;
   float x;
   float y;
+  float z;
+  String groupName = "";
   
   ScatterplotPoint() {
   }
@@ -67,13 +86,36 @@ class ScatterplotPoint {
     this.y = y;
   }
   
+  ScatterplotPoint(float x, float y, float z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+  
+  void drawColor() {
+    float opacity = OPACITY * 255;
+    switch (this.groupName) {
+      case "Large":
+        fill(255, 100, 100, opacity);
+        break;
+      case "Small":
+      default:
+        fill(100, 255, 100, opacity);
+    }
+    noStroke();
+  }
+  
   void draw(float minX, float minY, float maxX, float maxY, int yOffset) {
     // todo: use dynamic variables instead
     float xRatio = width / maxX;
     float yRatio = height / maxY;
     float x = this.x * xRatio;
     float y = (height - yOffset) - (this.y * yRatio); // flip y the right way
-    fill(255);
+    this.drawColor();
     ellipse(x, y, POINT_RADIUS, POINT_RADIUS);
+  }
+  
+  void setGroup(String groupName) {
+    this.groupName = groupName;
   }
 }

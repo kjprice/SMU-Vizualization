@@ -1,11 +1,20 @@
+// scatterplot of gun ownership versus homicides (grouped by develop[ed|ing] countries)
+
 class Viz4 extends Visualization{
   int vizualizationNum = 4;
   String heading = "Viz4";
   Scatterplot scatterplot;
 
-Viz4(){}
+  Viz4(){}
   void setup(Table inputData) {
-    scatterplot = new Scatterplot(inputData);
+    // TODO: somehow color scatterplot points based on GDP
+    // TODO: create regression plot
+    float[][] xyz = calculateValues(inputData);
+    float[] x = xyz[0];
+    float[] y = xyz[1];
+    float[] z = xyz[2];
+    scatterplot = new Scatterplot(x, y, z);
+    scatterplot.groupByZGreaterThan(15000);
   }
   void draw(Table inputData){
     if (this.scatterplot == null) {
@@ -18,5 +27,20 @@ Viz4(){}
   }
   String getHeading(){
     return heading;
+  }
+  
+  private float[][] calculateValues(Table inputData) {
+    float [] x = new float [inputData.getRowCount()];
+    float [] y = new float [inputData.getRowCount()];
+    float [] z = new float [inputData.getRowCount()];
+    int i = 0;
+    for (TableRow row : inputData.rows()) {
+      x[i] = row.getFloat("Guns per 100");
+      y[i] = row.getFloat("Homicide per 100k");
+      z[i] = row.getFloat("GDP");
+      i++;
+    }
+    
+    return new float[][] {x, y, z};
   }
 }

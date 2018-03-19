@@ -2,7 +2,15 @@ class Top_10_countries_by_GDP extends Visualization{
   int vizualizationNum = 2;
   String heading = "Top 10 countries by GDP";
   Top_10_countries_by_GDP(){}
-  void draw(Table inputData){
+  void prerender(Table inputData) {
+    this.drawMap(inputData);
+    this.createVizImage();
+  }
+
+  void draw(Table inputData) {
+    this.drawVizImage();
+  }
+  void drawMap(Table inputData){
     
         //new integer value of GDP column
         inputData.addColumn("iGDP", Table.INT);
@@ -36,11 +44,9 @@ class Top_10_countries_by_GDP extends Visualization{
         
         // loop thru sorted table
         for (TableRow row : inputData.rows()) {
-          //println(i);
           if(i < top) {
             String country = row.getString("Country");
             int GDP = row.getInt("iGDP");
-            //println(GDP);
             
             // scaled GDP
             GDP_bar_size[i] = GDP / 300; // resize as required

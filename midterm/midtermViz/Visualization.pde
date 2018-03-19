@@ -5,8 +5,9 @@ abstract class Visualization{
   int hh;
   int startX;
   int startY;
+
   Visualization(){
-    ww = 1000;
+    ww = 1100;
     hh = 700;
     startX = 0;
     startY = 0;

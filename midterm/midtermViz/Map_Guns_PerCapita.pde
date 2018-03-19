@@ -1,4 +1,7 @@
 public class MapGunsPerCapita extends Visualization {
+  private int clat = 0;
+  private int clon = 0;
+  private int zoom = 1;
   int vizualizationNum = 1;
   PImage mapimg;
   PImage vizImage; // the rendered/cached version of this visual
@@ -41,6 +44,7 @@ public class MapGunsPerCapita extends Visualization {
   }
 
   void drawMap(Table inputData) {
+    pushMatrix();
     mapimg = loadImage("earth.jpg");
     mapimg.resize(ww,hh);
     translate(ww / 2, hh / 2);
@@ -100,6 +104,7 @@ public class MapGunsPerCapita extends Visualization {
 
     }
     showLegends();
+    popMatrix();
   }
 
   void showLegends(){

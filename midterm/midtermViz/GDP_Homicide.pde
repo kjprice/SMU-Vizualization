@@ -12,8 +12,17 @@ class GDP_Homicide extends Visualization{
   
   GDP_Homicide(){}
   
+  void prerender(Table inputData) {
+    this.drawPlot(inputData);
+    this.createVizImage();
+  }
+
+  void draw(Table inputData) {
+    this.drawVizImage();
+  }
+
  
-  void draw(Table inputData){
+  void drawPlot(Table inputData){
     strokeWeight(1);
     for (TableRow row : inputData.rows()) {
          String economy = trim(row.getString("Developed"));

@@ -41,6 +41,7 @@ public class MapGunsPerCapita extends Visualization {
   }
 
   void drawMap(Table inputData) {
+    pushMatrix();
     mapimg = loadImage("earth.jpg");
     mapimg.resize(ww,hh);
     translate(ww / 2, hh / 2);
@@ -100,6 +101,7 @@ public class MapGunsPerCapita extends Visualization {
 
     }
     showLegends();
+    popMatrix();
   }
 
   void showLegends(){

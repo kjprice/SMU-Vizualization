@@ -28,6 +28,7 @@ class Scatterplot extends GraphObject {
     this.y = yy;
     this.z = zz;
     this.yOffset = dashboard.getHeight() + 100; // some arbitrary value
+    this.xMargin = this.X_MARGIN_LEFT;
     for (int i = 0; i < xx.length; i++) {
       float x = xx[i];
       float y = yy[i];
@@ -39,13 +40,12 @@ class Scatterplot extends GraphObject {
     }
     
     this.setPointRatio();
-    this.xMargin = this.X_MARGIN_LEFT;
   }
   
   // the plot is going to have a fake width/height based on the actual width/height of window
   void setPointRatio() {
-    this.xRatio = width / maxX;
-    this.yRatio = height / maxY;
+    this.xRatio = (width - this.xMargin) / maxX;
+    this.yRatio = (height - this.yOffset) / maxY;
     for (ScatterplotPoint point : scatterplotPoints) {
       point.setPointRatio(this.xRatio, this.yRatio);
     }
@@ -151,7 +151,6 @@ class ScatterplotPoint extends GraphObject {
   float x;
   float y;
   float z;
-  float xMargin;
   String groupName = "";
   
   ScatterplotPoint() {
@@ -199,7 +198,7 @@ class ScatterplotPoint extends GraphObject {
 
 class GraphObject {
   int yOffset; // space from bottom
-  int xMargin; // space from left
+  float xMargin; // space from left
   float xRatio; // ratio for what a number actually represents against the window
   float yRatio; // ratio for what a number actually represents against the window
   GraphObject() {

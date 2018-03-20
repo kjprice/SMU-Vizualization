@@ -9,8 +9,8 @@ abstract class Visualization{
   int textY=350;
 
   Visualization(){
-    ww = 1100;
-    hh = 700;
+    ww = 1000;//1100
+    hh = 650;//700
     startX = 0;
     startY = 0;
   }

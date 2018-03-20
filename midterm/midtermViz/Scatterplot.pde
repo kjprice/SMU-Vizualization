@@ -46,8 +46,10 @@ class Scatterplot extends GraphObject {
   // the plot is going to have a fake width/height based on the actual width/height of window
   void setPointRatio() {
     this.xRatio = (width - this.xMargin) / maxX;
-    this.yRatio = (height - this.yOffset) / maxY;
+    this.yRatio = (height - this.yOffset) / (maxY - minY);
+    this.yIncreaseToObtainZero = Math.abs(minY);
     for (ScatterplotPoint point : scatterplotPoints) {
+      point.yIncreaseToObtainZero = this.yIncreaseToObtainZero;
       point.setPointRatio(this.xRatio, this.yRatio);
     }
   }
@@ -202,6 +204,7 @@ class ScatterplotPoint extends GraphObject {
 }
 
 class GraphObject {
+  float yIncreaseToObtainZero = 0;
   int yOffset; // space from bottom
   float xMargin; // space from left
   float xRatio; // ratio for what a number actually represents against the window
@@ -222,7 +225,7 @@ class GraphObject {
   }
 
   float getWindowPointY(float virtualY) {
-    float y = (virtualY * this.yRatio);
+    float y = ((virtualY + this.yIncreaseToObtainZero) * this.yRatio);
     return (height - yOffset) - y; // flip y the right way
   }
   

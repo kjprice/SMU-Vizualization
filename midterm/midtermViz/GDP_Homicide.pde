@@ -76,6 +76,7 @@ class GNI_Homicide extends Visualization{
    textSize(15);
    text("Guns per 100 people",width-160,70);
    
+   
    //picture
     sizeX=50;
     sizeY=100;

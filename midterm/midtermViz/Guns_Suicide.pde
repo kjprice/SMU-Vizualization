@@ -1,4 +1,4 @@
-class Guns_HomicideANDsuicide extends Visualization{
+class Guns_Suicide extends Visualization{
   int vizualizationNum = 5;
   String heading = "Guns and suicide";
   float RadiusOfcirle;
@@ -9,8 +9,12 @@ class Guns_HomicideANDsuicide extends Visualization{
   float gdp;
   String country;
   float guns;
+  float sizeX;
+  float sizeY;
+  PImage gun=loadImage("gun.png");
+  PImage suicideIm=loadImage("suicide.jpg");
   
-  Guns_HomicideANDsuicide(){}
+  Guns_Suicide(){}
   
   void draw(Table inputData){
     strokeWeight(1);
@@ -22,7 +26,7 @@ class Guns_HomicideANDsuicide extends Visualization{
              guns = row.getFloat("Guns per 100");
              gdp = row.getFloat("GDP");
              country = row.getString("Country");
-             circleY = sq(height*0.8-guns*6-mouseY);
+             circleY = sq(height*0.8-guns*5.5-mouseY);
            
              
               RadiusOfcirle = sq(gdp/4000);
@@ -31,14 +35,14 @@ class Guns_HomicideANDsuicide extends Visualization{
                circleX = sq(suicide*25+10-mouseX);
                inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gdp);
                fill(255,0,10,150);
-               ellipse(suicide*25+10,height*0.8-guns*6,gdp/2000,gdp/2000);
+               ellipse(suicide*25+10,height*0.8-guns*5.5,gdp/2000,gdp/2000);
 
              }
              else{
                circleX=sq(width-suicide-mouseX);
                inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gdp);
                fill(255,0,10,150);
-               ellipse(height*0.8-guns*6,width-gdp/2000,gdp/2000,gdp/2000);
+               ellipse(height*0.8-guns*5.5,width-gdp/2000,gdp/2000,gdp/2000);
              }
          }
     }
@@ -48,9 +52,11 @@ class Guns_HomicideANDsuicide extends Visualization{
      ellipse(width-200,70,30,30);
      textAlign(LEFT);
      textSize(20);
+     fill(0);
      text("Legend: ",width-220,40);
      textSize(15);
      text("GDP",width-160,70);
+     text("Suicide doesn't appear to increase with increase of gun owenership", 200, 50);
     //coordinates
     stroke(0);
     strokeWeight(2);
@@ -68,7 +74,26 @@ class Guns_HomicideANDsuicide extends Visualization{
     textSize(20);
     text("Guns per 100",25,25);
     text("Suicide per 100k",width-250,height*0.85);
- 
+    //picture
+    sizeX=50;
+    sizeY=100;
+    pushMatrix();
+    gun.resize(int(sizeX*1.2),int(sizeY/2));
+    suicideIm.resize(int(sizeX*1.5),int(sizeY/2*1.5));
+    translate(width*0.67,height*0.254);
+    imageMode(CENTER);
+    image(gun, 0, 0);
+    image(suicideIm, 150, 0);
+    fill(0);
+    textAlign(LEFT);
+    textSize(30);
+    text("+1",-70,0);
+    text("=",40,0);
+    textSize(15);
+    text("increase of suicides", 60,-60);
+    text("per capita",-70,40);
+    line(40,5,60,-20);
+    popMatrix();
    
   }
   int getVizualizationNum(){

@@ -21,7 +21,7 @@ class Dashboard{
   Top_10_countries_by_GDP v2;
   GNI_Homicide v3;
   RegressionVisualization v4;
-  Guns_HomicideANDsuicide v5;
+  Guns_Suicide v5;
   public int vizNum = 5;//number of visualizations
 
 
@@ -40,7 +40,7 @@ class Dashboard{
     v2 = new Top_10_countries_by_GDP();
     v3 = new GNI_Homicide();
     v4 = new RegressionVisualization();
-    v5 = new Guns_HomicideANDsuicide();
+    v5 = new Guns_Suicide();
     //populate array with visualizations
     viz[0]=v1;
     viz[1]=v2;

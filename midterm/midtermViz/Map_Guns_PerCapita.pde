@@ -148,7 +148,7 @@ public class MapGunsPerCapita extends Visualization {
     float cx = mercX(clon);
     float cy = mercY(clat);
     float x = mercX(heading_lon) - cx;
-    float y = mercY(heading_lat) - cy;
+    float y = mercY(heading_lat) - cy-20;
     fill(2, 12, 255, 200);
     textSize(27);
     text(heading,x,y);

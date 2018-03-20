@@ -28,7 +28,7 @@ class Scatterplot extends GraphObject {
     this.x = xx;
     this.y = yy;
     this.z = zz;
-    this.yOffset = dashboard.getHeight() + 100; // some arbitrary value
+    this.yOffset = dashboard.getHeight() + 10; // some arbitrary value
     this.xMargin = this.X_MARGIN_LEFT;
     for (int i = 0; i < xx.length; i++) {
       float x = xx[i];
@@ -112,6 +112,7 @@ class Scatterplot extends GraphObject {
   }
   
   void draw() {
+    this.drawPlotBoundaries();
     for (ScatterplotPoint point : scatterplotPoints) {
       point.draw();
     }
@@ -223,5 +224,20 @@ class GraphObject {
   float getWindowPointY(float virtualY) {
     float y = (virtualY * this.yRatio);
     return (height - yOffset) - y; // flip y the right way
+  }
+  
+  void drawPlotBoundaries() {
+    int arrowWidth = 10;
+    int arrowHeight = 20;
+    stroke(0);
+    strokeWeight(2);
+    line(xMargin,height - yOffset,xMargin,0);
+    line(xMargin,height - yOffset,width,height - yOffset);
+    //arrows x
+    line(width,height - yOffset, (width-arrowHeight), (height + arrowWidth - yOffset));
+    line(width,height - yOffset, (width-arrowHeight), (height - arrowWidth - yOffset));
+    //arrows y
+    line(xMargin, 0, (xMargin + arrowWidth/2), height*0.03);
+    line(xMargin, 0, (xMargin - arrowWidth/2), height*0.03);
   }
 }

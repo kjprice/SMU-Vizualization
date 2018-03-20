@@ -197,6 +197,7 @@ class ScatterplotPoint extends GraphObject {
     float x = this.getWindowPointX(this.x);
     float y = this.getWindowPointY(this.y);
     this.drawColor();
+    stroke(0, 0, 0, 100);
     ellipse(x, y, POINT_RADIUS, POINT_RADIUS);
   }
   
@@ -212,9 +213,9 @@ class GraphObject {
   float xMargin; // space from left
   float xRatio; // ratio for what a number actually represents against the window
   float yRatio; // ratio for what a number actually represents against the window
-  final float OPACITY = .4 * 255;
-  color group1Color = color(255, 100, 100, OPACITY);
-  color group2Color = color(100, 255, 100, OPACITY);
+  final float OPACITY = .5 * 255;
+  color group1Color = color(255,0,10,OPACITY);
+  color group2Color = color(243,197,10, OPACITY);
   GraphObject() {
   }
   

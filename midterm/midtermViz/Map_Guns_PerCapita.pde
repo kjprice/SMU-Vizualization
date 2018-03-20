@@ -6,6 +6,16 @@ public class MapGunsPerCapita extends Visualization {
   PImage mapimg=loadImage("earth.jpg");
   PImage vizImage; // the rendered/cached version of this visual
   String heading = "Guns-homicide per capita of developed countries ";
+  float lat;
+  float lon;
+  float GunsPerCapita;
+  float homicide;
+  float suicide;
+  float gdp;
+  String country;
+  float circleX;
+  float circleY;
+  float RadiusOfcirle;
   
   // co-ordniates of white area of the map. This is where i am placing heading
   float heading_lat = -75;
@@ -39,14 +49,6 @@ public class MapGunsPerCapita extends Visualization {
     return a * c;
   }
 
-  //void prerender(Table inputData) {
-  //  this.drawMap(inputData);
-  //  this.createVizImage();
-  //}
-
-  //void draw(Table inputData){
-  //  this.drawVizImage();
-  //}
 
   void draw(Table inputData) {
     pushMatrix();
@@ -62,19 +64,19 @@ public class MapGunsPerCapita extends Visualization {
     setHeading();
     
     for (TableRow row : inputData.rows()) {
-      float lat = row.getFloat("latitude");
-      float lon = row.getFloat("longitude");
-      float GunsPerCapita = row.getFloat("Guns per 100");
-      String country = row.getString("Country");
-      float homicide = row.getFloat("Homicide per 100k");
+      lat = row.getFloat("latitude");
+      lon = row.getFloat("longitude");
+      GunsPerCapita = row.getFloat("Guns per 100");
+      country = row.getString("Country");
+      homicide = row.getFloat("Homicide per 100k");
+      gdp = row.getFloat("GDP");
       int stroke_W = round(homicide);
       //filter out non-developed countries 
       String economy = trim(row.getString("Developed"));
             
       // display data of developed country only
       if (economy.equals("yes") == true) {
-          //stroke_W = 5;
-      //}
+
           x = mercX(lon) - cx;
           y = mercY(lat) - cy;
           
@@ -98,13 +100,15 @@ public class MapGunsPerCapita extends Visualization {
           fill(55, 123, 55, 200);
           ellipse(x, y, d, d);
           
-          // show country name
-          fill(255, 10, 10, 200);
-          textAlign(LEFT);
-          textSize(13);
-          text(country,x,y);
-          
+          circleX = sq(x+ww / 2 - mouseX);
+          circleY = sq(y+hh / 2 - mouseY);
+          RadiusOfcirle = sq(d/2);
+          pushMatrix();
+          translate(-ww / 2, -hh / 2);
+          inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, GunsPerCapita,country,gdp);
+          popMatrix();
       }// end if economy = yes
+    
     }
     showLegends();
     popMatrix();

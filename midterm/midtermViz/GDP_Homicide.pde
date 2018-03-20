@@ -35,9 +35,9 @@ class GNI_Homicide extends Visualization{
              if(homicide*200+10<=width){
                //get points within circle
                circleX = sq(homicide*200+10-mouseX);
-               inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gni);
                fill(243,197,10,150);
                ellipse(homicide*200+10,height*0.8-gni/180,guns,guns);
+               inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gni);
              }
              else{
                fill(243,197,10,150);
@@ -84,7 +84,7 @@ class GNI_Homicide extends Visualization{
     gun.resize(int(sizeX*1.2),sizeY/2);
     blood.resize(int(sizeX*1.5),int(sizeY/2*1.5));
     murder.resize(int(sizeX*1.5),int(sizeY/2*1.5));
-    translate(width*0.4,height*0.2);
+    translate(width*0.35,height*0.254);
     imageMode(CENTER);
     image(gun, 0, 0);
     image(gunMan, 100, 0);

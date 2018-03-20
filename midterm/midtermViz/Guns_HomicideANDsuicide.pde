@@ -1,6 +1,6 @@
 class Guns_HomicideANDsuicide extends Visualization{
   int vizualizationNum = 5;
-  String heading = "Guns, GDP and homicide+suicide";
+  String heading = "Guns and suicide";
   float RadiusOfcirle;
   float circleX;
   float circleY;
@@ -26,19 +26,19 @@ class Guns_HomicideANDsuicide extends Visualization{
            
              
               RadiusOfcirle = sq(gdp/4000);
-             if((homicide+suicide)*25+10<=width){
+             if(suicide*25+10<=width){
                //get points within circle
-               circleX = sq((homicide+suicide)*25+10-mouseX);
+               circleX = sq(suicide*25+10-mouseX);
                inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gdp);
                fill(255,0,10,150);
-               ellipse((homicide+suicide)*25+10,height*0.8-guns*6,gdp/2000,gdp/2000);
+               ellipse(suicide*25+10,height*0.8-guns*6,gdp/2000,gdp/2000);
 
              }
              else{
                circleX=sq(width-suicide-mouseX);
                inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gdp);
                fill(255,0,10,150);
-               ellipse(width-gdp/2000,height*0.8-guns*6,gdp/2000,gdp/2000);
+               ellipse(height*0.8-guns*6,width-gdp/2000,gdp/2000,gdp/2000);
              }
          }
     }
@@ -67,8 +67,9 @@ class Guns_HomicideANDsuicide extends Visualization{
     textAlign(LEFT);
     textSize(20);
     text("Guns per 100",25,25);
-    text("Homicide and Suicide per 100k combined",width-450,height*0.85);
-    
+    text("Suicide per 100k",width-250,height*0.85);
+ 
+   
   }
   int getVizualizationNum(){
     return vizualizationNum;

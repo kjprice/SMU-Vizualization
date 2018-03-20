@@ -42,7 +42,7 @@ class RegressionVisualization extends Visualization{
     int i = 0;
     for (TableRow row : inputData.rows()) {
       x[i] = row.getFloat("Guns per 100");
-      y[i] = row.getFloat("Homicide per 100k");
+      y[i] = log(row.getFloat("Homicide per 100k"));
       z[i] = row.getFloat("gni2016");
       i++;
     }

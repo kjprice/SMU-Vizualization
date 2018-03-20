@@ -45,10 +45,12 @@ class Scatterplot extends GraphObject {
   
   // the plot is going to have a fake width/height based on the actual width/height of window
   void setPointRatio() {
-    this.xRatio = (width - this.xMargin) / maxX;
+    this.xRatio = (width - this.xMargin) / (maxX - minX);
     this.yRatio = (height - this.yOffset) / (maxY - minY);
+    this.xIncreaseToObtainZero = Math.abs(minX);
     this.yIncreaseToObtainZero = Math.abs(minY);
     for (ScatterplotPoint point : scatterplotPoints) {
+      point.xIncreaseToObtainZero = this.xIncreaseToObtainZero;
       point.yIncreaseToObtainZero = this.yIncreaseToObtainZero;
       point.setPointRatio(this.xRatio, this.yRatio);
     }
@@ -88,7 +90,7 @@ class Scatterplot extends GraphObject {
     beginShape();
 
     // show yIntercept
-    float x1 = this.getWindowPointX(0);
+    float x1 = this.getWindowPointX(this.minX);
     float y1 = this.getWindowPointY((float)yIntercept);
     vertex(x1, (float)y1);
 
@@ -195,6 +197,7 @@ class ScatterplotPoint extends GraphObject {
     float x = this.getWindowPointX(this.x);
     float y = this.getWindowPointY(this.y);
     this.drawColor();
+    stroke(0, 0, 0, 100);
     ellipse(x, y, POINT_RADIUS, POINT_RADIUS);
   }
   
@@ -205,13 +208,14 @@ class ScatterplotPoint extends GraphObject {
 
 class GraphObject {
   float yIncreaseToObtainZero = 0;
+  float xIncreaseToObtainZero = 0;
   int yOffset; // space from bottom
   float xMargin; // space from left
   float xRatio; // ratio for what a number actually represents against the window
   float yRatio; // ratio for what a number actually represents against the window
-  final float OPACITY = .4 * 255;
-  color group1Color = color(255, 100, 100, OPACITY);
-  color group2Color = color(100, 255, 100, OPACITY);
+  final float OPACITY = .5 * 255;
+  color group1Color = color(255,0,10,OPACITY);
+  color group2Color = color(243,197,10, OPACITY);
   GraphObject() {
   }
   
@@ -221,7 +225,7 @@ class GraphObject {
   }
   
   float getWindowPointX(float virtualX) {
-    return this.xMargin + virtualX * this.xRatio;
+    return this.xMargin + (virtualX + this.xIncreaseToObtainZero) * this.xRatio;
   }
 
   float getWindowPointY(float virtualY) {

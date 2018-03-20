@@ -3,7 +3,7 @@
 class RegressionVisualization extends Visualization{
   float DEVELOPED_NATION_CUTOFF = 12476;
   int vizualizationNum = 4;
-  String heading = "Linear Regression";
+  String heading = "Log(Homicides) * Guns per 100";
   Scatterplot scatterplot;
   
   RegressionVisualization(){}

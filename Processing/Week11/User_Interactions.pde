@@ -1,0 +1,4 @@
+
+void mouseClicked() {
+  dashboard.checkButtonsClicked();
+}

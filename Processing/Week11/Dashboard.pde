@@ -5,9 +5,8 @@ class Dashboard{
   private int button_w = 132;//80
   private int button_h = 100;//50
   private String heading;
-  private int lastVizualization = 0;
-  private int chosenVizualization = 1;
-  private int buttonClicked;
+  private int lastVizualization = 1;
+  private int chosenVizualization = 0;
   private boolean change=false;
   private int offset = 150;
   private float scaleAngle=1;
@@ -16,13 +15,6 @@ class Dashboard{
   Table table;
 
   public Visualization[] viz;
-
-  MapGunsPerCapita v1;
-  Top_10_countries_by_GDP v2;
-  GNI_Homicide v3;
-  RegressionVisualization v4;
-  Guns_Suicide v5;
-  public int vizNum = 5;//number of visualizations
 
 
   Dashboard(Table inputData) {
@@ -33,25 +25,20 @@ class Dashboard{
   void setup() {
     button_start_x = 20;
     button_start_y = 720;
-    //number of created visualizations
-    viz = new Visualization[vizNum];
-    //class instances of each visualization.
-    v1 = new MapGunsPerCapita();
-    v2 = new Top_10_countries_by_GDP();
-    v3 = new GNI_Homicide();
-    v4 = new RegressionVisualization();
-    v5 = new Guns_Suicide();
-    //populate array with visualizations
-    viz[0]=v1;
-    viz[1]=v2;
-    viz[2]=v3;
-    viz[3]=v4;
-    viz[4]=v5;
+
+    viz = new Visualization[] {
+      new MapGunsPerCapita(),
+      new Top_10_countries_by_GDP(),
+      new GNI_Homicide(),
+      new RegressionVisualization(),
+      new Guns_Suicide()
+    };
   }
   
   void draw() {
     this.drawViz();
-    this.displayButtons();
+    this.drawButtons();
+    this.drawHeader();
     this.performAnimationPageChange();
   }
   
@@ -71,90 +58,85 @@ class Dashboard{
   }
 
   void prerender() {
-    for (int j=0; j < vizNum; j++){
+    for (int j=0; j < this.viz.length; j++){
       viz[j].prerender(table);
       background(180);
     }
   }
+  
+  void drawButton(int buttonNumber) {
+    int x = button_start_x + (this.offset * buttonNumber);
+    int y = button_start_y;
+
+    pushMatrix();
+    translate(x, y);
+    scale(0.12, 0.12);
+    viz[buttonNumber].draw(table);
+    popMatrix();
+  }
+  
+  void drawHeader() {
+    heading=viz[chosenVizualization].getHeading();
+    fill(230,70,30);
+    textAlign(LEFT);
+    textSize(20);
+    text(heading, button_start_x + (this.offset * NUMBER_OF_BUTTONS), button_start_y + 30);
+  }
     
-  void displayButtons(){
+  void drawButtons(){
     fill(25);
     noStroke();
-    int start_x = button_start_x;
-    int start_y = button_start_y;
     for (int i = 0; i < NUMBER_OF_BUTTONS; i++) {
-      for (int j=0; j<vizNum; j++){
-        if (viz[j].getVizualizationNum()==i+1){
-          pushMatrix();
-          translate(start_x, start_y);
-          scale(0.12,0.12);
-          viz[j].draw(table);
-          popMatrix();
-        }
-      }
-      //drawButton(start_x);
-      start_x = start_x + this.offset;
+      this.drawButton(i);
     }
-   for (int j=0; j<vizNum; j++){
-      if (buttonClicked==viz[j].getVizualizationNum()){
-        heading=viz[j].getHeading();
-        fill(230,70,30);
-        textAlign(LEFT);
-        textSize(20);
-        text(heading,start_x,start_y+30);
-      }
-    }
-
-
   }
   
   public int getHeight() {
     return this.button_h;
   }
   
+  void setNewVisualization(int vizNumber) {
+    lastVizualization = chosenVizualization;
+    chosenVizualization = vizNumber;
+    scaleAngle = 1;
+    rotationAngle = 0;
+    change = true;
+  }
+  
   void checkButtonsClicked() {
-    int start_x = button_start_x;
-    for(int i = 1; i <= NUMBER_OF_BUTTONS; i++) {
+    for(int i = 0; i <= this.viz.length; i++) {
+      int x = button_start_x + (offset * i);
       if (
-          mouseX >= start_x && 
-          mouseX <= start_x+button_w && 
+          mouseX >= x && 
+          mouseX <= x + button_w && 
           mouseY >= button_start_y && 
-          mouseY <= button_start_y+button_h
+          mouseY <= button_start_y + button_h
         ) {
-          lastVizualization = chosenVizualization;
-          chosenVizualization=i;
-          buttonClicked = i;
-          //heading = i + "";
-          //this variables for listing visualizations
-          scaleAngle=1;
-          rotationAngle=0;
-    }
-        start_x += offset;
+          if (i == chosenVizualization) {
+            // do not restart animation if we are on the same vizualization
+            return;
+          }
+          this.setNewVisualization(i);
+      }
     }
   }
   
   void drawViz(){
-    if (lastVizualization==0){
-      viz[0].draw(table);
+    Visualization thisViz = viz[chosenVizualization];
+    thisViz.draw(table);
+    if (change) {
+      drawAnimatedVizualization();
     }
-    for (int j=0; j<vizNum; j++){
-      if(lastVizualization!=0){
-        if(viz[j].getVizualizationNum() == lastVizualization){
-          for (int k=0; k<vizNum; k++){
-            if(viz[k].getVizualizationNum() == chosenVizualization){
-              viz[k].draw(table);
-            }
-          }
-          change = true;
-          //list flipping of last visualization
-          pushMatrix();
-          translate(0,0);
-          scale(scaleAngle,1);
-          rotate(rotationAngle);
-          viz[j].draw(table);
-          popMatrix();
-        }
-      }
-    }     
+  }
+  
+  void drawAnimatedVizualization() {
+    Visualization lastViz = viz[lastVizualization];
+    //list flipping of last visualization
+    pushMatrix();
+    translate(0,0);
+    scale(scaleAngle,1);
+    rotate(rotationAngle);
+    lastViz.draw(table);
+    popMatrix();
   }
 }

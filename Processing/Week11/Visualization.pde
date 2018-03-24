@@ -30,7 +30,7 @@ abstract class Visualization{
               textAlign(LEFT);
               textSize(12);
               text(country,textX,textY);
-              text("Homicide per 100k "+homicide,textX,textY+offset);
+              text("Homicide per 100k "+homicide,textX,textY+offset*2);
               text("Suicide per 100k "+suicide,textX,textY+offset*3);
               text("Guns per 100 people "+guns,textX,textY+offset*4);
               text("GDP per capita "+gdp,textX,textY+offset*5);
@@ -53,7 +53,7 @@ abstract class Visualization{
               textAlign(LEFT);
               textSize(12);
               text(country,textX,textY);
-              text("Homicide per 100k "+homicide,textX,textY+offset);
+              text("Homicide per 100k "+homicide,textX,textY+offset*2);
               text("Suicide per 100k "+suicide,textX,textY+offset*3);
               text("Guns per 100 people "+guns,textX,textY+offset*4);
               text("GDP per capita "+gdp,textX,textY+offset*5);

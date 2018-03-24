@@ -70,6 +70,7 @@ public class MapGunsPerCapita extends Visualization {
       country = row.getString("Country");
       homicide = row.getFloat("Homicide per 100k");
       gdp = row.getFloat("GDP");
+      suicide = row.getFloat("Suicide per 100k");
       int stroke_W = round(homicide);
       //filter out non-developed countries 
       String economy = trim(row.getString("Developed"));

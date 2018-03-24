@@ -106,7 +106,7 @@ public class MapGunsPerCapita extends Visualization {
           RadiusOfcirle = sq(d/2);
           pushMatrix();
           translate(-ww / 2, -hh / 2);
-          inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, GunsPerCapita,country,gdp);
+          this.drawInfoBox(circleX, circleY, RadiusOfcirle, homicide, suicide, GunsPerCapita,country,gdp);
           popMatrix();
       }// end if economy = yes
     

@@ -33,14 +33,14 @@ class Guns_Suicide extends Visualization{
              if(suicide*25+10<=width){
                //get points within circle
                circleX = sq(suicide*25+10-mouseX);
-               inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gdp);
+               this.drawInfoBox(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gdp);
                fill(255,0,10,150);
                ellipse(suicide*25+10,height*0.8-guns*5.5,gdp/2000,gdp/2000);
 
              }
              else{
                circleX=sq(width-suicide-mouseX);
-               inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gdp);
+               this.drawInfoBox(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gdp);
                fill(255,0,10,150);
                ellipse(height*0.8-guns*5.5,width-gdp/2000,gdp/2000,gdp/2000);
              }

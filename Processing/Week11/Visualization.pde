@@ -17,61 +17,26 @@ abstract class Visualization{
   abstract void draw(Table inputData);
   abstract int getVizualizationNum();
   abstract String getHeading();
-  void inCircle(float circleX, float circleY, float RadiusOfcirle, float homicide, float suicide, float guns, String country, float gdp){
+
+protected void drawInfoBox(float circleX, float circleY, float RadiusOfcirle, float homicide, float suicide, float guns, String country, float gdp){
     int offset=20;
     if(circleX+circleY<=RadiusOfcirle){
-           //text window
-         fill(255);
-         strokeWeight(1);
-         rect(textX-10,textY-20,180,150);
-         if(homicide*200+10<=width-200){
-           if(height*0.8-gdp/180>25){
-              fill(128,0,64);
-              textAlign(LEFT);
-              textSize(12);
-              text(country,textX,textY);
-              text("Homicide per 100k "+homicide,textX,textY+offset*2);
-              text("Suicide per 100k "+suicide,textX,textY+offset*3);
-              text("Guns per 100 people "+guns,textX,textY+offset*4);
-              text("GDP per capita "+gdp,textX,textY+offset*5);
-           }
-           else{
-              fill(128,0,64);
-              textAlign(LEFT);
-              textSize(12);
-              text(country,textX,textY,offset);
-              text("Homicide per 100k "+homicide,textX,textY+offset*2);
-              text("Suicide per 100k "+suicide,textX,textY+offset*3);
-              text("Guns per 100 people "+guns,textX,textY+offset*4);
-              text("GDP per capita "+gdp,textX,textY+offset*5);
-             
-           }
-         }
-         else{
-           if(height*0.8-gdp/180>25){
-              fill(128,0,64);
-              textAlign(LEFT);
-              textSize(12);
-              text(country,textX,textY);
-              text("Homicide per 100k "+homicide,textX,textY+offset*2);
-              text("Suicide per 100k "+suicide,textX,textY+offset*3);
-              text("Guns per 100 people "+guns,textX,textY+offset*4);
-              text("GDP per capita "+gdp,textX,textY+offset*5);
-           }
-           else{
-              fill(128,0,64);
-              textAlign(LEFT);
-              textSize(12);
-              text(country,textX,textY+offset);
-              text("Homicide per 100k "+homicide,textX,textY+offset*2);
-              text("Suicide per 100k "+suicide,textX,textY+offset*3);
-              text("Guns per 100 people "+guns,textX,textY+offset*4);
-              text("GDP per capita "+gdp,textX,textY+offset*5);
-            }
-         }
-       }
+      //text window
+      fill(255);
+      strokeWeight(1);
+      rect(textX-10,textY-20,180,150);
+      fill(128,0,64);
+      textAlign(LEFT);
+      textSize(12);
+      text(country,textX,textY,offset);
+      text("Homicide per 100k "+homicide,textX,textY+offset*2);
+      text("Suicide per 100k "+suicide,textX,textY+offset*3);
+      text("Guns per 100 people "+guns,textX,textY+offset*4);
+      text("GDP per capita "+gdp,textX,textY+offset*5);
+   }
   }
-  void prerender(Table inputData) {
+
+void prerender(Table inputData) {
   }
   void createVizImage() {
     this.vizImage = createImage(this.ww, this.hh, RGB);

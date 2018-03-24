@@ -37,13 +37,13 @@ class GNI_Homicide extends Visualization{
                circleX = sq(homicide*200+10-mouseX);
                fill(243,197,10,150);
                ellipse(homicide*200+10,height*0.8-gni/180,guns,guns);
-               inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gni);
+               this.drawInfoBox(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gni);
              }
              else{
                fill(243,197,10,150);
                ellipse(width-guns/2,height*0.8-gni/180,guns,guns);
                circleX=sq(width-guns/2-mouseX);
-               inCircle(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gni);
+               this.drawInfoBox(circleX, circleY, RadiusOfcirle, homicide, suicide, guns, country, gni);
              }
          }
     }

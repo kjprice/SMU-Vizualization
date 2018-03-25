@@ -10,7 +10,12 @@ class Top_10_countries_by_GDP extends Visualization{
   void draw(Table inputData) {
     this.drawVizImage();
   }
+  
   void drawMap(Table inputData){
+    GunViolenceBarObject barChart = new GunViolenceBarObject(10);
+    barChart.drawBar(inputData);
+  }
+ /* void drawMap(Table inputData){
     
         //new integer value of GDP column
         inputData.addColumn("iGDP", Table.INT);
@@ -75,8 +80,8 @@ class Top_10_countries_by_GDP extends Visualization{
           }
         }
        textSize(30);
-       text("GDP in $ per capita according to International Monetary Fund",550,100);
-    }
+       text("GDP in $ per capita according to International Monetary Fund",550,100);  }*/
+    
   int getVizualizationNum(){
     return vizualizationNum;
   }

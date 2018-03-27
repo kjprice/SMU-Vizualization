@@ -25,7 +25,7 @@ class GunViolenceBarObject extends BarObject {
   }
   
   
-  void drawBar(Table gunViolenceData, int barColour){
+  void drawBar(Table gunViolenceData){
         
         gunViolenceData = createNumericGDP(gunViolenceData);
         int i = 0; // loop counter
@@ -66,7 +66,7 @@ class GunViolenceBarObject extends BarObject {
        text("GDP in $ per capita according to International Monetary Fund",550,100);
   }
   
-  void drawBar(Table gunViolenceData){
+  void drawBar(Table gunViolenceData, int barColour){
         
         gunViolenceData = createNumericGDP(gunViolenceData);
         
@@ -88,7 +88,7 @@ class GunViolenceBarObject extends BarObject {
     
             strokeWeight(4);
             rectMode(CENTER);  // Set rectMode to CENTER
-            fill(123); 
+            fill(barColour); 
             // fill(55, 123, 55, 200);
             rect(bar_position_x[i], bar_position_y[i], width_of_bar, bar_size[i]);
             

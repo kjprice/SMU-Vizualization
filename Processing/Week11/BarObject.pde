@@ -12,7 +12,6 @@ public class BarObject {
   int width_of_bar;
   int space_between_bar;
   
-  
    BarObject() {}
    BarObject(int barsToDisplay){
       numberOfBars = barsToDisplay;
@@ -22,9 +21,10 @@ public class BarObject {
       flag  = new PImage[numberOfBars];
       this.bottom_border = 40;   // Bottom border
       this.left_border = 40;  // Left side border
-      this.width_of_bar = 70;    // Width of bars
       this.space_between_bar = 20;    // Space between bars
-      this.ground_position = 600;
+      this.width_of_bar = (width-(left_border*3)-(space_between_bar*numberOfBars))/numberOfBars;
+      // should be height - button 1 x position - space for text
+      this.ground_position = height-200;
   }
   
   

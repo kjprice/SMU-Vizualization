@@ -40,20 +40,20 @@ class GunViolenceBarObject extends BarObject {
             bar_size[i] = GDP / 300; // resize as required
             
             // X position relative to left spacem required width and space
-            bar_position_x[i] = int(lb + (i + .5) * (w + s));
-            bar_position_y[i] = ground_position - bb - bar_size[i]/2;
+            bar_position_x[i] = int(left_border + (i + .5) * (width_of_bar + space_between_bar));
+            bar_position_y[i] = ground_position - bottom_border - bar_size[i]/2;
             flag[i] = loadImage(trim(country.substring(0,3)).toLowerCase() + ".png");
     
             // load image
             imageMode(CENTER);
-            image(flag[i], bar_position_x[i], bar_position_y[i], w, bar_size[i]);
+            image(flag[i], bar_position_x[i], bar_position_y[i], width_of_bar, bar_size[i]);
             
             // display data values
             fill(0);
             textAlign(CENTER);
             textSize(13);
-            text(GDP ,bar_position_x[i],bar_position_y[i] - (bar_size[i] / 2 )- (bb / 2));
-            text(country, bar_position_x[i], ground_position - bb/2);
+            text(GDP ,bar_position_x[i],bar_position_y[i] - (bar_size[i] / 2 )- (bottom_border / 2));
+            text(country, bar_position_x[i], ground_position - bottom_border/2);
             
             // next bar
             i+=1;
@@ -82,22 +82,22 @@ class GunViolenceBarObject extends BarObject {
             bar_size[i] = GDP / 300; // resize as required
             
             // X position relative to left spacem required width and space
-            bar_position_x[i] = int(lb + (i + .5) * (w + s));
-            bar_position_y[i] = ground_position - bb - bar_size[i]/2;
+            bar_position_x[i] = int(left_border + (i + .5) * (width_of_bar + space_between_bar));
+            bar_position_y[i] = ground_position - bottom_border - bar_size[i]/2;
 //            flag[i] = loadImage(trim(country.substring(0,3)).toLowerCase() + ".png");
     
             strokeWeight(4);
             rectMode(CENTER);  // Set rectMode to CENTER
             fill(123); 
             // fill(55, 123, 55, 200);
-            rect(bar_position_x[i], bar_position_y[i], w, bar_size[i]);
+            rect(bar_position_x[i], bar_position_y[i], width_of_bar, bar_size[i]);
             
             // display data values
             fill(0);
             textAlign(CENTER);
             textSize(13);
-            text(GDP ,bar_position_x[i],bar_position_y[i] - (bar_size[i] / 2 )- (bb / 2));
-            text(country, bar_position_x[i], ground_position - bb/2);
+            text(GDP ,bar_position_x[i],bar_position_y[i] - (bar_size[i] / 2 )- (bottom_border / 2));
+            text(country, bar_position_x[i], ground_position - bottom_border/2);
             
             // next bar
             i+=1;

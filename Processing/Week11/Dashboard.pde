@@ -19,7 +19,6 @@ class Dashboard{
 
   Dashboard(Table inputData) {
     this.table = inputData;
-    this.setup();
   }
   
   void setup() {
@@ -30,7 +29,7 @@ class Dashboard{
       new MapGunsPerCapita(),
       new Top_10_countries_by_GDP(),
       new GNI_Homicide(),
-      new RegressionVisualization(),
+      new GDP_Homicide_2(this.table),
       new Guns_Suicide()
     };
   }

@@ -23,6 +23,41 @@ class Scatterplot extends GraphObject {
   Scatterplot(float[] x, float[] y, float[] z) {
     this.setup(x, y, z);
   }
+
+  Scatterplot(Table inputData, String xColumnName, String yColumnName) {
+    float[][] xyz = this.calculateValues(inputData, xColumnName, yColumnName, null);
+    float[] x = xyz[0];
+    float[] y = xyz[1];
+    float[] z = xyz[2];
+
+    this.setup(x, y, z);
+  }
+  
+  Scatterplot(Table inputData, String xColumnName, String yColumnName, String zColumnName) {
+    float[][] xyz = this.calculateValues(inputData, xColumnName, yColumnName, zColumnName);
+    float[] x = xyz[0];
+    float[] y = xyz[1];
+    float[] z = xyz[2];
+
+    this.setup(x, y, z);
+  }
+  
+  private float[][] calculateValues(Table inputData, String xColumnName, String yColumnName, String zColumnName) {
+    float [] x = new float [inputData.getRowCount()];
+    float [] y = new float [inputData.getRowCount()];
+    float [] z = new float [inputData.getRowCount()];
+    int i = 0;
+    for (TableRow row : inputData.rows()) {
+      x[i] = row.getFloat(xColumnName);
+      y[i] = log(row.getFloat(yColumnName));
+      if (zColumnName != null) {
+        z[i] = row.getFloat(zColumnName);
+      }
+      i++;
+    }
+    
+    return new float[][] {x, y, z};
+  }
   
   void setup(float[] xx, float[] yy, float[] zz) {
     this.x = xx;

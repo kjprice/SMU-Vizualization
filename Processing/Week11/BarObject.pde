@@ -19,8 +19,8 @@ public class BarObject {
       bar_position_x  = new int[numberOfBars];
       bar_position_y  = new int[numberOfBars];
       flag  = new PImage[numberOfBars];
-      this.bottom_border = 40;   // Bottom border
-      this.left_border = 40;  // Left side border
+      this.bottom_border = round(height*0.04);   // Bottom border
+      this.left_border = round(width*0.04);  // Left side border
       this.space_between_bar = 20;    // Space between bars
       this.width_of_bar = (width-(left_border*3)-(space_between_bar*numberOfBars))/numberOfBars;
       // should be height - button 1 x position - space for text

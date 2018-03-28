@@ -15,7 +15,6 @@ abstract class Visualization{
     startY = 0;
   }
   abstract void draw(Table inputData);
-  abstract int getVizualizationNum();
   abstract String getHeading();
 
 protected void drawInfoBox(float circleX, float circleY, float RadiusOfcirle, float homicide, float suicide, float guns, String country, float gdp){

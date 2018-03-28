@@ -1,7 +1,4 @@
-// scatterplot of gun ownership versus homicides (grouped by develop[ed|ing] countries)
-
 class GDP_Homicide_2 extends Visualization{
-  int vizualizationNum = 4;
   String heading = "GNI * Homicides per 100";
   Scatterplot scatterplot;
   
@@ -15,11 +12,7 @@ class GDP_Homicide_2 extends Visualization{
     scatterplot.draw();
   }
   
-  int getVizualizationNum(){
-    return vizualizationNum;
-  }
   String getHeading(){
     return heading;
   }
-  
 }

@@ -20,4 +20,7 @@ class Earth {
     endShape();
   }
 
+  int getEarthImagePixelsWidth() {
+    return this.flatEarthImage.width;
+  }
 }

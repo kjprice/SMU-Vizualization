@@ -5,10 +5,15 @@
 
 public class SolarSystem {
   int EARTH_DIAMETER_MILES = 25000;
+  int SUN_RATE_OF_ROTATION = 1; // Number of degrees changed per frame
+  // TODO: 1500 is arbitrary - see if we can find better numbers
+  int SUN_ROTATION_RADIUS_MILES = 1500;
+  float MILES_TO_PIXEL = 5;
+
   Sun sun;
   Earth earth;
   // number of miles that are comprised in every pixel
-  float MILES_TO_PIXEL = 5;
+  float sunPositionTheta = TWO_PI;
 
   SolarSystem() {
     sun = new Sun();
@@ -17,13 +22,26 @@ public class SolarSystem {
  
   void draw() {
     background(100);
-    translate(width/2, height/2, 100);
+    translate(width/2, height/2, 300);
     // scaleEverything();
 
     this.earth.draw();
-    this.sun.draw();
+    this.drawSun();
+    this.rotateSun();
 
     this.setCamera();
+  }
+
+  void drawSun() {
+    // find how far the sun spins from its axis based on ratios found from the earth
+    float sunDistanceMultiplier = ((float)this.earth.getEarthImagePixelsWidth() / EARTH_DIAMETER_MILES) * SUN_ROTATION_RADIUS_MILES;
+    float x = cos(sunPositionTheta) * sunDistanceMultiplier;
+    float y = sin(sunPositionTheta) * sunDistanceMultiplier;
+    this.sun.draw(x, y);
+  }
+
+  void rotateSun() {
+    sunPositionTheta += TWO_PI * SUN_RATE_OF_ROTATION / 360;
   }
 
   void scaleEverything() {

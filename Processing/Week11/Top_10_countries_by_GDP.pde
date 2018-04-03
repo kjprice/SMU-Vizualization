@@ -1,7 +1,13 @@
 class Top_10_countries_by_GDP extends Visualization{
   int vizualizationNum = 2;
   String heading = "Top 10 countries by GDP";
+  int colour;
+  boolean flagTrue;
   Top_10_countries_by_GDP(){}
+  Top_10_countries_by_GDP(boolean flagInd){
+    colour = 225;
+    flagTrue = flagInd;
+  }
   void prerender(Table inputData) {
     this.drawMap(inputData);
     this.createVizImage();
@@ -13,8 +19,12 @@ class Top_10_countries_by_GDP extends Visualization{
   
   void drawMap(Table inputData){
     GunViolenceBarObject barChart = new GunViolenceBarObject(10);
-    barChart.drawBar(inputData);
-  }
+      if(flagTrue)
+        barChart.drawBar(inputData);
+       else
+         barChart.drawBar(inputData,colour);
+      // barChart.drawBar(inputData);
+   }
  /* void drawMap(Table inputData){
     
         //new integer value of GDP column

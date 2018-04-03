@@ -15,7 +15,7 @@ class Dashboard{
   Table table;
 
   public Visualization[] viz;
-
+  boolean flagInd = true;
 
   Dashboard(Table inputData) {
     this.table = inputData;
@@ -26,8 +26,9 @@ class Dashboard{
     button_start_y = 720;
 
     viz = new Visualization[] {
-      new MapGunsPerCapita(),
+      //new MapGunsPerCapita(),
       new Top_10_countries_by_GDP(),
+      new Top_10_countries_by_GDP(flagInd),
       new GNI_Homicide(),
       new GDP_Homicide_2(this.table),
       new Guns_Suicide()

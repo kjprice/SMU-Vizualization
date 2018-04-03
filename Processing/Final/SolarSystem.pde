@@ -17,8 +17,8 @@ public class SolarSystem {
  
   void draw() {
     background(100);
-    translate(width/2, height/2, 0);
-    scaleEverything();
+    translate(width/2, height/2, 100);
+    // scaleEverything();
 
     this.earth.draw();
     this.sun.draw();
@@ -27,19 +27,14 @@ public class SolarSystem {
   }
 
   void scaleEverything() {
-    int earthImageDesiredPixelWidth = ceil(this.EARTH_DIAMETER_MILES / this.MILES_TO_PIXEL);
+    float earthImageDesiredPixelWidth = this.EARTH_DIAMETER_MILES / this.MILES_TO_PIXEL;
 
     scale(earthImageDesiredPixelWidth);
   }
 
   void setCamera() {
-    camera(width/2.0, height/2.0, 100,
-      width/2.0, height/2.0, 20,
+    camera(width/2.0, height/2.0, (height/2.0) / tan(PI*30.0 / 180.0),
+      width/2.0, height/2, 0,
       0, 1, 0);
-  }
-
-  // TODO: We should include the current width of the earth image when calculaating the new width
-  void calculateMilesToPixelConversion() {
-    int earthPixelsCount = this.earth.getEarthImagePixelsWidth();
   }
 }

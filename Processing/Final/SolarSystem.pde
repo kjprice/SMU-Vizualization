@@ -5,19 +5,24 @@
 
 public class SolarSystem {
   int EARTH_DIAMETER_MILES = 25000;
-  int SUN_RATE_OF_ROTATION = 1; // Number of degrees changed per frame
+  float SUN_RATE_OF_ROTATION = 1.5; // Number of degrees changed per frame
+  float MOON_RATE_OF_ROTATION = 1; // Number of degrees changed per frame
   // TODO: 1500 is arbitrary - see if we can find better numbers
-  int SUN_ROTATION_RADIUS_MILES = 1500;
+  int SUN_ROTATION_RADIUS_MILES = 1850;
   float MILES_TO_PIXEL = 5;
+  int MOON_ROTATION_RADIUS_MILES = 1400;
 
   Sun sun;
   Earth earth;
+  Moon moon;
   // number of miles that are comprised in every pixel
   float sunPositionTheta = TWO_PI;
-
+  float moonPositionTheta = PI;
+  
   SolarSystem() {
     sun = new Sun();
     earth = new Earth();
+    moon = new Moon();
   }
  
   void draw() {
@@ -28,7 +33,8 @@ public class SolarSystem {
     this.earth.draw();
     this.drawSun();
     this.rotateSun();
-
+    this.drawMoon();
+    this.rotateMoon();
     this.setCamera();
   }
 
@@ -39,9 +45,21 @@ public class SolarSystem {
     float y = sin(sunPositionTheta) * sunDistanceMultiplier;
     this.sun.draw(x, y);
   }
-
+  
+  void drawMoon() {
+    // find how far the moon spins from its axis based on ratios found from the earth
+    float moonDistanceMultiplier = ((float)this.earth.getEarthImagePixelsWidth() / EARTH_DIAMETER_MILES) * MOON_ROTATION_RADIUS_MILES;
+    float x = cos(moonPositionTheta) * moonDistanceMultiplier;
+    float y = sin(moonPositionTheta) * moonDistanceMultiplier;
+    this.moon.draw(x, y);
+  }
+  
   void rotateSun() {
     sunPositionTheta += TWO_PI * SUN_RATE_OF_ROTATION / 360;
+  }
+
+  void rotateMoon() {
+    moonPositionTheta += TWO_PI * MOON_RATE_OF_ROTATION / 360;
   }
 
   void scaleEverything() {

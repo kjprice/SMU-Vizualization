@@ -1,4 +1,5 @@
 class Sun {
+  int sunSize = 5;
   Sun() {}
   void draw(float x, float y) {
     int z = 40;
@@ -7,7 +8,11 @@ class Sun {
     // TODO: Size of sun and distance from Earth
     translate(x, y, z);
     ambientLight(255, 204, 0);
-    sphere(5);
+   //fill(200, 220, 0);
+    sphere(sunSize);
+   // Sunlight
+    fill(200, 155, 255, 64);
+    sphere(sunSize*6);
     popMatrix();
   }
 }

@@ -12,12 +12,17 @@ public class SolarSystem {
   float MILES_TO_PIXEL = 5;
   int MOON_ROTATION_RADIUS_MILES = 1400;
 
+  // For animation purposes
+  float currentXRotation = 0;
+  float futureXRotation = 0;
+
   Sun sun;
   Earth earth;
   Moon moon;
   // number of miles that are comprised in every pixel
   float sunPositionTheta = TWO_PI;
   float moonPositionTheta = PI;
+  boolean isOnEarth = false;
   
   SolarSystem() {
     sun = new Sun();
@@ -27,15 +32,38 @@ public class SolarSystem {
  
   void draw() {
     background(100);
-    translate(width/2, height/2, 300);
-    // scaleEverything();
 
+    pushMatrix();
+    translate(width/2, height/2, 300);
+    rotateX(radians(currentXRotation));
+    // scaleEverything();
     this.earth.draw();
     this.drawSun();
     this.rotateSun();
     this.drawMoon();
     this.rotateMoon();
-    this.setCamera();
+    popMatrix();
+
+    setCamera();
+
+    this.animateTransitions();
+  }
+
+  void moveToEarth() {
+    this.futureXRotation = 87;
+    isOnEarth = true;
+  }
+
+  void animateTransitions() {
+    if (this.currentXRotation == this.futureXRotation) {
+      return;
+    }
+    if (this.isOnEarth) {
+      this.currentXRotation++;
+    }
+    else {
+       this.currentXRotation--;
+    }
   }
 
   void drawSun() {
@@ -69,8 +97,8 @@ public class SolarSystem {
   }
 
   void setCamera() {
-    camera(width/2.0, height/2.0, (height/2.0) / tan(PI*30.0 / 180.0),
-      width/2.0, height/2, 0,
+    camera(width/2.0, height/2, (height/2.0) / tan(PI*30.0 / 180.0),
+      width/2.0, height/2.0, 0,
       0, 1, 0);
   }
 }

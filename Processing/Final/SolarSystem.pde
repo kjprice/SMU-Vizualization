@@ -16,6 +16,9 @@ public class SolarSystem {
   float currentXRotation = 0;
   float futureXRotation = 0;
 
+  float currentTranslateZ = 300;
+  float futureTranslateZ = 300;
+
   Sun sun;
   Earth earth;
   Moon moon;
@@ -34,7 +37,7 @@ public class SolarSystem {
     background(100);
 
     pushMatrix();
-    translate(width/2, height/2, 300);
+    translate(width/2, height/2, this.currentTranslateZ);
     rotateX(radians(currentXRotation));
     // scaleEverything();
     this.earth.draw();
@@ -51,10 +54,28 @@ public class SolarSystem {
 
   void moveToEarth() {
     this.futureXRotation = 87;
+    this.futureTranslateZ = 400;
     isOnEarth = true;
   }
 
   void animateTransitions() {
+    this.animateXRotation();
+    this.animateTranlationZ();
+  }
+
+  void animateTranlationZ() {
+    if (this.currentTranslateZ == this.futureTranslateZ) {
+      return;
+    }
+    if (this.isOnEarth) {
+      this.currentTranslateZ++;
+    }
+    else {
+      this.currentTranslateZ--;
+    }
+  }
+
+  void animateXRotation() {
     if (this.currentXRotation == this.futureXRotation) {
       return;
     }

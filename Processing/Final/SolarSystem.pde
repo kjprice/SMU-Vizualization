@@ -56,7 +56,10 @@ public class SolarSystem {
   void moveToEarth() {
     this.futureXRotation = 87;
     this.futureTranslateZ = 400;
-    isOnEarth = true;
+    if (isOnEarth){
+       this.futureXRotation = 0;
+       this.futureTranslateZ = 300;
+    }
   }
 
   void animateTransitions() {

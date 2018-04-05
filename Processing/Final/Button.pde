@@ -36,11 +36,12 @@ class Button extends UserControl {
 }
 
 class MoveToEarthButton extends Button {
-  MoveToEarthButton(String buttonText, int x, int y) {
+    MoveToEarthButton(String buttonText, int x, int y) {
     super(buttonText, x, y);
   }
 
   void onClick() {
     solarSystem.moveToEarth();
+    solarSystem.isOnEarth = !solarSystem.isOnEarth;
   }
 }

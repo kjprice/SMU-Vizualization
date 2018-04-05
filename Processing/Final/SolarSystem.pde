@@ -19,18 +19,18 @@ public class SolarSystem {
   float currentTranslateZ = 300;
   float futureTranslateZ = 300;
 
-  Sun sun;
+  CelestialObject sun;
   Earth earth;
-  Moon moon;
+  CelestialObject moon;
   // number of miles that are comprised in every pixel
   float sunPositionTheta = TWO_PI;
   float moonPositionTheta = PI;
   boolean isOnEarth = false;
   
   SolarSystem() {
-    sun = new Sun();
+    sun = new CelestialObject(5, SUN_RATE_OF_ROTATION, sunPositionTheta, SUN_ROTATION_RADIUS_MILES);
     earth = new Earth();
-    moon = new Moon();
+    moon = new CelestialObject(5, MOON_RATE_OF_ROTATION, moonPositionTheta, MOON_ROTATION_RADIUS_MILES);
   }
  
   void draw() {
@@ -41,10 +41,11 @@ public class SolarSystem {
     rotateX(radians(currentXRotation));
     // scaleEverything();
     this.earth.draw();
-    this.drawSun();
-    this.rotateSun();
-    this.drawMoon();
-    this.rotateMoon();
+    drawCelestialObject(SUN_ROTATION_RADIUS_MILES, this.sun.PositionTheta, this.sun);
+    drawCelestialObject(MOON_ROTATION_RADIUS_MILES, this.moon.PositionTheta, this.moon);
+
+    rotateCelestialObject(this.sun);
+    rotateCelestialObject(this.moon);
     popMatrix();
 
     setCamera();
@@ -87,30 +88,20 @@ public class SolarSystem {
     }
   }
 
-  void drawSun() {
-    // find how far the sun spins from its axis based on ratios found from the earth
-    float sunDistanceMultiplier = ((float)this.earth.getEarthImagePixelsWidth() / EARTH_DIAMETER_MILES) * SUN_ROTATION_RADIUS_MILES;
-    float x = cos(sunPositionTheta) * sunDistanceMultiplier;
-    float y = sin(sunPositionTheta) * sunDistanceMultiplier;
-    this.sun.draw(x, y);
+  void drawCelestialObject(float ROTATION_RADIUS_MILES, float PositionTheta, CelestialObject object) {
+    // find how far the object spins from its axis based on ratios found from the earth
+    float DistanceMultiplier = ((float)this.earth.getEarthImagePixelsWidth() / EARTH_DIAMETER_MILES) * ROTATION_RADIUS_MILES;
+    float x = cos(PositionTheta) * DistanceMultiplier;
+    float y = sin(PositionTheta) * DistanceMultiplier;
+    object.draw(x, y);
   }
   
-  void drawMoon() {
-    // find how far the moon spins from its axis based on ratios found from the earth
-    float moonDistanceMultiplier = ((float)this.earth.getEarthImagePixelsWidth() / EARTH_DIAMETER_MILES) * MOON_ROTATION_RADIUS_MILES;
-    float x = cos(moonPositionTheta) * moonDistanceMultiplier;
-    float y = sin(moonPositionTheta) * moonDistanceMultiplier;
-    this.moon.draw(x, y);
-  }
-  
-  void rotateSun() {
-    sunPositionTheta += TWO_PI * SUN_RATE_OF_ROTATION / 360;
+
+  void rotateCelestialObject(CelestialObject object) {
+    object.PositionTheta += TWO_PI * object.RATE_OF_ROTATION / 360;
   }
 
-  void rotateMoon() {
-    moonPositionTheta += TWO_PI * MOON_RATE_OF_ROTATION / 360;
-  }
-
+ 
   void scaleEverything() {
     float earthImageDesiredPixelWidth = this.EARTH_DIAMETER_MILES / this.MILES_TO_PIXEL;
 

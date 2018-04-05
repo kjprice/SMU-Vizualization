@@ -12,6 +12,7 @@ class CelestialObject{
     this.ROTATION_RADIUS_MILES = ROTATION_RADIUS_MILES;
   }
   void draw(float x, float y) {
+    fill(255);
     int z = 40;
     spotLight(51, 102, 126, x, y, z, -1, 0, 0, PI/2, 200);
     pushMatrix();

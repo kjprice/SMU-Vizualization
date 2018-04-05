@@ -26,12 +26,12 @@ class Button extends UserControl {
   }
 
   void draw() {
-    textSize(220);
-    pushMatrix();
+    fill(255,20,30);
     rect(positionStartX, positionStartY, this.elementWidth, this.elementHeight);
     // TODO: Why isn't text showing?
-    text(buttonText, positionStartX, positionStartY);
-    popMatrix();
+    fill(0);
+    textSize(12);
+    text(buttonText, positionStartX, positionStartY+10);
   }
 }
 

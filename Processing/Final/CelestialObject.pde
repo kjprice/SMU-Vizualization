@@ -1,25 +1,62 @@
 class CelestialObject{
   CelestialObject(){}
-  int diameter;
-  public float RATE_OF_ROTATION;
+  private int diameter;
+  private boolean producesLight = false;
+  public float rateOfRotation;
   public float PositionTheta;
-  public float ROTATION_RADIUS_MILES;
+  private float currentX;
+  private float currentY;
+  private float distanceMultiplier;
   
-  CelestialObject(int diameter, float RATE_OF_ROTATION, float PositionTheta, float ROTATION_RADIUS_MILES){
+  CelestialObject(int diameter, float rateOfRotation, float PositionTheta, float distanceRatio, float radiusInMiles){
     this.diameter = diameter;
-    this.RATE_OF_ROTATION = RATE_OF_ROTATION;
+    this.rateOfRotation = rateOfRotation;
     this.PositionTheta = PositionTheta;
-    this.ROTATION_RADIUS_MILES = ROTATION_RADIUS_MILES;
+    this.distanceMultiplier = this.createDistanceMultiplier(distanceRatio, radiusInMiles);
   }
-  void draw(float x, float y) {
-    fill(255);
-    int z = 40;
-    spotLight(51, 102, 126, x, y, z, -1, 0, 0, PI/2, 200);
+
+  float createDistanceMultiplier(float distanceRatio, float radiusInMiles) {
+    return distanceRatio * radiusInMiles;
+  }
+
+  void enableLightSource() {
+    this.producesLight = true;
+  }
+
+  // move celestial body around a central point
+  private void orbit() {
+    this.PositionTheta += TWO_PI * this.rateOfRotation / 360;
+  }
+
+  void draw() {
+    float[] xyz = this.calculatePosition();
+    float x = xyz[0];
+    float y = xyz[1];
+    float z = xyz[2];
+    if (this.producesLight) {
+      ambientLight(255, 204, 0);
+    }
     pushMatrix();
-    // TODO: Size of sun and distance from Earth
     translate(x, y, z);
-    ambientLight(255, 204, 0);
     sphere(diameter);
     popMatrix();
+
+    this.orbit();
+  }
+
+  void iluminateOtherObjects() {
+    float[] xyz = this.calculatePosition();
+    float x = xyz[0];
+    float y = xyz[1];
+    float z = xyz[2];
+    pointLight(255, 240, 140, x, y, z);
+  }
+
+  float[] calculatePosition() {
+    float x = cos(PositionTheta) * this.distanceMultiplier;
+    float y = sin(PositionTheta) * this.distanceMultiplier;
+    // TODO: Calculate z based on some distance multiplier too (3k miles from earth)
+    int z = 40;
+    return new float[] { x, y, z };
   }
 }

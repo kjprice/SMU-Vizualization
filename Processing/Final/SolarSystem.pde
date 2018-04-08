@@ -19,38 +19,50 @@ public class SolarSystem {
   float currentTranslateZ = 300;
   float futureTranslateZ = 300;
 
+  // our solar system objects
   CelestialObject sun;
   Earth earth;
   CelestialObject moon;
+
   // number of miles that are comprised in every pixel
   float sunPositionTheta = TWO_PI;
   float moonPositionTheta = PI;
   boolean isOnEarth = false;
-  
+
   SolarSystem() {
-    sun = new CelestialObject(5, SUN_RATE_OF_ROTATION, sunPositionTheta, SUN_ROTATION_RADIUS_MILES);
     earth = new Earth();
-    moon = new CelestialObject(5, MOON_RATE_OF_ROTATION, moonPositionTheta, MOON_ROTATION_RADIUS_MILES);
+    // This must be calculated by taken the Earth image width (in pixels) and divide by the Earth's diameter in miles
+    float distanceRatio = ((float)this.earth.getEarthImagePixelsWidth() / EARTH_DIAMETER_MILES);
+
+    sun = new CelestialObject(5, SUN_RATE_OF_ROTATION, sunPositionTheta, distanceRatio, SUN_ROTATION_RADIUS_MILES);
+    sun.enableLightSource();
+
+    moon = new CelestialObject(5, MOON_RATE_OF_ROTATION, moonPositionTheta, distanceRatio, MOON_ROTATION_RADIUS_MILES);
   }
  
   void draw() {
     background(100);
+    // Oh the darkness of space
+    fill(255);
 
     pushMatrix();
     translate(width/2, height/2, this.currentTranslateZ);
-    rotateX(radians(currentXRotation));
+    rotateX(radians(this.currentXRotation));
     // scaleEverything();
-    this.earth.draw();
-    drawCelestialObject(SUN_ROTATION_RADIUS_MILES, this.sun.PositionTheta, this.sun);
-    drawCelestialObject(MOON_ROTATION_RADIUS_MILES, this.moon.PositionTheta, this.moon);
-
-    rotateCelestialObject(this.sun);
-    rotateCelestialObject(this.moon);
+    this.drawCelestialBodies();
     popMatrix();
 
     setCamera();
 
     this.animateTransitions();
+  }
+
+  // The order of each item is important due to lighting - the moon should not have ambient light but should have light casted upon it
+  void drawCelestialBodies() {
+    this.earth.draw();
+    this.sun.iluminateOtherObjects();
+    this.moon.draw();
+    this.sun.draw();
   }
 
   void moveToEarth() {
@@ -90,20 +102,6 @@ public class SolarSystem {
        this.currentXRotation--;
     }
   }
-
-  void drawCelestialObject(float ROTATION_RADIUS_MILES, float PositionTheta, CelestialObject object) {
-    // find how far the object spins from its axis based on ratios found from the earth
-    float DistanceMultiplier = ((float)this.earth.getEarthImagePixelsWidth() / EARTH_DIAMETER_MILES) * ROTATION_RADIUS_MILES;
-    float x = cos(PositionTheta) * DistanceMultiplier;
-    float y = sin(PositionTheta) * DistanceMultiplier;
-    object.draw(x, y);
-  }
-  
-
-  void rotateCelestialObject(CelestialObject object) {
-    object.PositionTheta += TWO_PI * object.RATE_OF_ROTATION / 360;
-  }
-
  
   void scaleEverything() {
     float earthImageDesiredPixelWidth = this.EARTH_DIAMETER_MILES / this.MILES_TO_PIXEL;

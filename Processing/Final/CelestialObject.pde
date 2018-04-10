@@ -7,17 +7,23 @@ class CelestialObject{
   private float currentX;
   private float currentY;
   private float distanceMultiplier;
+  private float distanceRatio;
+  private float radiusInMiles;
+  private boolean isYearChange;
+  private float radiusChange=0.233;
+  private boolean summerToWinter = true;
+  private float radius;
   
-  CelestialObject(int diameter, float rateOfRotation, float PositionTheta, float distanceRatio, float radiusInMiles){
+  CelestialObject(int diameter, float rateOfRotation, float PositionTheta, float distanceRatio, float radiusInMiles, boolean isYearChange){
     this.diameter = diameter;
     this.rateOfRotation = rateOfRotation;
     this.PositionTheta = PositionTheta;
-    this.distanceMultiplier = this.createDistanceMultiplier(distanceRatio, radiusInMiles);
+    this.radiusInMiles = radiusInMiles;
+    this.distanceRatio = distanceRatio;
+    this.isYearChange = isYearChange;
+    this.radius = radiusInMiles;
   }
 
-  float createDistanceMultiplier(float distanceRatio, float radiusInMiles) {
-    return distanceRatio * radiusInMiles;
-  }
 
   void enableLightSource() {
     this.producesLight = true;
@@ -53,8 +59,27 @@ class CelestialObject{
   }
 
   float[] calculatePosition() {
+    if (this.isYearChange){
+      if (this.radiusInMiles>2850){
+        this.summerToWinter=false;
+        println("is false");
+      }
+      if (this.radiusInMiles<this.radius){
+        this.summerToWinter=true;
+        println("is true");
+      }
+      if (summerToWinter){
+        this.radiusInMiles+=this.radiusChange;
+      }
+      else{
+        this.radiusInMiles-=this.radiusChange;
+      }
+    }
+    this.distanceMultiplier=this.distanceRatio * this.radiusInMiles;
+    
     float x = cos(PositionTheta) * this.distanceMultiplier;
     float y = sin(PositionTheta) * this.distanceMultiplier;
+   
     // TODO: Calculate z based on some distance multiplier too (3k miles from earth)
     int z = 40;
     return new float[] { x, y, z };

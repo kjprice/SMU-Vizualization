@@ -31,7 +31,7 @@ class Button extends UserControl {
     // TODO: Why isn't text showing?
     fill(0);
     textSize(12);
-    text(buttonText, positionStartX, positionStartY+10);
+    text(buttonText, positionStartX, positionStartY+12);
   }
 }
 

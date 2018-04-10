@@ -34,10 +34,10 @@ public class SolarSystem {
     // This must be calculated by taken the Earth image width (in pixels) and divide by the Earth's diameter in miles
     float distanceRatio = ((float)this.earth.getEarthImagePixelsWidth() / EARTH_DIAMETER_MILES);
 
-    sun = new CelestialObject(5, SUN_RATE_OF_ROTATION, sunPositionTheta, distanceRatio, SUN_ROTATION_RADIUS_MILES);
+    sun = new CelestialObject(5, SUN_RATE_OF_ROTATION, sunPositionTheta, distanceRatio, SUN_ROTATION_RADIUS_MILES, true);
     sun.enableLightSource();
 
-    moon = new CelestialObject(5, MOON_RATE_OF_ROTATION, moonPositionTheta, distanceRatio, MOON_ROTATION_RADIUS_MILES);
+    moon = new CelestialObject(5, MOON_RATE_OF_ROTATION, moonPositionTheta, distanceRatio, MOON_ROTATION_RADIUS_MILES, false);
   }
  
   void draw() {

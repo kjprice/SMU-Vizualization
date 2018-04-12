@@ -42,6 +42,5 @@ class MoveToEarthButton extends Button {
 
   void onClick() {
     solarSystem.moveToEarth();
-    solarSystem.isOnEarth = !solarSystem.isOnEarth;
   }
 }

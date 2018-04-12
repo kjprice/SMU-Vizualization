@@ -1,5 +1,7 @@
 class CelestialObject{
-  CelestialObject(){}
+  CelestialObject(){
+  
+  }
   private int diameter;
   private boolean producesLight = false;
   public float rateOfRotation;
@@ -13,8 +15,9 @@ class CelestialObject{
   private float radiusChange=0.233;
   private boolean summerToWinter = true;
   private float radius;
+  private boolean isTransparent = false;
   
-  CelestialObject(int diameter, float rateOfRotation, float PositionTheta, float distanceRatio, float radiusInMiles, boolean isYearChange){
+  CelestialObject(int diameter, float rateOfRotation, float PositionTheta, float distanceRatio, float radiusInMiles, boolean isYearChange,boolean isTransparent){
     this.diameter = diameter;
     this.rateOfRotation = rateOfRotation;
     this.PositionTheta = PositionTheta;
@@ -22,8 +25,10 @@ class CelestialObject{
     this.distanceRatio = distanceRatio;
     this.isYearChange = isYearChange;
     this.radius = radiusInMiles;
+    this.isTransparent = isTransparent;
   }
-
+  
+  
 
   void enableLightSource() {
     this.producesLight = true;
@@ -41,6 +46,9 @@ class CelestialObject{
     float z = xyz[2];
     if (this.producesLight) {
       ambientLight(255, 204, 0);
+    }
+    if (this.isTransparent) {
+      fill(255, 204, 0,64);
     }
     pushMatrix();
     translate(x, y, z);

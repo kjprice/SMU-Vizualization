@@ -21,9 +21,10 @@ public class SolarSystem {
 
   // our solar system objects
   CelestialObject sun;
+  CelestialObject sunlight;
   Earth earth;
   CelestialObject moon;
-
+ 
   // number of miles that are comprised in every pixel
   float sunPositionTheta = TWO_PI;
   float moonPositionTheta = PI;
@@ -34,22 +35,21 @@ public class SolarSystem {
     // This must be calculated by taken the Earth image width (in pixels) and divide by the Earth's diameter in miles
     float distanceRatio = ((float)this.earth.getEarthImagePixelsWidth() / EARTH_DIAMETER_MILES);
 
-    sun = new CelestialObject(5, SUN_RATE_OF_ROTATION, sunPositionTheta, distanceRatio, SUN_ROTATION_RADIUS_MILES, true);
+    sun = new CelestialObject(5, SUN_RATE_OF_ROTATION, sunPositionTheta, distanceRatio, SUN_ROTATION_RADIUS_MILES, true,false);
     sun.enableLightSource();
-
-    moon = new CelestialObject(5, MOON_RATE_OF_ROTATION, moonPositionTheta, distanceRatio, MOON_ROTATION_RADIUS_MILES, false);
+    sunlight = new CelestialObject(25, SUN_RATE_OF_ROTATION, sunPositionTheta, distanceRatio, SUN_ROTATION_RADIUS_MILES, true,true);
+    moon = new CelestialObject(5, MOON_RATE_OF_ROTATION, moonPositionTheta, distanceRatio, MOON_ROTATION_RADIUS_MILES, false,false);
   }
  
   void draw() {
-    background(100);
+    background(0);
     // Oh the darkness of space
     fill(255);
-
     pushMatrix();
-    translate(width/2, height/2, this.currentTranslateZ);
-    rotateX(radians(this.currentXRotation));
-    // scaleEverything();
-    this.drawCelestialBodies();
+      translate(width/2, height/2, this.currentTranslateZ);
+      rotateX(radians(this.currentXRotation));
+      // scaleEverything();
+      this.drawCelestialBodies();
     popMatrix();
 
     setCamera();
@@ -63,6 +63,8 @@ public class SolarSystem {
     this.sun.iluminateOtherObjects();
     this.moon.draw();
     this.sun.draw();
+    this.sunlight.draw();
+    
   }
 
   void moveToEarth() {

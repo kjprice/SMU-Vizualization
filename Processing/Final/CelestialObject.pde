@@ -51,8 +51,8 @@ class CelestialObject{
       fill(255, 204, 0,64);
     }
     pushMatrix();
-    translate(x, y, z);
-    sphere(diameter);
+      translate(x, y, z);
+      sphere(diameter);
     popMatrix();
 
     this.orbit();
@@ -92,4 +92,5 @@ class CelestialObject{
     int z = 40;
     return new float[] { x, y, z };
   }
-}
+  
+ }

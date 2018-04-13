@@ -29,6 +29,7 @@ public class SolarSystem {
   float sunPositionTheta = TWO_PI;
   float moonPositionTheta = PI;
   boolean isOnEarth = false;
+  Star[] stars = new Star[2000];
 
   SolarSystem() {
     earth = new Earth();
@@ -39,6 +40,10 @@ public class SolarSystem {
     sun.enableLightSource();
     sunlight = new CelestialObject(25, SUN_RATE_OF_ROTATION, sunPositionTheta, distanceRatio, SUN_ROTATION_RADIUS_MILES, true,true);
     moon = new CelestialObject(5, MOON_RATE_OF_ROTATION, moonPositionTheta, distanceRatio, MOON_ROTATION_RADIUS_MILES, false,false);
+    // plenty of stars
+    for (int i = 0; i < stars.length; i++) {
+        stars[i] = new Star();
+     }
   }
  
   void draw() {
@@ -55,6 +60,10 @@ public class SolarSystem {
     setCamera();
 
     this.animateTransitions();
+    for (int i = 0; i < stars.length; i++) {
+      stars[i].update();
+      stars[i].show();
+    }
   }
 
   // The order of each item is important due to lighting - the moon should not have ambient light but should have light casted upon it
@@ -63,7 +72,7 @@ public class SolarSystem {
     this.sun.iluminateOtherObjects();
     this.moon.draw();
     this.sun.draw();
-    this.sunlight.draw();
+    this.sunlight.draw(); // check if camera is on Earth
     
   }
 

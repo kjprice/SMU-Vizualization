@@ -4,20 +4,27 @@
 */
 
 public class SolarSystem {
+  Distance distance = new Distance();
+
   int EARTH_DIAMETER_MILES = 25000;
+  int SUN_DIAMETER_MILES = 500;
+  int SUNLIGHT_DIAMETER_MILES = 800;
+  int MOON_DIAMETER_MILES = 200;
+  int DISTANCE_TO_SUN = 3000;
   float SUN_RATE_OF_ROTATION = 1.5; // Number of degrees changed per frame
   float MOON_RATE_OF_ROTATION = 1; // Number of degrees changed per frame
   // TODO: 1500 is arbitrary - see if we can find better numbers
-  int SUN_ROTATION_RADIUS_MILES = 1850;
+  int SUN_ROTATION_RADIUS_MILES = 2450;
   float MILES_TO_PIXEL = 5;
   int MOON_ROTATION_RADIUS_MILES = 1400;
+  int EYE_POSITION_START_MILES = -12000;
 
   // For animation purposes
   float currentXRotation = 0;
   float futureXRotation = 0;
 
-  float currentTranslateZ = 300;
-  float futureTranslateZ = 300;
+  float currentTranslateZ = distance.getObjectScale(EYE_POSITION_START_MILES);
+  float futureTranslateZ = currentTranslateZ;
 
   // our solar system objects
   CelestialObject sun;
@@ -33,13 +40,10 @@ public class SolarSystem {
 
   SolarSystem() {
     earth = new Earth();
-    // This must be calculated by taken the Earth image width (in pixels) and divide by the Earth's diameter in miles
-    float distanceRatio = ((float)this.earth.getEarthImagePixelsWidth() / EARTH_DIAMETER_MILES);
-
-    sun = new CelestialObject(5, SUN_RATE_OF_ROTATION, sunPositionTheta, distanceRatio, SUN_ROTATION_RADIUS_MILES, true,false);
+    sun = new CelestialObject(SUN_DIAMETER_MILES, SUN_RATE_OF_ROTATION, sunPositionTheta, SUN_ROTATION_RADIUS_MILES, true,false);
     sun.enableLightSource();
-    sunlight = new CelestialObject(25, SUN_RATE_OF_ROTATION, sunPositionTheta, distanceRatio, SUN_ROTATION_RADIUS_MILES, true,true);
-    moon = new CelestialObject(5, MOON_RATE_OF_ROTATION, moonPositionTheta, distanceRatio, MOON_ROTATION_RADIUS_MILES, false,false);
+    sunlight = new CelestialObject(SUNLIGHT_DIAMETER_MILES, SUN_RATE_OF_ROTATION, sunPositionTheta, SUN_ROTATION_RADIUS_MILES, true,true);
+    moon = new CelestialObject(MOON_DIAMETER_MILES, MOON_RATE_OF_ROTATION, moonPositionTheta, MOON_ROTATION_RADIUS_MILES, false,false);
     // plenty of stars
     for (int i = 0; i < stars.length; i++) {
         stars[i] = new Star();
@@ -68,11 +72,11 @@ public class SolarSystem {
 
   // The order of each item is important due to lighting - the moon should not have ambient light but should have light casted upon it
   void drawCelestialBodies() {
-    this.earth.draw();
-    this.sun.iluminateOtherObjects();
-    this.moon.draw();
-    this.sun.draw();
-    this.sunlight.draw(); // check if camera is on Earth
+    this.earth.draw(distance.getObjectScale(EARTH_DIAMETER_MILES));
+    this.sun.iluminateOtherObjects(distance.getObjectScale(DISTANCE_TO_SUN));
+    this.moon.draw(distance.getObjectScale(DISTANCE_TO_SUN));
+    this.sun.draw(distance.getObjectScale(DISTANCE_TO_SUN));
+    this.sunlight.draw(distance.getObjectScale(DISTANCE_TO_SUN)); // check if camera is on Earth
     
   }
 
@@ -122,7 +126,7 @@ public class SolarSystem {
 
     scale(earthImageDesiredPixelWidth);
   }
-
+  
   void setCamera() {
     camera(width/2.0, height/2, (height/2.0) / tan(PI*30.0 / 180.0),
       width/2.0, height/2.0, 0,

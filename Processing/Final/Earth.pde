@@ -1,11 +1,13 @@
 class Earth {
   private PImage flatEarthImage;
+  private float diameter;
 
   Earth() {
     flatEarthImage = loadImage("Flat_earth.png");
   }
   
-  void draw() {
+  void draw(float diameter) {
+    this.diameter = diameter;
     this.drawFlatCircle(flatEarthImage);
   }
  
@@ -13,10 +15,11 @@ class Earth {
     beginShape();
     noStroke();
     texture(topImage);
-    vertex(-100, -100, 0, 0, 0);
-    vertex(100, -100, 0, topImage.width, 0);
-    vertex(100, 100, 0, topImage.width, topImage.height);
-    vertex(-100, 100, 0, 0, topImage.height);
+    float radius = diameter / 2;
+    vertex(-radius, -radius, 0, 0, 0);
+    vertex(radius, -radius, 0, topImage.width, 0);
+    vertex(radius, radius, 0, topImage.width, topImage.height);
+    vertex(-radius, radius, 0, 0, topImage.height);
     endShape();
   }
 

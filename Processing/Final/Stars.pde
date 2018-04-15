@@ -47,6 +47,10 @@ class Star {
   }
 
   void show() {
+    pushMatrix();
+    // move stars backward
+    translate(0, 0, -2000);
+
     fill(255);
     noStroke();
 
@@ -75,6 +79,7 @@ class Star {
 
     stroke(255);
     line(px, py, sx, sy);
+    popMatrix();
 
   }
 }

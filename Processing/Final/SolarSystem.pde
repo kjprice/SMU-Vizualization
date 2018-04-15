@@ -6,18 +6,16 @@
 public class SolarSystem {
   Distance distance = new Distance();
 
-  int EARTH_DIAMETER_MILES = 25000;
-  int SUN_DIAMETER_MILES = 500;
-  int SUNLIGHT_DIAMETER_MILES = 800;
-  int MOON_DIAMETER_MILES = 200;
-  int DISTANCE_TO_SUN = 3000;
+  int EARTH_DIAMETER_MILES       = 25000;
+  int SUN_DIAMETER_MILES         = 500;
+  int SUNLIGHT_DIAMETER_MILES    = 800;
+  int MOON_DIAMETER_MILES        = 200;
+  int DISTANCE_TO_SUN            = 3000;
+  int SUN_ROTATION_RADIUS_MILES  = 2450;
+  int MOON_ROTATION_RADIUS_MILES = 1400;
+  int EYE_POSITION_START_MILES   = -12000;
   float SUN_RATE_OF_ROTATION = 1.5; // Number of degrees changed per frame
   float MOON_RATE_OF_ROTATION = 1; // Number of degrees changed per frame
-  // TODO: 1500 is arbitrary - see if we can find better numbers
-  int SUN_ROTATION_RADIUS_MILES = 2450;
-  float MILES_TO_PIXEL = 5;
-  int MOON_ROTATION_RADIUS_MILES = 1400;
-  int EYE_POSITION_START_MILES = -12000;
 
   // For animation purposes
   float currentXRotation = 0;
@@ -57,7 +55,6 @@ public class SolarSystem {
     pushMatrix();
       translate(width/2, height/2, this.currentTranslateZ);
       rotateX(radians(this.currentXRotation));
-      // scaleEverything();
       this.drawCelestialBodies();
     popMatrix();
 
@@ -120,13 +117,7 @@ public class SolarSystem {
        this.currentXRotation--;
     }
   }
- 
-  void scaleEverything() {
-    float earthImageDesiredPixelWidth = this.EARTH_DIAMETER_MILES / this.MILES_TO_PIXEL;
 
-    scale(earthImageDesiredPixelWidth);
-  }
-  
   void setCamera() {
     camera(width/2.0, height/2, (height/2.0) / tan(PI*30.0 / 180.0),
       width/2.0, height/2.0, 0,

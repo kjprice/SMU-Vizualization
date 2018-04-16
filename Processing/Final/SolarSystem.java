@@ -16,8 +16,8 @@ public class SolarSystem {
   int SUN_ROTATION_RADIUS_MILES  = 2450;
   int MOON_ROTATION_RADIUS_MILES = 1400;
   int EYE_POSITION_START_MILES   = -12000;
-  float SUN_RATE_OF_ROTATION = 1.5F; // Number of degrees changed per frame
-  float MOON_RATE_OF_ROTATION = 0.535F; // Number of degrees changed per frame
+  float SUN_RATE_OF_ROTATION = 1.15F; // Number of degrees changed per frame
+  float MOON_RATE_OF_ROTATION = 1.05F; // Number of degrees changed per frame
 
   // For animation purposes
   float currentXRotation = 0;

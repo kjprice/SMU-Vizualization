@@ -18,7 +18,7 @@ class CelestialObject {
 
   private float radiusInMiles;
   private boolean isYearChange;
-  private float radiusChange = 0.5F;
+  private float radiusChange = 2F;
   private boolean summerToWinter = true;
   private float radius;
 

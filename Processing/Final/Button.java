@@ -47,3 +47,13 @@ class MoveToEarthButton extends Button {
     solarSystem.moveToEarth();
   }
 }
+
+class PauseButton extends Button {
+  PauseButton(PApplet p, SolarSystem solarSystem, UserInteractions userInteractions, String buttonText, int x, int y) {
+    super(p, solarSystem, userInteractions, buttonText, x, y);
+  }
+  
+  void onClick() {
+    solarSystem.pauseAnimations();
+  }
+}

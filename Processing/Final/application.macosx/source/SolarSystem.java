@@ -17,7 +17,7 @@ public class SolarSystem {
   int MOON_ROTATION_RADIUS_MILES = 1400;
   int EYE_POSITION_START_MILES   = -12000;
   float SUN_RATE_OF_ROTATION = 1.5F; // Number of degrees changed per frame
-  float MOON_RATE_OF_ROTATION = 1F; // Number of degrees changed per frame
+  float MOON_RATE_OF_ROTATION = 0.535F; // Number of degrees changed per frame
 
   // For animation purposes
   float currentXRotation = 0;
@@ -25,6 +25,9 @@ public class SolarSystem {
 
   float currentTranslateZ = distance.getObjectScale(EYE_POSITION_START_MILES);
   float futureTranslateZ = currentTranslateZ;
+   
+  //date
+  private long epoch = 1529542696;
 
   // our solar system objects
   CelestialObject sun;
@@ -36,14 +39,15 @@ public class SolarSystem {
   float sunPositionTheta = p.TWO_PI;
   float moonPositionTheta = p.PI;
   boolean isOnEarth = false;
+  boolean allowAnimations = true;
   Star[] stars = new Star[2000];
 
   SolarSystem(PApplet p) {
     this.p = p;
     earth = new Earth(p);
     sun = new CelestialObject(p, SUN_DIAMETER_MILES, SUN_RATE_OF_ROTATION, sunPositionTheta, SUN_ROTATION_RADIUS_MILES, true,false);
+    sunlight  = new CelestialObject(p, SUNLIGHT_DIAMETER_MILES, SUN_RATE_OF_ROTATION, sunPositionTheta, SUN_ROTATION_RADIUS_MILES, true,true);
     sun.enableLightSource();
-    sunlight = new CelestialObject(p, SUNLIGHT_DIAMETER_MILES, SUN_RATE_OF_ROTATION, sunPositionTheta, SUN_ROTATION_RADIUS_MILES, true,true);
     moon = new CelestialObject(p, MOON_DIAMETER_MILES, MOON_RATE_OF_ROTATION, moonPositionTheta, MOON_ROTATION_RADIUS_MILES, false,false);
     // plenty of stars
     for (int i = 0; i < stars.length; i++) {
@@ -53,21 +57,40 @@ public class SolarSystem {
  
   void draw() {
    p.background(0);
-    // Oh the darkness of space
+   // Oh the darkness of space
    p.fill(255);
    p.pushMatrix();
-     p.translate(p.width/2, p.height/2, this.currentTranslateZ);
-     p.rotateX(p.radians(this.currentXRotation));
-      this.drawCelestialBodies();
+   displayDate();
+   p.translate(p.width/2, p.height/2, this.currentTranslateZ);
+   p.rotateX(p.radians(this.currentXRotation));
+   this.drawCelestialBodies();
    p.popMatrix();
 
     setCamera();
-
     this.animateTransitions();
     for (int i = 0; i < stars.length; i++) {
       stars[i].update();
       stars[i].show();
     }
+  }
+  
+  void pauseAnimations() {
+    this.allowAnimations = !allowAnimations;
+  }
+
+  void displayDate() {
+    if(sun.getRadiusInMiles() % 22 == 0){
+      epoch += 86400;
+    }
+
+    String date = new java.text.SimpleDateFormat("dd/MMMM").format(new java.util.Date (epoch*1000L));
+    p.pushMatrix();
+    p.translate(0,0,0);
+    p.fill(255,255,255);
+    p.rect(0,5,100,30);
+    p.fill(0);
+    p.text(date,10,24);    
+    p.popMatrix();
   }
 
   // The order of each item is important due to lighting - the moon should not have ambient light but should have light casted upon it
@@ -77,7 +100,6 @@ public class SolarSystem {
     this.moon.draw(distance.getObjectScale(DISTANCE_TO_SUN));
     this.sun.draw(distance.getObjectScale(DISTANCE_TO_SUN));
     this.sunlight.draw(distance.getObjectScale(DISTANCE_TO_SUN)); // check ifp.camera is on Earth
-    
   }
 
   void moveToEarth() {
@@ -98,6 +120,9 @@ public class SolarSystem {
   }
 
   void animateTranlationZ() {
+    if (!this.allowAnimations) {
+      return;
+    }
     if (this.currentTranslateZ == this.futureTranslateZ) {
       return;
     }
@@ -110,6 +135,9 @@ public class SolarSystem {
   }
 
   void animateXRotation() {
+    if (!this.allowAnimations) {
+      return;
+    }
     if (this.currentXRotation == this.futureXRotation) {
       return;
     }
@@ -129,5 +157,9 @@ public class SolarSystem {
   
   public boolean getIsOnEarth(){
     return isOnEarth;
+  }
+  
+  public CelestialObject getSun(){
+    return sun;
   }
 }

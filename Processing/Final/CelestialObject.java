@@ -29,7 +29,7 @@ class CelestialObject {
   private boolean isTransparent = false;
 
   
-  CelestialObject(PApplet p, int diameter, float rateOfRotation, float PositionTheta, float radiusInMiles, boolean isYearChange,boolean isTransparent){
+  CelestialObject(PApplet p, int diameter, float rateOfRotation, float PositionTheta, float radiusInMiles, boolean isYearChange, boolean isTransparent){
     this.p = p;
     this.diameter = diameter;
     this.rateOfRotation = rateOfRotation;
@@ -52,6 +52,7 @@ class CelestialObject {
   }
 
   void draw(float distance) {
+    this.changePosition();
     float[] xyz = this.calculatePosition(distance);
     float x = xyz[0];
     float y = xyz[1];
@@ -78,9 +79,9 @@ class CelestialObject {
    p.pointLight(255, 240, 140, x, y, z);
   }
 
-  float[] calculatePosition(float distance) {
+  void changePosition() {
     if (this.isYearChange){
-      if (this.radiusInMiles>6476 | this.radiusInMiles<this.radius){
+      if (this.radiusInMiles > 6476 || this.radiusInMiles < this.radius){
         this.summerToWinter = !this.summerToWinter;
       }
       if (summerToWinter){
@@ -90,11 +91,12 @@ class CelestialObject {
         this.radiusInMiles-=this.radiusChange;
       }
     }
-    
+  }
+
+  float[] calculatePosition(float distance) {   
     float x =p.cos(PositionTheta) * this.distance.getObjectScale((int)radiusInMiles);
     float y =p.sin(PositionTheta) * this.distance.getObjectScale((int)radiusInMiles);
-   
-    // TODO: Calculate z based on some distance multiplier too (3k miles from earth)
+
     float z = distance;
     return new float[] { x, y, z };
   }  

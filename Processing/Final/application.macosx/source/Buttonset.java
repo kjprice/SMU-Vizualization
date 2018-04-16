@@ -20,7 +20,8 @@ class Buttonset {
   private void createButtons() {
     int buttonXPosition = p.width - 100;
     buttons = new Button[]{
-      new MoveToEarthButton(this.p, solarSystem, userInteractions, "Place On Earth", buttonXPosition, this.buttonYPosition())
+      new MoveToEarthButton(this.p, solarSystem, userInteractions, "Place On Earth", buttonXPosition, this.buttonYPosition()),
+      new PauseButton(this.p, solarSystem, userInteractions, "Pause", buttonXPosition, this.buttonYPosition())
     };
   }
 

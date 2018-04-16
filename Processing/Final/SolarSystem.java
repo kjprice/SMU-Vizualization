@@ -71,17 +71,16 @@ public class SolarSystem {
       stars[i].show();
     }
     
-   if(sun.getRadiusInMiles()%6 == 0){
+   if(sun.getRadiusInMiles()%22 == 0){
       epoch+=86400;
     }
     String date = new java.text.SimpleDateFormat("dd/MMMM").format(new java.util.Date (epoch*1000L));
-    // TODO: This could cause breakage
     p.pushMatrix();
     p.translate(0,0,0);
     p.fill(255,255,255);
     p.rect(0,5,100,30);
     p.fill(0);
-    p.text(date,10,20);    
+    p.text(date,10,24);    
     p.popMatrix();
   }
 

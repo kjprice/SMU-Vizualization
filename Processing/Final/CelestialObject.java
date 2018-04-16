@@ -12,15 +12,13 @@ class CelestialObject {
   public float rateOfRotation;
   public float PositionTheta;
 
-  private float distanceMultiplier;
-  private float distanceRatio;
 
   private float currentX;
   private float currentY;
 
   private float radiusInMiles;
   private boolean isYearChange;
-  private float radiusChange = 0.25F;
+  private float radiusChange = 0.5F;
   private boolean summerToWinter = true;
   private float radius;
 
@@ -82,7 +80,7 @@ class CelestialObject {
 
   float[] calculatePosition(float distance) {
     if (this.isYearChange){
-      if (this.radiusInMiles>2948 | this.radiusInMiles<this.radius){
+      if (this.radiusInMiles>6476 | this.radiusInMiles<this.radius){
         this.summerToWinter = !this.summerToWinter;
       }
       if (summerToWinter){
@@ -92,10 +90,6 @@ class CelestialObject {
         this.radiusInMiles-=this.radiusChange;
       }
     }
-
- 
-    this.distanceMultiplier=this.distanceRatio * this.radiusInMiles;
-
     
     float x =p.cos(PositionTheta) * this.distance.getObjectScale((int)radiusInMiles);
     float y =p.sin(PositionTheta) * this.distance.getObjectScale((int)radiusInMiles);

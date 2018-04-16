@@ -39,6 +39,7 @@ public class SolarSystem {
   float sunPositionTheta = p.TWO_PI;
   float moonPositionTheta = p.PI;
   boolean isOnEarth = false;
+  boolean allowAnimations = true;
   Star[] stars = new Star[2000];
 
   SolarSystem(PApplet p) {
@@ -71,6 +72,10 @@ public class SolarSystem {
       stars[i].update();
       stars[i].show();
     }
+  }
+  
+  void pauseAnimations() {
+    this.allowAnimations = !allowAnimations;
   }
 
   void displayDate() {
@@ -115,6 +120,9 @@ public class SolarSystem {
   }
 
   void animateTranlationZ() {
+    if (!this.allowAnimations) {
+      return;
+    }
     if (this.currentTranslateZ == this.futureTranslateZ) {
       return;
     }
@@ -127,6 +135,9 @@ public class SolarSystem {
   }
 
   void animateXRotation() {
+    if (!this.allowAnimations) {
+      return;
+    }
     if (this.currentXRotation == this.futureXRotation) {
       return;
     }

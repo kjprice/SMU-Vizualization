@@ -1,6 +1,8 @@
 class UserInteractions {
   ArrayList<UserControl> userControls;
-  UserInteractions() {
+  PApplet p;
+  UserInteractions(PApplet p) {
+    this.p = p;
     userControls = new ArrayList<UserControl>();
   }
 

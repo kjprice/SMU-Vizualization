@@ -1,7 +1,9 @@
 class UserDashboard{
   private Buttonset buttonset;
+  PApplet p;
 
-  UserDashboard() {
+  UserDashboard(PApplet p) {
+    this.p = p;
     this.buttonset = new Buttonset();
   }
 

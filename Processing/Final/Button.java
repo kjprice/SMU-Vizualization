@@ -1,11 +1,14 @@
+import processing.core.*;
+
 class Button extends UserControl {
   private String buttonText;
 
   Button() {
+    super();
   }
 
-  Button (String buttonText, int x, int y) {
-    super();
+  Button (PApplet p, SolarSystem solarSystem, UserInteractions userInteractions, String buttonText, int x, int y) {
+    super(p, solarSystem, userInteractions);
     this.positionStartX = x;
     this.positionStartY = y;
     this.buttonText = buttonText;
@@ -22,24 +25,24 @@ class Button extends UserControl {
   }
 
   public float getTextWidth() {
-    return textWidth(buttonText);
+    return p.textWidth(buttonText);
   }
 
   void draw() {
-    fill(255,20,30);
-    rect(positionStartX, positionStartY, this.elementWidth, this.elementHeight);
-    // TODO: Why isn't text showing?
-    fill(0);
-    textSize(12);
-    text(buttonText, positionStartX, positionStartY+12);
+   p.fill(255,20,30);
+   p.rect(positionStartX, positionStartY, this.elementWidth, this.elementHeight);
+    // TODO: Why isn'tp.text showing?
+   p.fill(0);
+   p.textSize(12);
+   p.text(buttonText, positionStartX, positionStartY+12);
   }
 }
 
 class MoveToEarthButton extends Button {
-    MoveToEarthButton(String buttonText, int x, int y) {
-    super(buttonText, x, y);
+  MoveToEarthButton(PApplet p, SolarSystem solarSystem, UserInteractions userInteractions, String buttonText, int x, int y) {
+    super(p, solarSystem, userInteractions, buttonText, x, y);
   }
-
+  
   void onClick() {
     solarSystem.moveToEarth();
   }

@@ -1,3 +1,6 @@
+import processing.core.*;
+import java.util.ArrayList;
+
 class UserInteractions {
   ArrayList<UserControl> userControls;
   PApplet p;
@@ -15,8 +18,4 @@ class UserInteractions {
       userControl.checkIfClicked();
     }
   }
-}
-
-void mouseClicked() {
-  userInteractions.checkIfClicked();
 }

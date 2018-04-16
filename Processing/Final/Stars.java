@@ -4,6 +4,7 @@
 // Code for: https://youtu.be/17WoOqgXsRM
 
 // I create a "Star" Class.
+import processing.core.*;
 class Star {
   // I create variables to specify the x and y of each star.
   float x;
@@ -13,12 +14,14 @@ class Star {
   // I create an other variable to store the previous value of the z variable.
   // (the value of the z variable at the previous frame).
   float pz;
+  PApplet p;
 
-  Star() {
+  Star(PApplet p) {
+    this.p = p;
     
-    x = random(-width/2, height/2);
-    y = random(-width/2, height/2);
-    z = random(width/4);
+    x = p.random(-p.width/2, p.height/2);
+    y = p.random(-p.width/2, p.height/2);
+    z = p.random(p.width/4);
     // I set the previous position of "z" in the same position of "z",
     // which it's like to say that the stars are not moving during the first frame.
     pz = z;
@@ -39,47 +42,47 @@ class Star {
     // so i can place it on more time in the canvas, with new x, y and z values.
     // Note: in this way I also avoid a potential division by 0.
     if (z < 1) {
-      z = width/4;
-      x = random(-width/2, width/2);
-      y = random(-height/2, height/2);
+      z = p.width/4;
+      x = p.random(-p.width/2, p.width/2);
+      y = p.random(-p.height/2, p.height/2);
       pz = z;
     }
   }
 
   void show() {
-    pushMatrix();
+   p.pushMatrix();
     // move stars backward
-    translate(0, 0, -2000);
+   p.translate(0, 0, -2000);
 
-    fill(255);
-    noStroke();
+   p.fill(255);
+   p.noStroke();
 
-    // with theese "map", I get the new star positions
+    // with theese p.map", I get the new star positions
     // the division x / z get a number between 0 and a very high number,
-    // we map this number (proportionally to a range of 0 - 1), inside a range of 0 - width/2.
+    // wep.map this number (proportionally to a range of 0 - 1), inside a range of 0 - p.width/2.
     // In this way we are sure the new coordinates "sx" and "sy" move faster at each frame
     // and which they finish their travel outside of the canvas (they finish when "z" is less than a).
 
-    float sx = map(x / z, 0, 1, 0, width/2);
-    float sy = map(y / z, 0, 1, 0, height/2);;
+    float sx =p.map(x / z, 0, 1, 0, p.width/2);
+    float sy =p.map(y / z, 0, 1, 0, p.height/2);;
 
     // I use the z value to increase the star size between a range from 0 to 8.
-    float r = map(z, 0, width/2, 8, 0);
-    ellipse(sx, sy, r, r);
+    float r =p.map(z, 0, p.width/2, 8, 0);
+   p.ellipse(sx, sy, r, r);
 
     // Here i use the "pz" valute to get the previous position of the stars,
-    // so I can draw a line from the previous position to the new (current) one.
-    float px = map(x / pz, 0, 1, 0, width/2);
-    float py = map(y / pz, 0, 1, 0, height/2);
+    // so I can draw ap.line from the previous position to the new (current) one.
+    float px =p.map(x / pz, 0, 1, 0, p.width/2);
+    float py =p.map(y / pz, 0, 1, 0, p.height/2);
 
-    // Placing here this line of code, I'm sure the "pz" value are updated after the
+    // Placing here thisp.line of code, I'm sure the "pz" value are updated after the
     // coordinates are already calculated; in this way the "pz" value is always equals
     // to the "z" value of the previous frame.
     pz = z;
 
-    stroke(255);
-    line(px, py, sx, sy);
-    popMatrix();
+   p.stroke(255);
+   p.line(px, py, sx, sy);
+   p.popMatrix();
 
   }
 }

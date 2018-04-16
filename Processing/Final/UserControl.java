@@ -1,10 +1,18 @@
+import processing.core.*;
+
 abstract class UserControl {
+  protected SolarSystem solarSystem;
   protected int positionStartX = -1;
   protected int positionStartY = -1;
   protected float elementWidth = -1;
   protected float elementHeight = -1;
+  protected PApplet p;
+  
+  UserControl() {}
 
-  UserControl() {
+  UserControl(PApplet p, SolarSystem solarSystem, UserInteractions userInteractions) {
+    this.p = p;
+    this.solarSystem = solarSystem;
     userInteractions.push(this);
   }
 
@@ -17,8 +25,8 @@ abstract class UserControl {
     }
 
     if (
-      mouseX >= this.positionStartX && mouseX <= (this.positionStartX + this.elementWidth) &&
-      mouseY >= this.positionStartY && mouseY <= (this.positionStartY + this.elementHeight)
+     p.mouseX >= this.positionStartX && p.mouseX <= (this.positionStartX + this.elementWidth) &&
+     p.mouseY >= this.positionStartY && p.mouseY <= (this.positionStartY + this.elementHeight)
     ) {
       this.onClick();
     }

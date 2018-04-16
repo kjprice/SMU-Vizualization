@@ -1,5 +1,8 @@
+import processing.core.*;
+
 class Distance {
   private float MILES_TO_FIT_IN_PIXEL = 10;
+  PApplet p;
 
   Distance() {}
 

@@ -1,10 +1,10 @@
+import processing.core.*;
+
 class UserDashboard{
   private Buttonset buttonset;
-  PApplet p;
 
-  UserDashboard(PApplet p) {
-    this.p = p;
-    this.buttonset = new Buttonset();
+  UserDashboard(PApplet p, SolarSystem solarSystem, UserInteractions userInteractions) {
+    this.buttonset = new Buttonset(p, solarSystem, userInteractions);
   }
 
   void draw() {

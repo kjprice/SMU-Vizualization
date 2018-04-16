@@ -1,9 +1,13 @@
+import processing.core.*;
+
 class Earth {
   private PImage flatEarthImage;
   private float diameter;
+  PApplet p;
 
-  Earth() {
-    flatEarthImage = loadImage("Flat_earth.png");
+  Earth(PApplet p) {
+    this.p = p;
+    flatEarthImage =p.loadImage("Flat_earth.png");
   }
   
   void draw(float diameter) {
@@ -12,15 +16,15 @@ class Earth {
   }
  
   void drawFlatCircle(PImage topImage) {
-    beginShape();
-    noStroke();
-    texture(topImage);
+   p.beginShape();
+   p.noStroke();
+   p.texture(topImage);
     float radius = diameter / 2;
-    vertex(-radius, -radius, 0, 0, 0);
-    vertex(radius, -radius, 0, topImage.width, 0);
-    vertex(radius, radius, 0, topImage.width, topImage.height);
-    vertex(-radius, radius, 0, 0, topImage.height);
-    endShape();
+   p.vertex(-radius, -radius, 0, 0, 0);
+   p.vertex(radius, -radius, 0, topImage.width, 0);
+   p.vertex(radius, radius, 0, topImage.width, topImage.height);
+   p.vertex(-radius, radius, 0, 0, topImage.height);
+   p.endShape();
   }
 
   int getEarthImagePixelsWidth() {

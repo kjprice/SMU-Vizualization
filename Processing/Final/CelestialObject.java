@@ -1,7 +1,12 @@
-class CelestialObject{
-  Distance distance = new Distance();
+import processing.core.*;
 
-  CelestialObject(){}
+class CelestialObject {
+  Distance distance = new Distance();
+  PApplet p;
+
+  CelestialObject(PApplet p){
+    this.p = p;
+  }
   private int diameter;
   private boolean producesLight = false;
   public float rateOfRotation;
@@ -15,7 +20,7 @@ class CelestialObject{
 
   private float radiusInMiles;
   private boolean isYearChange;
-  private float radiusChange=0.25;
+  private float radiusChange = 0.25F;
   private boolean summerToWinter = true;
   private float radius;
 
@@ -26,7 +31,8 @@ class CelestialObject{
   private boolean isTransparent = false;
 
   
-  CelestialObject(int diameter, float rateOfRotation, float PositionTheta, float radiusInMiles, boolean isYearChange,boolean isTransparent){
+  CelestialObject(PApplet p, int diameter, float rateOfRotation, float PositionTheta, float radiusInMiles, boolean isYearChange,boolean isTransparent){
+    this.p = p;
     this.diameter = diameter;
     this.rateOfRotation = rateOfRotation;
     this.PositionTheta = PositionTheta;
@@ -44,7 +50,7 @@ class CelestialObject{
 
   // move celestial body around a central point
   private void orbit() {
-    this.PositionTheta += TWO_PI * this.rateOfRotation / 360;
+    this.PositionTheta += p.TWO_PI * this.rateOfRotation / 360;
   }
 
   void draw(float distance) {
@@ -52,17 +58,17 @@ class CelestialObject{
     float x = xyz[0];
     float y = xyz[1];
     float z = xyz[2];
-    fill(255);
+    p.fill(255);
     if (this.producesLight) {
-      ambientLight(255, 204, 0);
+      p.ambientLight(255, 204, 0);
     }
     if (this.isTransparent) {
-      fill(255, 204, 0,64);
+      p.fill(255, 204, 0,64);
     }
-    pushMatrix();
-      translate(x, y, z);
-      sphere(this.distance.getObjectScale(diameter));
-    popMatrix();
+    p.pushMatrix();
+    p.translate(x, y, z);
+    p.sphere(this.distance.getObjectScale(diameter));
+    p.popMatrix();
     this.orbit();
     
   
@@ -70,22 +76,18 @@ class CelestialObject{
       epoch+=86400;
     }
       
-    String date = new java.text.SimpleDateFormat("dd/MMMM").format(new java.util.Date (epoch*1000L));  
-    pushMatrix();
-    if(!solarSystem.getIsOnEarth()){
-      //rotateX(300);
-      //translate(-40,-80,-80);
-      translate(-80,-105,0);
-      fill(255,255,255);
-      rect(-120,-25,130,30);
-      fill(0);
-      text(date,-80,-7);
-    }
-    else{
-
-    }
-
-    popMatrix();
+    String date = new java.text.SimpleDateFormat("dd/MMMM").format(new java.util.Date (epoch*1000L));
+    // TODO: This could cause breakage
+    p.pushMatrix();
+    p.rotateX(300);
+    p.translate(-40,-80,-80);
+    p.translate(-80,-105,0);
+    p.fill(255,255,255);
+    p.rect(-120,-25,130,30);
+    p.fill(0);
+   p.text(date,-80,-7);
+    
+    p.popMatrix();
   }
 
   void iluminateOtherObjects(float distance) {
@@ -93,7 +95,7 @@ class CelestialObject{
     float x = xyz[0];
     float y = xyz[1];
     float z = xyz[2];
-    pointLight(255, 240, 140, x, y, z);
+   p.pointLight(255, 240, 140, x, y, z);
   }
 
   float[] calculatePosition(float distance) {
@@ -113,8 +115,8 @@ class CelestialObject{
     this.distanceMultiplier=this.distanceRatio * this.radiusInMiles;
 
     
-    float x = cos(PositionTheta) * this.distance.getObjectScale((int)radiusInMiles);
-    float y = sin(PositionTheta) * this.distance.getObjectScale((int)radiusInMiles);
+    float x =p.cos(PositionTheta) * this.distance.getObjectScale((int)radiusInMiles);
+    float y =p.sin(PositionTheta) * this.distance.getObjectScale((int)radiusInMiles);
    
     // TODO: Calculate z based on some distance multiplier too (3k miles from earth)
     float z = distance;

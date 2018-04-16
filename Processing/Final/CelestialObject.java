@@ -24,7 +24,7 @@ class CelestialObject {
   private boolean summerToWinter = true;
   private float radius;
 
-  private long epoch = 1529542696;
+  //private long epoch = 1529542696;
   private int x;
   private int z;
 
@@ -70,24 +70,6 @@ class CelestialObject {
     p.sphere(this.distance.getObjectScale(diameter));
     p.popMatrix();
     this.orbit();
-    
-  
-    if(radiusInMiles%6 == 0){
-      epoch+=86400;
-    }
-      
-    String date = new java.text.SimpleDateFormat("dd/MMMM").format(new java.util.Date (epoch*1000L));
-    // TODO: This could cause breakage
-    p.pushMatrix();
-    p.rotateX(300);
-    p.translate(-40,-80,-80);
-    p.translate(-80,-105,0);
-    p.fill(255,255,255);
-    p.rect(-120,-25,130,30);
-    p.fill(0);
-   p.text(date,-80,-7);
-    
-    p.popMatrix();
   }
 
   void iluminateOtherObjects(float distance) {
@@ -122,4 +104,8 @@ class CelestialObject {
     float z = distance;
     return new float[] { x, y, z };
   }  
+  
+  public float getRadiusInMiles(){
+    return radiusInMiles;
+  }
 }

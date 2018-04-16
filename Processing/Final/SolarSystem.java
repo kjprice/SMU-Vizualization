@@ -25,6 +25,9 @@ public class SolarSystem {
 
   float currentTranslateZ = distance.getObjectScale(EYE_POSITION_START_MILES);
   float futureTranslateZ = currentTranslateZ;
+   
+  //date
+  private long epoch = 1529542696;
 
   // our solar system objects
   CelestialObject sun;
@@ -53,21 +56,33 @@ public class SolarSystem {
  
   void draw() {
    p.background(0);
-    // Oh the darkness of space
+   // Oh the darkness of space
    p.fill(255);
    p.pushMatrix();
-     p.translate(p.width/2, p.height/2, this.currentTranslateZ);
-     p.rotateX(p.radians(this.currentXRotation));
-      this.drawCelestialBodies();
+   p.translate(p.width/2, p.height/2, this.currentTranslateZ);
+   p.rotateX(p.radians(this.currentXRotation));
+   this.drawCelestialBodies();
    p.popMatrix();
 
     setCamera();
-
     this.animateTransitions();
     for (int i = 0; i < stars.length; i++) {
       stars[i].update();
       stars[i].show();
     }
+    
+   if(sun.getRadiusInMiles()%6 == 0){
+      epoch+=86400;
+    }
+    String date = new java.text.SimpleDateFormat("dd/MMMM").format(new java.util.Date (epoch*1000L));
+    // TODO: This could cause breakage
+    p.pushMatrix();
+    p.translate(0,0,0);
+    p.fill(255,255,255);
+    p.rect(0,5,100,30);
+    p.fill(0);
+    p.text(date,10,20);    
+    p.popMatrix();
   }
 
   // The order of each item is important due to lighting - the moon should not have ambient light but should have light casted upon it
@@ -129,5 +144,9 @@ public class SolarSystem {
   
   public boolean getIsOnEarth(){
     return isOnEarth;
+  }
+  
+  public CelestialObject getSun(){
+    return sun;
   }
 }

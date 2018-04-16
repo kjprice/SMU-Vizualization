@@ -6,14 +6,25 @@ class CelestialObject{
   private boolean producesLight = false;
   public float rateOfRotation;
   public float PositionTheta;
+
+  private float distanceMultiplier;
+  private float distanceRatio;
+
   private float currentX;
   private float currentY;
+
   private float radiusInMiles;
   private boolean isYearChange;
-  private float radiusChange=0.233;
+  private float radiusChange=0.25;
   private boolean summerToWinter = true;
   private float radius;
+
+  private long epoch = 1529542696;
+  private int x;
+  private int z;
+
   private boolean isTransparent = false;
+
   
   CelestialObject(int diameter, float rateOfRotation, float PositionTheta, float radiusInMiles, boolean isYearChange,boolean isTransparent){
     this.diameter = diameter;
@@ -41,6 +52,7 @@ class CelestialObject{
     float x = xyz[0];
     float y = xyz[1];
     float z = xyz[2];
+    fill(255);
     if (this.producesLight) {
       ambientLight(255, 204, 0);
     }
@@ -51,8 +63,29 @@ class CelestialObject{
       translate(x, y, z);
       sphere(this.distance.getObjectScale(diameter));
     popMatrix();
-
     this.orbit();
+    
+  
+    if(radiusInMiles%6 == 0){
+      epoch+=86400;
+    }
+      
+    String date = new java.text.SimpleDateFormat("dd/MMMM").format(new java.util.Date (epoch*1000L));  
+    pushMatrix();
+    if(!solarSystem.getIsOnEarth()){
+      //rotateX(300);
+      //translate(-40,-80,-80);
+      translate(-80,-105,0);
+      fill(255,255,255);
+      rect(-120,-25,130,30);
+      fill(0);
+      text(date,-80,-7);
+    }
+    else{
+
+    }
+
+    popMatrix();
   }
 
   void iluminateOtherObjects(float distance) {
@@ -65,11 +98,8 @@ class CelestialObject{
 
   float[] calculatePosition(float distance) {
     if (this.isYearChange){
-      if (this.radiusInMiles>2850){
-        this.summerToWinter=false;
-      }
-      if (this.radiusInMiles<this.radius){
-        this.summerToWinter=true;
+      if (this.radiusInMiles>2948 | this.radiusInMiles<this.radius){
+        this.summerToWinter = !this.summerToWinter;
       }
       if (summerToWinter){
         this.radiusInMiles+=this.radiusChange;
@@ -78,6 +108,10 @@ class CelestialObject{
         this.radiusInMiles-=this.radiusChange;
       }
     }
+
+ 
+    this.distanceMultiplier=this.distanceRatio * this.radiusInMiles;
+
     
     float x = cos(PositionTheta) * this.distance.getObjectScale((int)radiusInMiles);
     float y = sin(PositionTheta) * this.distance.getObjectScale((int)radiusInMiles);
@@ -85,5 +119,5 @@ class CelestialObject{
     // TODO: Calculate z based on some distance multiplier too (3k miles from earth)
     float z = distance;
     return new float[] { x, y, z };
-  }
- }
+  }  
+}

@@ -123,4 +123,8 @@ public class SolarSystem {
       width/2.0, height/2.0, 0,
       0, 1, 0);
   }
+  
+  public boolean getIsOnEarth(){
+    return isOnEarth;
+  }
 }

@@ -64,6 +64,7 @@ public class SolarSystem {
    p.translate(p.width/2, p.height/2, this.currentTranslateZ);
    p.rotateX(p.radians(this.currentXRotation));
    this.drawCelestialBodies();
+   this.moveCelestialBodies();
    p.popMatrix();
 
     setCamera();
@@ -100,6 +101,15 @@ public class SolarSystem {
     this.moon.draw(distance.getObjectScale(DISTANCE_TO_SUN));
     this.sun.draw(distance.getObjectScale(DISTANCE_TO_SUN));
     this.sunlight.draw(distance.getObjectScale(DISTANCE_TO_SUN)); // check ifp.camera is on Earth
+  }
+
+  void moveCelestialBodies() {
+    if (!this.allowAnimations) {
+      return;
+    }
+    this.sun.move();
+    this.sunlight.move();
+    this.moon.move();
   }
 
   void moveToEarth() {

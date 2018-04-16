@@ -52,7 +52,6 @@ class CelestialObject {
   }
 
   void draw(float distance) {
-    this.changePosition();
     float[] xyz = this.calculatePosition(distance);
     float x = xyz[0];
     float y = xyz[1];
@@ -68,6 +67,10 @@ class CelestialObject {
     p.translate(x, y, z);
     p.sphere(this.distance.getObjectScale(diameter));
     p.popMatrix();
+  }
+
+  public void move() {
+    this.changePosition();
     this.orbit();
   }
 
